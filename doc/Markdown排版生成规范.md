@@ -17,9 +17,10 @@
 
 ```md
 ---
-title: "战术电竞服务价格表"
+template: "susu_tactical_ui_template"
+theme: "bright"
 subtitle: "TACTICAL SERVICE MENU & PRICE LIST"
-label.header_tag: "TACTICAL SERVICE MENU // 战术导引菜单"
+hud_tag: "TACTICAL SERVICE MENU // 战术导引菜单"
 label.experience_badge_1: "OPTION A"
 label.experience_badge_2: "OPTION B"
 label.guarantee_badge: "GUARANTEED"
@@ -31,8 +32,11 @@ notice:
 
 规则：
 
-- `title` 为空时，删除对应标题元素。
-- `subtitle` 为空时，删除对应副标题元素。
+- 正文中没有一级文档标题时，删除对应标题元素。
+- `template` 指向 `标准格式/<template>.html`，只写文件名主体，不写路径或扩展名。
+- `theme` 指向 `css/themes/<theme>.css`，只写文件名主体，不写路径或扩展名。
+- `subtitle`、`hud_tag` 和 `label.*` 是可变模板文字。
+- 主标题不能写在 frontmatter，必须写在 Markdown 正文中。
 - `label.*` 用于绑定可变装饰文字。
 - 没有提供的装饰文字使用模板默认值，或按模板规则隐藏。
 - `notice` 是须知列表。
@@ -45,7 +49,7 @@ notice:
 Markdown 允许使用 1 到 6 级标题：
 
 ```md
-# 文档级标题
+# [document:header] 文档级标题
 ## [section:experience] 体验套餐
 ### [card:exp-1] 机密体验单
 #### 套餐说明
@@ -147,6 +151,7 @@ ID 绑定优先于顺序绑定。被 ID 指定的模板元素标记为已使用�
 需要绑定模板的标题使用角色和 ID：
 
 ```md
+# [document:header] 战术电竞服务价格表
 ## [section:escort] 护航
 ### [card:escort-guarantee] 保底
 ### [card:escort-match] 单局
@@ -301,16 +306,18 @@ ID 规则：
 
 ## 7. 图片
 
-图片可以使用标准 Markdown 写法：
+图片由 frontmatter 的 `images` 按顺序提供：
 
 ```md
-![宣传图](assets/example.png)
+images:
+  - "体验-机密.png"
+  - "体验-绝密.png"
 ```
 
-也可以作为列表内容：
+图片文件必须位于：
 
-```md
-- [image] assets/example.png
+```text
+assets/insert-png/
 ```
 
 图片规则：
@@ -320,9 +327,27 @@ ID 规则：
 - 高度根据宽高比自动计算。
 - 不裁切、不变形。
 - 图片框高度跟随实际图片高度。
-- 图片不存在时，生成器必须报告错误或保留空图片框，不能生成损坏图片链接。
+- 第 1 张图片绑定到第 1 个未跳过的媒体槽位；后续图片依次绑定。
+- 图片少于媒体槽位时，剩余图片框保持空白。
+- 图片多于媒体槽位时，生成器必须报错。
+- `{{skip}}` 删除的元素不消耗图片。
+- 图片不存在时，生成器必须报错，不能生成损坏图片链接。
 
-## 8. 禁止内容
+## 8. 构建命令
+
+构建入口只接受 `original-md-files` 文件夹中的 Markdown 文件名：
+
+```powershell
+node .\new-project\build.js 体验护航.md
+```
+
+它会读取 frontmatter 的 `template`、`theme` 和 `images`，输出到：
+
+```text
+output/体验护航.html
+```
+
+## 9. 禁止内容
 
 HTML 模板和生成结果中禁止出现以下可见占位文本：
 
@@ -341,7 +366,7 @@ HTML 模板和生成结果中禁止出现以下可见占位文本：
 <div data-placeholder="art-copy"></div>
 ```
 
-## 9. 固定模板内容
+## 10. 固定模板内容
 
 最终解释权必须由模板固定提供：
 
@@ -355,7 +380,7 @@ HTML 模板和生成结果中禁止出现以下可见占位文本：
 
 JS 不得因为 Markdown 缺少字段而删除、清空或替换该区域。
 
-## 10. 生成前校验
+## 11. 生成前校验
 
 JS 生成前必须检查：
 

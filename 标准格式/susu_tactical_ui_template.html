@@ -15,21 +15,21 @@
             font-display: swap;
         }
     </style>
-    <link rel="stylesheet" href="../css/themes/bright.css">
+    <link rel="stylesheet" href="../css/themes/bright.css" data-theme-stylesheet>
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/layout.css">
     <link rel="stylesheet" href="../css/components.css">
     <link rel="stylesheet" href="../css/utilities.css">
     <style id="layout-config">
-        :root { --decor-block-height: 1300px; }
+        :root { --decor-block-height: 100px; }
     </style>
 </head>
 <body>
     <div class="canvas-container">
         <header class="header-banner" data-section="header" data-md-role="document" data-md-id="header">
-            <div class="hud-tag" data-bind="label.header_tag" data-md-field="label" data-md-scope="header">TACTICAL SERVICE MENU // 战术导引菜单</div>
-            <h1 class="main-title" data-bind="header.title" data-md-field="title" data-md-scope="header"></h1>
-            <p class="sub-title" data-bind="header.subtitle" data-md-field="subtitle" data-md-scope="header"></p>
+            <div class="hud-tag" data-bind="hud_tag" data-md-field="label" data-md-scope="header">TACTICAL SERVICE MENU // 战术导引菜单</div>
+            <h1 class="main-title" data-bind="document.title" data-md-field="title" data-md-scope="header" data-md-empty="remove"></h1>
+            <p class="sub-title" data-bind="subtitle" data-md-field="subtitle" data-md-scope="header" data-md-empty="remove"></p>
         </header>
 
         <section class="section-block" data-section="experience" data-md-role="section" data-md-id="experience" data-md-heading-level="2">

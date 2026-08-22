@@ -21,6 +21,7 @@ const documentedInput = path.join(projectRoot, 'doc', '体验护航.md');
 const defaultInput = fs.existsSync(originalInput) ? originalInput : documentedInput;
 const defaultOutput = path.join(projectRoot, 'output', '体验护航.html');
 
+/** 对来自 Markdown 的文本进行 HTML 转义，防止内容破坏模板结构。 */
 function escapeHtml(value) {
     return String(value ?? '')
         .replace(/&/g, '&amp;')
@@ -30,6 +31,7 @@ function escapeHtml(value) {
         .replace(/'/g, '&#39;');
 }
 
+/** 读取 frontmatter 标量时去除可选的单双引号。 */
 function unquote(value) {
     const text = String(value ?? '').trim();
     if ((text.startsWith('"') && text.endsWith('"')) || (text.startsWith("'") && text.endsWith("'"))) {
@@ -38,6 +40,10 @@ function unquote(value) {
     return text;
 }
 
+/**
+ * 解析本项目约定的轻量 frontmatter：标量键值和一级字符串列表。
+ * 不引入 YAML 依赖，因此嵌套对象、锚点等完整 YAML 特性不在支持范围内。
+ */
 function parseFrontmatter(lines) {
     const data = { notice: [] };
     if (lines[0]?.trim() !== '---') return { data, body: lines };
@@ -64,6 +70,7 @@ function parseFrontmatter(lines) {
     return { data, body: lines.slice(end + 1) };
 }
 
+/** 将有限的行内 Markdown 标记降级为纯文本，供固定排版 HTML 使用。 */
 function stripMarkdown(text) {
     return String(text ?? '')
         .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '$1')
@@ -74,12 +81,14 @@ function stripMarkdown(text) {
         .trim();
 }
 
+/** 解析标题开头可选的 [role:id] 显式模板覆盖标记。 */
 function parseBinding(title) {
     const match = title.match(/^\[([A-Za-z][A-Za-z0-9_-]*):([A-Za-z0-9_-]+)\]\s*(.*)$/);
     if (!match) return { role: '', id: '', title: stripMarkdown(title) };
     return { role: match[1].toLowerCase(), id: match[2], title: stripMarkdown(match[3]) };
 }
 
+/** 仅接受 {{placeholder}} 与 {{placeholder lines=N}} 两种透明占位符。 */
 function parsePlaceholder(text) {
     const match = String(text).trim().match(/^\{\{placeholder(?:\s+lines=(\d+))?\}\}$/);
     if (!match) return null;
@@ -88,6 +97,7 @@ function parsePlaceholder(text) {
     return { kind: 'placeholder', lines };
 }
 
+/** 将一个列表项及其缩进续行解析为普通文本、透明占位符或行内图片项。 */
 function parseItem(firstLine, continuationLines) {
     const allLines = [firstLine, ...continuationLines].map((line) => stripMarkdown(line));
     const image = allLines[0].match(/^\[image\]\s+(.+)$/i);
@@ -97,6 +107,10 @@ function parseItem(firstLine, continuationLines) {
     return { kind: 'item', lines: allLines };
 }
 
+/**
+ * 解析正文的标题、列表、引用、跳过指令和占位符。
+ * 结果保留标题出现顺序，供后续按模板 DOM 顺序绑定。
+ */
 function parseDocument(text) {
     const lines = text.replace(/^\uFEFF/, '').split(/\r?\n/);
     const { data, body } = parseFrontmatter(lines);
@@ -166,11 +180,16 @@ function parseDocument(text) {
     return { meta: data, headings };
 }
 
+/** 生成可安全嵌入 RegExp 的精确 HTML 属性匹配片段。 */
 function attributePattern(name, value) {
     const escaped = String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     return `\\b${name}="${escaped}"`;
 }
 
+/**
+ * 在字符串模板中定位同时满足指定属性的完整 HTML 元素范围。
+ * 使用同名标签深度计数，避免 card 内部嵌套 div 时提前截断。
+ */
 function findElementRange(html, attributes) {
     const checks = Object.entries(attributes).map(([name, value]) => attributePattern(name, value));
     const lookaheads = checks.map((check) => `(?=[^>]*${check})`).join('');
@@ -194,23 +213,27 @@ function findElementRange(html, attributes) {
     throw new Error(`模板元素 <${tag}> 没有闭合`);
 }
 
+/** 替换精确模板元素的 innerHTML。 */
 function replaceElementInner(html, attributes, content) {
     const range = findElementRange(html, attributes);
     if (!range) throw new Error(`模板中找不到元素：${JSON.stringify(attributes)}`);
     return html.slice(0, range.openEnd) + content + html.slice(range.closeStart);
 }
 
+/** 删除完整模板元素，用于空字段和 {{skip}}。 */
 function removeElement(html, attributes) {
     const range = findElementRange(html, attributes);
     if (!range) throw new Error(`模板中找不到要删除的元素：${JSON.stringify(attributes)}`);
     return html.slice(0, range.openStart) + html.slice(range.closeEnd);
 }
 
+/** 按 DOM 顺序收集同一 data-md-role 的模板槽位。 */
 function findSlots(html, role) {
     const regex = new RegExp(`<([a-z][a-z0-9]*)\\b(?=[^>]*${attributePattern('data-md-role', role)})(?=[^>]*\\bdata-md-id="([^"]+)")[^>]*>`, 'gi');
     return [...html.matchAll(regex)].map((match) => ({ role, id: match[2], tag: match[1] }));
 }
 
+/** 根据模板元素的 data-md-format 决定标题是否插入中文视觉间隔。 */
 function formatTitle(value, html, scope) {
     const pattern = new RegExp(`<([a-z][a-z0-9]*)\\b(?=[^>]*${attributePattern('data-md-scope', scope)})(?=[^>]*${attributePattern('data-md-field', 'title')})[^>]*>`, 'i');
     const field = pattern.exec(html);
@@ -222,10 +245,12 @@ function formatTitle(value, html, scope) {
         .join('').trim();
 }
 
+/** 渲染无文字、仅保留高度的透明占位节点。 */
 function renderPlaceholder(lines) {
     return `<span class="md-placeholder" style="--placeholder-lines: ${lines};"></span>`;
 }
 
+/** 将普通多行项目或 /| 左右栏项目渲染为列表 HTML。 */
 function renderItem(item) {
     if (item.kind === 'placeholder') return `<li class="list-item"><span class="bullet"></span><span class="item-content">${renderPlaceholder(item.lines)}</span></li>`;
     if (item.kind === 'image') return '';
@@ -239,19 +264,23 @@ function renderItem(item) {
     return `<li class="list-item"><span class="bullet"></span><span class="item-content">${item.lines.map(lineHtml).join('')}</span></li>`;
 }
 
+/** 过滤图片项后批量渲染列表内容；图片交给独立媒体槽位处理。 */
 function renderItems(items) {
     return items.filter((item) => item.kind !== 'image').map(renderItem).join('\n');
 }
 
+/** 兼容正文内 [image] 写法；常规图片优先使用 frontmatter images 顺序列表。 */
 function imageFromItems(items) {
     return items.find((item) => item.kind === 'image')?.path || '';
 }
 
+/** 按 scope + field 写入模板字段；空字段可按模板规则直接移除。 */
 function bindField(html, scope, field, value, options = {}) {
     if (!value && options.removeWhenEmpty) return removeElement(html, { 'data-md-scope': scope, 'data-md-field': field });
     return replaceElementInner(html, { 'data-md-scope': scope, 'data-md-field': field }, options.raw ? value : escapeHtml(value));
 }
 
+/** 先尊重显式 ID，未指定 ID 时才取当前角色的下一个可用槽位。 */
 function targetForHeading(heading, slots, used) {
     if (heading.id) {
         const exact = slots.find((slot) => slot.id === heading.id);
@@ -263,43 +292,72 @@ function targetForHeading(heading, slots, used) {
     return candidate;
 }
 
-function applyLabels(html, meta) {
-    const targets = {
-        'label.header_tag': ['header', 'label'],
-        'label.experience_en': ['experience', 'label'],
-        'label.experience_status': ['experience', 'status'],
-        'label.experience_badge_1': ['exp-1', 'badge'],
-        'label.experience_badge_2': ['exp-2', 'badge'],
-        'label.escort_en': ['escort', 'label'],
-        'label.escort_status': ['escort', 'status'],
-        'label.guarantee_badge': ['escort-guarantee', 'badge'],
-        'label.match_badge': ['escort-match', 'badge'],
-        'label.notice_en': ['notice', 'label'],
-        'label.notice_status': ['notice', 'status'],
-        'label.notice_tag': ['notice', 'tag'],
-    };
-    for (const [key, value] of Object.entries(meta)) {
-        if (!key.startsWith('label.') || !String(value).trim()) continue;
-        const target = targets[key];
-        if (target) html = bindField(html, target[0], target[1], value);
+// 模板的 data-bind 名称直接对应 frontmatter 键名，例如 data-bind="label.notice_tag"。
+// 这样新增模板标签时无需在 JS 再添加硬编码映射表。
+function applyMetadataBindings(html, meta) {
+    const bindings = [...html.matchAll(/<([a-z][a-z0-9]*)\b(?=[^>]*\bdata-bind="([^"]+)")[^>]*>/gi)]
+        .map((match) => match[2]);
+    for (const binding of [...new Set(bindings)]) {
+        if (!Object.prototype.hasOwnProperty.call(meta, binding)) continue;
+        const value = meta[binding];
+        if (Array.isArray(value)) continue;
+        const range = findElementRange(html, { 'data-bind': binding });
+        if (!range) continue;
+        const opening = html.slice(range.openStart, range.openEnd);
+        const removeWhenEmpty = /data-md-empty="remove"/.test(opening);
+        html = value === '' && removeWhenEmpty
+            ? html.slice(0, range.openStart) + html.slice(range.closeEnd)
+            : html.slice(0, range.openEnd) + escapeHtml(value) + html.slice(range.closeStart);
     }
     return html;
 }
 
-function renderDocument(document) {
-    let html = fs.readFileSync(templatePath, 'utf8');
+/** 将模板中唯一的 data-theme-stylesheet 链接替换为 build.js 选定的主题。 */
+function setThemeStylesheet(html, themeHref) {
+    if (!themeHref) return html;
+    return html.replace(/(<link\b[^>]*\bdata-theme-stylesheet\b[^>]*\bhref=")[^"]*(")/i, `$1${themeHref}$2`);
+}
+
+/** 主标题也允许使用透明占位符，供后续手工加入艺术字。 */
+function renderTitleValue(title) {
+    const placeholder = parsePlaceholder(title);
+    return placeholder ? { value: renderPlaceholder(placeholder.lines), raw: true } : { value: title, raw: false };
+}
+
+/** 写入等比图片，并给媒体容器添加 has-image 以切换自动高度样式。 */
+function insertMedia(html, scope, image) {
+    if (!image) return html;
+    if (!fs.existsSync(image.sourcePath)) throw new Error(`图片文件不存在：${image.sourcePath}`);
+    html = replaceElementInner(html, { 'data-md-scope': scope, 'data-md-field': 'media' }, `<img class="media-image" src="${escapeHtml(image.href)}" alt="">`);
+    const mediaRange = findElementRange(html, { 'data-md-scope': scope, 'data-md-field': 'media' });
+    return html.slice(0, mediaRange.openStart) + html.slice(mediaRange.openStart).replace(/^([^>]*class="[^"]*)"/, '$1 has-image"');
+}
+
+/**
+ * 将解析后的 Markdown 内容绑定到一份模板副本。
+ * options 由 build.js 提供已校验的模板、主题和图片资源，生成器不猜测目录。
+ */
+function renderDocument(document, options = {}) {
+    const activeTemplatePath = options.templatePath || templatePath;
+    let html = fs.readFileSync(activeTemplatePath, 'utf8');
+    html = setThemeStylesheet(html, options.themeHref);
     const roles = ['section', 'card'];
     const slots = Object.fromEntries(roles.map((role) => [role, findSlots(html, role)]));
     const used = new Set();
+    const orderedImages = [...(options.images || [])];
 
-    if (document.meta.title) html = bindField(html, 'header', 'title', document.meta.title);
-    else html = bindField(html, 'header', 'title', '', { removeWhenEmpty: true });
-    if (document.meta.subtitle) html = bindField(html, 'header', 'subtitle', document.meta.subtitle);
-    else html = bindField(html, 'header', 'subtitle', '', { removeWhenEmpty: true });
-    html = applyLabels(html, document.meta);
+    html = applyMetadataBindings(html, document.meta);
+    const documentHeading = document.headings.find((heading) => heading.role === 'document' || (!heading.role && heading.level === 1));
+    if (documentHeading) {
+        const rendered = renderTitleValue(documentHeading.title);
+        html = bindField(html, 'header', 'title', rendered.value, { raw: rendered.raw, removeWhenEmpty: !rendered.raw });
+    } else {
+        html = bindField(html, 'header', 'title', '', { removeWhenEmpty: true });
+    }
 
     for (const heading of document.headings) {
         const role = heading.role || (heading.level <= 2 ? 'section' : 'card');
+        if (role === 'document') continue;
         if (!slots[role]) continue;
         const target = targetForHeading(heading, slots[role], used);
         if (heading.skipBefore) {
@@ -310,14 +368,12 @@ function renderDocument(document) {
         used.add(target.id);
         const title = formatTitle(heading.title, html, target.id);
         html = bindField(html, target.id, 'title', title, { removeWhenEmpty: true });
-        const image = imageFromItems(heading.items);
-        if (image) {
-            const imagePath = path.resolve(path.dirname(templatePath), image);
-            if (!fs.existsSync(imagePath)) throw new Error(`图片文件不存在：${image}`);
-            html = replaceElementInner(html, { 'data-md-scope': target.id, 'data-md-field': 'media' }, `<img class="media-image" src="${escapeHtml(image.replace(/\\/g, '/'))}" alt="">`);
-            const mediaRange = findElementRange(html, { 'data-md-scope': target.id, 'data-md-field': 'media' });
-            html = html.slice(0, mediaRange.openStart) + html.slice(mediaRange.openStart).replace(/^([^>]*class="[^"]*)"/, '$1 has-image"');
-        }
+        const inlineImage = imageFromItems(heading.items);
+        const inlineSource = inlineImage
+            ? { sourcePath: path.resolve(options.imagesRoot || path.dirname(activeTemplatePath), inlineImage), href: inlineImage.replace(/\\/g, '/') }
+            : null;
+        const nextImage = target.role === 'card' && !inlineSource ? orderedImages.shift() : null;
+        html = insertMedia(html, target.id, inlineSource || nextImage);
         const field = 'items';
         // 不依赖 HTML 属性书写顺序，避免 data-md-field 与 data-md-scope 调换后失效。
         const hasList = Boolean(findElementRange(html, {
@@ -333,15 +389,35 @@ function renderDocument(document) {
         }
     }
 
+    if (orderedImages.length > 0) throw new Error(`图片数量超过已绑定的卡片媒体槽位：剩余 ${orderedImages.length} 张`);
+
     if (!html.includes('*以上内容最终解释权归溯流电竞所有')) throw new Error('固定最终解释权区域缺失');
     if (/\[[^\]]*(占位|placeholder)[^\]]*\]/i.test(html) || /标题占位符|SUBTITLE PLACEHOLDER/.test(html)) throw new Error('生成结果残留可见占位文本');
     return html;
 }
 
-const inputPath = path.resolve(projectRoot, process.argv[2] || defaultInput);
-const outputPath = path.resolve(projectRoot, process.argv[3] || defaultOutput);
-if (!fs.existsSync(inputPath)) throw new Error(`Markdown 文件不存在：${inputPath}`);
-const document = parseDocument(fs.readFileSync(inputPath, 'utf8'));
-fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-fs.writeFileSync(outputPath, renderDocument(document), 'utf8');
-console.log(`已生成：${outputPath}`);
+/**
+ * 对外可调用的生成入口。
+ * build.js 调用此函数；直接执行 generate.js 时仍保留兼容的命令行模式。
+ */
+function generate(options = {}) {
+    const inputPath = path.resolve(options.inputPath || defaultInput);
+    const outputPath = path.resolve(options.outputPath || defaultOutput);
+    if (!fs.existsSync(inputPath)) throw new Error(`Markdown 文件不存在：${inputPath}`);
+    const document = parseDocument(fs.readFileSync(inputPath, 'utf8'));
+    const html = renderDocument(document, options);
+    fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+    fs.writeFileSync(outputPath, html, 'utf8');
+    return outputPath;
+}
+
+// 直接执行时使用默认 Markdown；被 build.js require 时只导出函数，不自动生成文件。
+if (require.main === module) {
+    const outputPath = generate({
+        inputPath: process.argv[2] || defaultInput,
+        outputPath: process.argv[3] || defaultOutput,
+    });
+    console.log(`已生成：${outputPath}`);
+}
+
+module.exports = { generate, parseFrontmatter };
