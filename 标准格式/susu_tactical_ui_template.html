@@ -21,107 +21,88 @@
     <link rel="stylesheet" href="../css/components.css">
     <link rel="stylesheet" href="../css/utilities.css">
     <style id="layout-config">
-        :root { --decor-block-height: 100px; }
+        :root { --decor-block-height: 1300px; }
     </style>
 </head>
 <body>
     <div class="canvas-container">
-        <header class="header-banner" data-section="header">
-            <div class="hud-tag" data-bind="header.tag" data-label-token="header-tag"></div>
-            <h1 class="main-title" data-bind="header.title"></h1>
-            <p class="sub-title" data-bind="header.subtitle"></p>
+        <header class="header-banner" data-section="header" data-md-role="document" data-md-id="header">
+            <div class="hud-tag" data-bind="label.header_tag" data-md-field="label" data-md-scope="header">TACTICAL SERVICE MENU // 战术导引菜单</div>
+            <h1 class="main-title" data-bind="header.title" data-md-field="title" data-md-scope="header"></h1>
+            <p class="sub-title" data-bind="header.subtitle" data-md-field="subtitle" data-md-scope="header"></p>
         </header>
 
-        <section class="section-block" data-section="experience">
+        <section class="section-block" data-section="experience" data-md-role="section" data-md-id="experience" data-md-heading-level="2">
             <div class="section-header">
                 <div class="section-title-group">
-                    <h2 class="section-title-cn" data-bind="sections.exp.title_cn">体 验</h2>
-                    <span class="section-title-en" data-bind="sections.exp.title_en" data-label-token="exp-en"></span>
+                    <h2 class="section-title-cn" data-bind="sections.exp.title_cn" data-md-field="title" data-md-scope="experience" data-md-format="spaced-cjk">体 验</h2>
+                    <span class="section-title-en" data-bind="label.experience_en" data-md-field="label" data-md-scope="experience">EXPERIENCE PACKAGES</span>
                 </div>
-                <span class="section-status-badge" data-bind="sections.exp.status" data-label-token="section-01"></span>
+                <span class="section-status-badge" data-bind="label.experience_status" data-md-field="status" data-md-scope="experience">SECTION // 01</span>
             </div>
             <div class="grid-col-2">
-                <div class="card theme-a" data-card-id="exp-1">
+                <div class="card theme-a" data-card-id="exp-1" data-md-role="card" data-md-id="exp-1" data-md-heading-level="3">
                     <div class="card-header">
-                        <h3 class="card-title" data-bind="exp.card1.title">体验卡片 01</h3>
-                        <span class="card-badge" data-bind="exp.card1.badge" data-label-token="exp-card-01"></span>
+                        <h3 class="card-title" data-bind="exp.card1.title" data-md-field="title" data-md-scope="exp-1"></h3>
+                        <span class="card-badge" data-bind="label.experience_badge_1" data-md-field="badge" data-md-scope="exp-1">OPTION A</span>
                     </div>
-                    <div class="card-media-placeholder" data-bind-media="exp.card1.media" data-media-file="../assets/exp-1.png">
-                        <span class="icon">🖼️</span>
-                        <span>[ 体验项目 01 图片 / 视觉元素占位框 ]</span>
+                    <div class="card-media-placeholder" data-bind-media="exp.card1.media" data-md-field="media" data-md-scope="exp-1" data-media-file="">
                     </div>
-                    <ul class="list-group" data-bind-list="exp.card1.items">
-                        <li class="list-item"><span class="bullet"></span><span class="item-content">[ 体验套餐 01 详细描述文本 / 占位符 ]</span></li>
-                        <li class="list-item"><span class="bullet"></span><span class="item-content">[ 参数或说明项目 / 占位符 ]</span></li>
+                    <ul class="list-group" data-bind-list="exp.card1.items" data-md-field="items" data-md-scope="exp-1">
                     </ul>
                 </div>
-                <div class="card theme-b" data-card-id="exp-2">
+                <div class="card theme-b" data-card-id="exp-2" data-md-role="card" data-md-id="exp-2" data-md-heading-level="3">
                     <div class="card-header">
-                        <h3 class="card-title" data-bind="exp.card2.title">体验卡片 02</h3>
-                        <span class="card-badge" data-bind="exp.card2.badge" data-label-token="exp-card-02"></span>
+                        <h3 class="card-title" data-bind="exp.card2.title" data-md-field="title" data-md-scope="exp-2"></h3>
+                        <span class="card-badge" data-bind="label.experience_badge_2" data-md-field="badge" data-md-scope="exp-2">OPTION B</span>
                     </div>
-                    <div class="card-media-placeholder" data-bind-media="exp.card2.media" data-media-file="../assets/exp-2.png">
-                        <span class="icon">🖼️</span>
-                        <span>[ 体验项目 02 图片 / 视觉元素占位框 ]</span>
+                    <div class="card-media-placeholder" data-bind-media="exp.card2.media" data-md-field="media" data-md-scope="exp-2" data-media-file="">
                     </div>
-                    <ul class="list-group" data-bind-list="exp.card2.items">
-                        <li class="list-item"><span class="bullet"></span><span class="item-content">[ 体验套餐 02 详细描述文本 / 占位符 ]</span></li>
-                        <li class="list-item"><span class="bullet"></span><span class="item-content">[ 参数或说明项目 / 占位符 ]</span></li>
+                    <ul class="list-group" data-bind-list="exp.card2.items" data-md-field="items" data-md-scope="exp-2">
                     </ul>
                 </div>
             </div>
         </section>
 
-        <section class="section-block" data-section="escort">
+        <section class="section-block" data-section="escort" data-md-role="section" data-md-id="escort" data-md-heading-level="2">
             <div class="section-header">
                 <div class="section-title-group">
-                    <h2 class="section-title-cn" data-bind="sections.escort.title_cn">护 航</h2>
-                    <span class="section-title-en" data-bind="sections.escort.title_en" data-label-token="escort-en"></span>
+                    <h2 class="section-title-cn" data-bind="sections.escort.title_cn" data-md-field="title" data-md-scope="escort" data-md-format="spaced-cjk">护 航</h2>
+                    <span class="section-title-en" data-bind="label.escort_en" data-md-field="label" data-md-scope="escort">ESCORT SERVICES</span>
                 </div>
-                <span class="section-status-badge" data-bind="sections.escort.status" data-label-token="section-02"></span>
+                <span class="section-status-badge" data-bind="label.escort_status" data-md-field="status" data-md-scope="escort">SECTION // 02</span>
             </div>
             <div class="grid-col-2">
-                <div class="card theme-a" data-card-id="escort-guarantee">
+                <div class="card theme-a" data-card-id="escort-guarantee" data-md-role="card" data-md-id="escort-guarantee" data-md-heading-level="3">
                     <div class="card-header">
-                        <h3 class="card-title text-accent-mint" data-bind="escort.guarantee.title">保 低</h3>
-                        <span class="card-badge" data-bind="escort.guarantee.badge" data-label-token="escort-guarantee"></span>
+                        <h3 class="card-title text-accent-mint" data-bind="escort.guarantee.title" data-md-field="title" data-md-scope="escort-guarantee" data-md-format="spaced-cjk">保 低</h3>
+                        <span class="card-badge" data-bind="label.guarantee_badge" data-md-field="badge" data-md-scope="escort-guarantee">GUARANTEED</span>
                     </div>
-                    <ul class="list-group" data-bind-list="escort.guarantee.items">
-                        <li class="list-item"><span class="bullet"></span><span class="item-content">[ 保低条款说明 01 ]: 详细文本内容占位符行。</span></li>
-                        <li class="list-item"><span class="bullet"></span><span class="item-content">[ 保低条款说明 02 ]: 详细文本内容占位符行。</span></li>
-                        <li class="list-item"><span class="bullet"></span><span class="item-content">[ 保低条款说明 03 ]: 详细文本内容占位符行。</span></li>
-                        <li class="list-item"><span class="bullet"></span><span class="item-content">[ 保低条款说明 04 ]: 详细文本内容占位符行。</span></li>
+                    <ul class="list-group" data-bind-list="escort.guarantee.items" data-md-field="items" data-md-scope="escort-guarantee">
                     </ul>
                 </div>
-                <div class="card theme-c" data-card-id="escort-match">
+                <div class="card theme-c" data-card-id="escort-match" data-md-role="card" data-md-id="escort-match" data-md-heading-level="3">
                     <div class="card-header">
-                        <h3 class="card-title text-accent-violet" data-bind="escort.match.title">单 局</h3>
-                        <span class="card-badge" data-bind="escort.match.badge" data-label-token="escort-match"></span>
+                        <h3 class="card-title text-accent-violet" data-bind="escort.match.title" data-md-field="title" data-md-scope="escort-match" data-md-format="spaced-cjk">单 局</h3>
+                        <span class="card-badge" data-bind="label.match_badge" data-md-field="badge" data-md-scope="escort-match">PER MATCH</span>
                     </div>
-                    <ul class="list-group" data-bind-list="escort.match.items">
-                        <li class="list-item"><span class="bullet"></span><span class="item-content">[ 单局规则说明 01 ]: 详细文本内容占位符行。</span></li>
-                        <li class="list-item"><span class="bullet"></span><span class="item-content">[ 单局规则说明 02 ]: 详细文本内容占位符行。</span></li>
-                        <li class="list-item"><span class="bullet"></span><span class="item-content">[ 单局规则说明 03 ]: 详细文本内容占位符行。</span></li>
-                        <li class="list-item"><span class="bullet"></span><span class="item-content">[ 单局规则说明 04 ]: 详细文本内容占位符行。</span></li>
-                        <li class="list-item"><span class="bullet"></span><span class="item-content">[ 单局规则说明 05 ]: 详细文本内容占位符行。</span></li>
+                    <ul class="list-group" data-bind-list="escort.match.items" data-md-field="items" data-md-scope="escort-match">
                     </ul>
                 </div>
             </div>
         </section>
 
-        <section class="section-block" data-section="notice">
+        <section class="section-block" data-section="notice" data-md-role="section" data-md-id="notice" data-md-heading-level="2">
             <div class="section-header">
                 <div class="section-title-group">
-                    <h2 class="section-title-cn" data-bind="sections.notice.title_cn">须 知</h2>
-                    <span class="section-title-en" data-bind="sections.notice.title_en" data-label-token="notice-en"></span>
+                    <h2 class="section-title-cn" data-bind="sections.notice.title_cn" data-md-field="title" data-md-scope="notice">须 知</h2>
+                    <span class="section-title-en" data-bind="label.notice_en" data-md-field="label" data-md-scope="notice">TERMS & NOTICE</span>
                 </div>
-                <span class="section-status-badge" data-bind="sections.notice.status" data-label-token="section-03"></span>
+                <span class="section-status-badge" data-bind="label.notice_status" data-md-field="status" data-md-scope="notice">SECTION // 03</span>
             </div>
             <div class="notice-box">
-                <div class="notice-content-list" data-bind-list="notice.items">
-                    <div class="notice-item"><span class="num">01.</span><span class="text">[ 须知事项 01 ]: 请在开始服务前与客服确认需求细节与预约时间。</span></div>
-                    <div class="notice-item"><span class="num">02.</span><span class="text">[ 须知事项 02 ]: 本服务最终解释权归团队所有，如有疑问请随时联系。</span></div>
-                    <div class="notice-item"><span class="num">03.</span><span class="text">[ 须知事项 03 ]: 占位须知说明行，支持自动换行与自由追加多行文本内容喵。</span></div>
+                <span class="notice-label" data-bind="label.notice_tag" data-md-field="tag" data-md-scope="notice">NOTICE / 须知说明</span>
+                <div class="notice-content-list" data-bind-list="notice.items" data-md-field="items" data-md-scope="notice">
                 </div>
             </div>
         </section>
@@ -130,8 +111,8 @@
             <span class="copyright-text" data-bind="copyright.text">*以上内容最终解释权归溯流电竞所有</span>
         </section>
 
-        <section class="section-block" data-section="decorative">
-            <div class="decorative-block" data-bind="decorative.block" data-placeholder="art-text"></div>
+        <section class="section-block" data-section="decorative" data-md-role="placeholder" data-md-id="decorative">
+            <div class="decorative-block" data-bind="decorative.block" data-placeholder="art-text" data-placeholder-lines="1"></div>
         </section>
     </div>
 </body>

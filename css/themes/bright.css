@@ -1,19 +1,5 @@
 /* Bright theme color tokens. Keep all visual colors here. */
 :root {
-    /* Decorative labels: change these values to retheme the fixed template. */
-    --label-header-tag: 'TACTICAL SERVICE MENU // 战术导引菜单';
-    --label-exp-en: 'EXPERIENCE PACKAGES';
-    --label-escort-en: 'ESCORT SERVICES';
-    --label-notice-en: 'TERMS & NOTICE';
-    --label-section-01: 'SECTION // 01';
-    --label-section-02: 'SECTION // 02';
-    --label-section-03: 'SECTION // 03';
-    --label-exp-card-01: 'OPTION A';
-    --label-exp-card-02: 'OPTION B';
-    --label-escort-guarantee: 'GUARANTEED';
-    --label-escort-match: 'PER MATCH';
-    --label-notice: 'NOTICE / 须知说明';
-
     --color-primary: #787DB5;
     --color-primary-light: #F0F2FA;
     --color-primary-glow: rgba(120, 125, 181, 0.2);
