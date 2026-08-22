@@ -1,0 +1,70 @@
+/* Bright theme color tokens. Keep all visual colors here. */
+:root {
+    /* Decorative labels: change these values to retheme the fixed template. */
+    --label-header-tag: 'TACTICAL SERVICE MENU // 战术导引菜单';
+    --label-exp-en: 'EXPERIENCE PACKAGES';
+    --label-escort-en: 'ESCORT SERVICES';
+    --label-notice-en: 'TERMS & NOTICE';
+    --label-section-01: 'SECTION // 01';
+    --label-section-02: 'SECTION // 02';
+    --label-section-03: 'SECTION // 03';
+    --label-exp-card-01: 'OPTION A';
+    --label-exp-card-02: 'OPTION B';
+    --label-escort-guarantee: 'GUARANTEED';
+    --label-escort-match: 'PER MATCH';
+    --label-notice: 'NOTICE / 须知说明';
+
+    --color-primary: #787DB5;
+    --color-primary-light: #F0F2FA;
+    --color-primary-glow: rgba(120, 125, 181, 0.2);
+    --color-mint: #6cbcac;
+    --color-mint-light: #E8FAF6;
+    --color-mint-glow: rgba(62, 202, 175, 0.25);
+    --color-ice: #68C2E3;
+    --color-ice-light: #EFF9FC;
+    --color-ice-glow: rgba(104, 194, 227, 0.25);
+    --color-violet: #9580B8;
+    --color-violet-light: #F4F0FA;
+    --color-violet-glow: rgba(149, 128, 184, 0.25);
+    --color-amber: #E69D2E;
+    --color-amber-light: #FFF9EF;
+
+    --bg-body: #E6E8F2;
+    --bg-canvas-fallback: #C8CEE8;
+    --bg-canvas: linear-gradient(180deg, #FFFFFF 0%, #EEF0F8 30%, #D8DCF0 65%, #C8CEE8 100%);
+    --bg-card: #FFFFFF;
+    --bg-card-header: rgba(120, 125, 181, 0.06);
+    --bg-placeholder: #F8F9FC;
+    --bg-list-item: #F8F9FD;
+    --bg-badge: rgba(255, 255, 255, 0.8);
+
+    --bg-pattern-dots: radial-gradient(rgba(120, 125, 181, 0.28) 1.5px, transparent 1.5px);
+    --bg-glow-mint: radial-gradient(circle at 12% 10%, rgba(62, 202, 175, 0.22) 0%, transparent 40%);
+    --bg-glow-ice: radial-gradient(circle at 88% 22%, rgba(104, 194, 227, 0.25) 0%, transparent 45%);
+    --bg-glow-violet: radial-gradient(circle at 50% 75%, rgba(120, 125, 181, 0.22) 0%, transparent 50%);
+    --bg-pattern-stripes: repeating-linear-gradient(45deg, rgba(120, 125, 181, 0.035) 0, rgba(120, 125, 181, 0.035) 2px, transparent 2px, transparent 24px);
+
+    --border-primary: #9FA4D0;
+    --border-accent: #6cbcac;
+    --border-muted: rgba(120, 125, 181, 0.25);
+    --text-title: #1E2038;
+    --text-body: #32354A;
+    --text-muted: #787DA0;
+    --text-highlight: #4abda8;
+    --text-on-accent: #FFFFFF;
+
+    --shadow-canvas: 0 0 60px rgba(0, 0, 0, 0.12);
+    --shadow-header: 0 10px 30px rgba(120, 125, 181, 0.12);
+    --shadow-card: 0 8px 24px var(--color-primary-glow);
+    --shadow-notice: 0 8px 24px rgba(230, 157, 46, 0.15);
+
+    --card-theme-a-border: var(--color-mint);
+    --card-theme-a-bg: var(--color-mint-light);
+    --card-theme-a-glow: var(--color-mint-glow);
+    --card-theme-b-border: var(--color-ice);
+    --card-theme-b-bg: var(--color-ice-light);
+    --card-theme-b-glow: var(--color-ice-glow);
+    --card-theme-c-border: var(--color-violet);
+    --card-theme-c-bg: var(--color-violet-light);
+    --card-theme-c-glow: var(--color-violet-glow);
+}

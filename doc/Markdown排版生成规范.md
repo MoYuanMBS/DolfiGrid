@@ -1,0 +1,320 @@
+# Markdown 固定排版生成规范
+
+本文档是本项目 Markdown → 固定尺寸 HTML 排版图片的输入规范。
+
+## 1. 项目原则
+
+- Markdown 只负责内容、层级和绑定 ID。
+- HTML 模板只负责固定结构和排版位置。
+- CSS 只负责颜色、字体、尺寸、间距和视觉样式。
+- JS 负责解析 Markdown、校验格式并生成新的 HTML。
+- 生成结果不是响应式网页，而是固定画布图片排版。
+- JS 不直接修改原始模板，只读取模板并输出新文件。
+
+## 2. Frontmatter
+
+文档可以使用 YAML 风格的 frontmatter：
+
+```md
+---
+title: "战术电竞服务价格表"
+subtitle: "TACTICAL SERVICE MENU & PRICE LIST"
+label.header_tag: "TACTICAL SERVICE MENU // 战术导引菜单"
+label.experience_badge_1: "OPTION A"
+label.experience_badge_2: "OPTION B"
+label.guarantee_badge: "GUARANTEED"
+label.match_badge: "PER MATCH"
+notice:
+  - "消费前请老板务必查看点单须知。"
+---
+```
+
+规则：
+
+- `title` 为空时，删除对应标题元素。
+- `subtitle` 为空时，删除对应副标题元素。
+- `label.*` 用于绑定可变装饰文字。
+- 没有提供的装饰文字使用模板默认值，或按模板规则隐藏。
+- `notice` 是须知列表。
+- 最终解释权不放入 Markdown，必须由 HTML 模板固定提供。
+
+## 3. 标题等级与 HTML 模板映射
+
+标题等级只表示 Markdown 文档中的层级关系，不直接规定 HTML 使用 `h1`、`h2` 还是某个固定组件。
+
+Markdown 允许使用 1 到 6 级标题：
+
+```md
+# 文档级标题
+## [section:experience] 体验套餐
+### [card:exp-1] 机密体验单
+#### 套餐说明
+##### 价格规则
+###### 补充说明
+```
+
+不要在 JS 中写死下面这种全局规则：
+
+```text
+## 永远是 section
+### 永远是 card
+```
+
+因为不同 HTML 模板可能有不同的排版层级。标题应该由 HTML 模板声明如何接收 Markdown 数据。
+
+### 3.1 HTML 模板绑定属性
+
+HTML 模板使用 `data-md-*` 属性声明 Markdown 对应关系：
+
+```html
+<section
+    data-section="experience"
+    data-md-role="section"
+    data-md-id="experience"
+    data-md-heading-level="2"
+>
+    <h2 data-md-field="title"></h2>
+
+    <div
+        data-card-id="exp-1"
+        data-md-role="card"
+        data-md-id="exp-1"
+        data-md-heading-level="3"
+    >
+        <h3 data-md-field="title"></h3>
+        <div data-md-field="items"></div>
+    </div>
+</section>
+```
+
+属性含义：
+
+- `data-md-role`：模板节点接收的内容角色，例如 `document`、`section`、`card`、`subheading`。
+- `data-md-id`：对应 Markdown 中的绑定 ID。
+- `data-md-heading-level`：该模板节点默认接收的 Markdown 标题等级。
+- `data-md-field`：节点接收的字段，例如 `title`、`items`、`label`、`media`。
+- `data-section`、`data-card-id`：保留作为现有布局和 CSS 的功能属性。
+
+### 3.2 绑定优先级
+
+JS 按以下顺序寻找对应模板节点：
+
+```text
+明确的 role + id 绑定
+→ 明确的 id 绑定
+→ heading level + role 绑定
+→ 同级模板节点按顺序绑定
+```
+
+因此，ID 是最稳定的绑定方式，标题等级是结构校验和无 ID 内容的辅助方式。
+
+同一份 Markdown 可以用于不同 HTML 模板：
+
+```text
+模板 A：section 使用 ##，card 使用 ###
+模板 B：section 使用 ###，card 使用 ####
+```
+
+只要两个模板声明了对应的 `data-md-id`，JS 就不需要修改 Markdown 解析逻辑。
+
+### 3.3 Markdown 标题写法
+
+需要绑定模板的标题使用角色和 ID：
+
+```md
+## [section:escort] 护航
+### [card:escort-guarantee] 保底
+### [card:escort-match] 单局
+```
+
+不需要绑定具体模板的标题可以只写普通 Markdown 标题：
+
+```md
+#### 套餐说明
+##### 价格规则
+```
+
+这类标题由模板根据 `data-md-role="subheading"` 或同级内容容器决定如何渲染。
+
+如果 Markdown 标题等级与模板声明不一致：
+
+- 有明确 `id` 时，以 ID 绑定为准，并记录等级不一致警告；
+- 没有明确 `id` 时，生成器必须报错，不能猜测绑定目标。
+
+ID 规则：
+
+- ID 只能使用英文小写、数字、短横线和下划线。
+- 同一种 ID 在全文中不能重复。
+- HTML 模板通过 `data-section` 和 `data-card-id` 查找对应位置。
+- JS 不允许把 `D1`、`D2`、`D3` 写死为唯一业务结构。
+
+## 4. 列表和强制换行
+
+普通列表项：
+
+```md
+- 普通的一行文字
+```
+
+多行列表项：
+
+```md
+- 78r = 666w
+  包通道卡 / 每人限一单
+  每人仅限购买一次
+```
+
+规则：
+
+- 以 `- ` 开头的是新的列表项。
+- 紧随其后的、至少缩进两个空格的文字是该列表项的续行。
+- 续行必须强制换行。
+- 续行不依赖空格数量实现视觉对齐。
+- 生成 HTML 时，续行文字必须和第一行文字的起始位置对齐。
+
+## 5. 左右栏分隔符
+
+使用 `/|` 表示左右栏分隔：
+
+```md
+- 158r /| 保底 788w
+- 268r /| 保底 1488w
+```
+
+生成后：
+
+```text
+158r                         保底 788w
+```
+
+规则：
+
+- `/|` 是特殊分隔符。
+- 普通单独出现的 `|` 不具有分栏作用。
+- `/|` 左侧生成 `.price-left`。
+- `/|` 右侧生成 `.price-right`。
+- 没有 `/|` 的列表项按普通多行内容处理。
+- 分栏项目也可以继续写缩进续行：
+
+```md
+- 128r /| 保单局 688w
+  打不到保底一直吃
+```
+
+## 6. 空字段和占位符
+
+普通空字段：
+
+```text
+没有内容 → 删除对应元素
+```
+
+占位符只允许使用以下两种格式：
+
+```md
+{{placeholder}}
+```
+
+表示保留一行透明空间。
+
+```md
+{{placeholder lines=3}}
+```
+
+表示保留三行透明空间。
+
+占位符规则：
+
+- 占位符永远不输出任何文字。
+- 占位符的输出值始终为空字符串。
+- 占位符必须透明，但必须保留空间。
+- `lines` 必须是正整数。
+- 不支持 `{{placeholder:name}}`。
+- 不支持其他占位符写法。
+- 占位符文字不参与字体等级判断。
+- 占位符所在结构的字体和行高由 HTML/CSS 模板决定。
+
+示例：
+
+```md
+## [section:experience] 体验套餐
+
+{{placeholder lines=3}}
+```
+
+这不会输出 `placeholder` 文字，只会保留三行透明区域。
+
+## 7. 图片
+
+图片可以使用标准 Markdown 写法：
+
+```md
+![宣传图](assets/example.png)
+```
+
+也可以作为列表内容：
+
+```md
+- [image] assets/example.png
+```
+
+图片规则：
+
+- 图片按原始比例缩放。
+- 图片宽度不能超过所在容器。
+- 高度根据宽高比自动计算。
+- 不裁切、不变形。
+- 图片框高度跟随实际图片高度。
+- 图片不存在时，生成器必须报告错误或保留空图片框，不能生成损坏图片链接。
+
+## 8. 禁止内容
+
+HTML 模板和生成结果中禁止出现以下可见占位文本：
+
+```text
+[ 须知事项 01 ]
+[ 体验套餐 01 详细描述文本 / 占位符 ]
+[ 保底条款说明 01 ]
+体验卡片 01
+```
+
+这些文字不能作为默认内容留在最终图片中。
+
+允许保留的是没有文字的结构占位符，例如：
+
+```html
+<div data-placeholder="art-copy"></div>
+```
+
+## 9. 固定模板内容
+
+最终解释权必须由模板固定提供：
+
+```html
+<section class="copyright-section" data-section="copyright">
+    <span class="copyright-text">
+        *以上内容最终解释权归溯流电竞所有
+    </span>
+</section>
+```
+
+JS 不得因为 Markdown 缺少字段而删除、清空或替换该区域。
+
+## 10. 生成前校验
+
+JS 生成前必须检查：
+
+- Markdown 是否可以读取。
+- frontmatter 是否闭合。
+- 标题等级是否在 1 到 6 之间。
+- `section ID` 是否重复。
+- `card ID` 是否重复。
+- `data-md-id` 是否与 Markdown 绑定 ID 对应。
+- `data-md-role` 是否是模板声明的有效角色。
+- `data-md-heading-level` 是否为 1 到 6 的整数。
+- 无 ID 标题是否能通过模板声明的等级和角色唯一绑定。
+- `/|` 是否拥有左右两侧内容。
+- `lines` 是否为正整数。
+- 图片文件是否存在。
+- 最终 HTML 是否残留可见占位文本。
+- 最终解释权区域是否仍然存在。

@@ -1,0 +1,28 @@
+.canvas-container {
+    width: 4096px;
+    min-height: 100px;
+    height: auto;
+    background-color: var(--bg-canvas-fallback);
+    background-image: var(--bg-pattern-dots), var(--bg-glow-mint), var(--bg-glow-ice), var(--bg-glow-violet), var(--bg-pattern-stripes), var(--bg-canvas);
+    background-size: 40px 40px, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    position: relative;
+    padding: 90px 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    overflow: hidden;
+    box-shadow: var(--shadow-canvas);
+}
+
+.canvas-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 12px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-mint), var(--color-ice), var(--color-violet));
+}
+
+.section-block { width: 100%; display: flex; flex-direction: column; gap: 36px; }
+.grid-col-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; width: 100%; }
+.grid-col-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; width: 100%; }
+.grid-col-1 { display: grid; grid-template-columns: 1fr; gap: 36px; width: 100%; }
