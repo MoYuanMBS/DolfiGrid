@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>长文规则说明模板</title>
+    <link rel="stylesheet" href="../css/themes/bright.css" data-theme-stylesheet>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/longform-rules.css">
+    <style id="layout-config">
+        :root {
+            --decor-block-height: 0px;
+            --canvas-min-height: 0px;
+            --canvas-layout-width: 1280px;
+        }
+    </style>
+</head>
+<body>
+    <main class="canvas-container longform-canvas">
+        <header class="document-masthead" data-section="header" data-md-role="document" data-md-id="header">
+            <div class="masthead-rule"><span></span><i></i><span></span></div>
+            <p class="document-kicker" data-bind="hud_tag" data-md-field="label" data-md-scope="header"></p>
+            <h1 data-bind="document.title" data-md-field="title" data-md-scope="header" data-md-empty="remove"></h1>
+            <p class="document-subtitle" data-bind="subtitle" data-md-field="subtitle" data-md-scope="header" data-md-empty="remove"></p>
+        </header>
+
+        <div class="longform-pages">
+            <section class="paper-page page-rules" data-section="chapter-1" data-md-role="section" data-md-id="chapter-1" data-md-heading-level="2">
+                <header class="page-heading">
+                    <span class="page-tab" data-bind="label.chapter_1" data-md-field="label" data-md-scope="chapter-1"></span>
+                    <div class="heading-copy">
+                        <h2 data-md-field="title" data-md-scope="chapter-1"></h2>
+                        <p data-bind="label.chapter_1_subtitle"></p>
+                    </div>
+                    <div class="heading-ornament" aria-hidden="true"><span></span><i></i><span></span></div>
+                </header>
+                <ul class="section-lead" data-md-field="items" data-md-scope="chapter-1"></ul>
+                <div class="rules-layout">
+                    <div class="rules-column">
+                        <article class="article-block article-major" data-md-role="card" data-md-id="article-1" data-md-heading-level="3">
+                            <div class="article-heading"><span class="article-index" data-bind="label.article_1"></span><h3 data-md-field="title" data-md-scope="article-1"></h3></div>
+                            <div class="article-media media-float" data-bind-media="article-1.media" data-md-field="media" data-md-scope="article-1"></div>
+                            <ol class="prose-list" data-md-field="items" data-md-scope="article-1"></ol>
+                        </article>
+                        <article class="article-block" data-md-role="card" data-md-id="article-2" data-md-heading-level="3">
+                            <div class="article-heading"><span class="article-index" data-bind="label.article_2"></span><h3 data-md-field="title" data-md-scope="article-2"></h3></div>
+                            <div class="article-media" data-bind-media="article-2.media" data-md-field="media" data-md-scope="article-2"></div>
+                            <ol class="prose-list" data-md-field="items" data-md-scope="article-2"></ol>
+                        </article>
+                    </div>
+                    <div class="rules-column rules-column-secondary">
+                        <article class="article-block" data-md-role="card" data-md-id="article-3" data-md-heading-level="3">
+                            <div class="article-heading"><span class="article-index" data-bind="label.article_3"></span><h3 data-md-field="title" data-md-scope="article-3"></h3></div>
+                            <div class="article-media" data-bind-media="article-3.media" data-md-field="media" data-md-scope="article-3"></div>
+                            <ol class="prose-list" data-md-field="items" data-md-scope="article-3"></ol>
+                        </article>
+                        <article class="article-block note-article" data-md-role="card" data-md-id="article-4" data-md-heading-level="3">
+                            <div class="article-heading"><span class="article-index" data-bind="label.article_4"></span><h3 data-md-field="title" data-md-scope="article-4"></h3></div>
+                            <div class="article-media" data-bind-media="article-4.media" data-md-field="media" data-md-scope="article-4"></div>
+                            <ol class="prose-list" data-md-field="items" data-md-scope="article-4"></ol>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="paper-page page-benefits" data-section="chapter-2" data-md-role="section" data-md-id="chapter-2" data-md-heading-level="2">
+                <header class="page-heading">
+                    <span class="page-tab" data-bind="label.chapter_2" data-md-field="label" data-md-scope="chapter-2"></span>
+                    <div class="heading-copy">
+                        <h2 data-md-field="title" data-md-scope="chapter-2"></h2>
+                        <p data-bind="label.chapter_2_subtitle"></p>
+                    </div>
+                    <div class="heading-ornament" aria-hidden="true"><span></span><i></i><span></span></div>
+                </header>
+                <ul class="section-lead" data-md-field="items" data-md-scope="chapter-2"></ul>
+                <div class="benefit-ledger">
+                    <article class="benefit-row" data-md-role="card" data-md-id="article-5" data-md-heading-level="3">
+                        <span class="benefit-icon icon-backpack" aria-hidden="true"></span><span class="row-number" data-bind="label.article_5"></span><h3 data-md-field="title" data-md-scope="article-5"></h3><ol class="row-details" data-md-field="items" data-md-scope="article-5"></ol>
+                    </article>
+                    <article class="benefit-row" data-md-role="card" data-md-id="article-6" data-md-heading-level="3">
+                        <span class="benefit-icon icon-angry" aria-hidden="true"></span><span class="row-number" data-bind="label.article_6"></span><h3 data-md-field="title" data-md-scope="article-6"></h3><ol class="row-details" data-md-field="items" data-md-scope="article-6"></ol>
+                    </article>
+                    <article class="benefit-row" data-md-role="card" data-md-id="article-7" data-md-heading-level="3">
+                        <span class="benefit-icon icon-stress" aria-hidden="true"></span><span class="row-number" data-bind="label.article_7"></span><h3 data-md-field="title" data-md-scope="article-7"></h3><ol class="row-details" data-md-field="items" data-md-scope="article-7"></ol>
+                    </article>
+                    <article class="benefit-row" data-md-role="card" data-md-id="article-8" data-md-heading-level="3">
+                        <span class="benefit-icon icon-chat" aria-hidden="true"></span><span class="row-number" data-bind="label.article_8"></span><h3 data-md-field="title" data-md-scope="article-8"></h3><ol class="row-details" data-md-field="items" data-md-scope="article-8"></ol>
+                    </article>
+                    <article class="benefit-row" data-md-role="card" data-md-id="article-9" data-md-heading-level="3">
+                        <span class="benefit-icon icon-add-friend" aria-hidden="true"></span><span class="row-number" data-bind="label.article_9"></span><h3 data-md-field="title" data-md-scope="article-9"></h3><ol class="row-details" data-md-field="items" data-md-scope="article-9"></ol>
+                    </article>
+                </div>
+                <aside class="page-notice">
+                    <strong data-bind="label.chapter_2_notice"></strong>
+                    <span data-bind="label.chapter_2_notice_text"></span>
+                </aside>
+            </section>
+
+            <section class="paper-page page-service" data-section="chapter-3" data-md-role="section" data-md-id="chapter-3" data-md-heading-level="2">
+                <header class="page-heading">
+                    <span class="page-tab" data-bind="label.chapter_3" data-md-field="label" data-md-scope="chapter-3"></span>
+                    <div class="heading-copy">
+                        <h2 data-md-field="title" data-md-scope="chapter-3"></h2>
+                        <p data-bind="label.chapter_3_subtitle"></p>
+                    </div>
+                    <div class="heading-ornament" aria-hidden="true"><span></span><i></i><span></span></div>
+                </header>
+                <ul class="section-lead" data-md-field="items" data-md-scope="chapter-3"></ul>
+                <div class="service-grid">
+                    <article class="service-article service-wide" data-md-role="card" data-md-id="article-10" data-md-heading-level="3">
+                        <div class="article-heading"><span class="article-index" data-bind="label.article_10"></span><h3 data-md-field="title" data-md-scope="article-10"></h3></div>
+                        <div class="article-media" data-bind-media="article-10.media" data-md-field="media" data-md-scope="article-10"></div><ol class="prose-list" data-md-field="items" data-md-scope="article-10"></ol>
+                    </article>
+                    <article class="service-article" data-md-role="card" data-md-id="article-11" data-md-heading-level="3">
+                        <div class="article-heading"><span class="article-index" data-bind="label.article_11"></span><h3 data-md-field="title" data-md-scope="article-11"></h3></div>
+                        <div class="article-media" data-bind-media="article-11.media" data-md-field="media" data-md-scope="article-11"></div><ol class="prose-list" data-md-field="items" data-md-scope="article-11"></ol>
+                    </article>
+                    <article class="service-article" data-md-role="card" data-md-id="article-12" data-md-heading-level="3">
+                        <div class="article-heading"><span class="article-index" data-bind="label.article_12"></span><h3 data-md-field="title" data-md-scope="article-12"></h3></div>
+                        <div class="article-media" data-bind-media="article-12.media" data-md-field="media" data-md-scope="article-12"></div><ol class="prose-list" data-md-field="items" data-md-scope="article-12"></ol>
+                    </article>
+                    <article class="service-article service-wide" data-md-role="card" data-md-id="article-13" data-md-heading-level="3">
+                        <div class="article-heading"><span class="article-index" data-bind="label.article_13"></span><h3 data-md-field="title" data-md-scope="article-13"></h3></div>
+                        <div class="article-media" data-bind-media="article-13.media" data-md-field="media" data-md-scope="article-13"></div><ol class="prose-list" data-md-field="items" data-md-scope="article-13"></ol>
+                    </article>
+                </div>
+            </section>
+        </div>
+
+        <section class="copyright-section" data-section="copyright">
+            <span class="copyright-text" data-bind="copyright.text">*以上内容最终解释权归溯流电竞所有</span>
+        </section>
+    </main>
+</body>
+</html>

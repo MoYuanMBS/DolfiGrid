@@ -18,6 +18,7 @@ const sourceDirectory = path.join(projectRoot, 'original-md-files');
 const templateDirectory = path.join(projectRoot, '标准格式');
 const themeDirectory = path.join(projectRoot, 'css', 'themes');
 const imageDirectory = path.join(projectRoot, 'assets', 'insert-png');
+const assetDirectory = path.join(projectRoot, 'assets');
 const outputDirectory = path.join(projectRoot, 'output');
 
 /** 统一构建错误前缀，方便用户从终端日志中定位配置问题。 */
@@ -105,10 +106,14 @@ const exportConfig = resolveExportConfig(meta);
 const outputPath = path.join(outputDirectory, `${path.basename(inputName, '.md')}.html`);
 // images 按列表顺序交给 generate.js，并绑定到未跳过的媒体槽位。
 const images = Array.isArray(meta.images) ? meta.images.map((entry) => {
-    const imageName = String(entry).trim();
-    assertSimpleFileName(imageName);
-    const sourcePath = path.join(imageDirectory, imageName);
-    if (!fs.existsSync(sourcePath)) fail(`图片不存在：assets/insert-png/${imageName}`);
+    const imageName = String(entry).trim().replace(/\\/g, '/');
+    const isLegacyFileName = path.posix.basename(imageName) === imageName;
+    const relativeAssetPath = isLegacyFileName ? `insert-png/${imageName}` : imageName;
+    if (!/^(?:insert-png|svg)\/[A-Za-z0-9_.-]+$/.test(relativeAssetPath)) {
+        fail(`图片只允许使用 assets/insert-png 或 assets/svg 内的文件：${imageName}`);
+    }
+    const sourcePath = path.join(assetDirectory, ...relativeAssetPath.split('/'));
+    if (!fs.existsSync(sourcePath)) fail(`图片不存在：assets/${relativeAssetPath}`);
     return {
         sourcePath,
         href: relativeHref(path.dirname(outputPath), sourcePath),
