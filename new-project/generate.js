@@ -173,10 +173,6 @@ function parseDocument(text) {
         throw new Error(`无法解析第 ${index + 1} 行：${line}`);
     }
 
-    for (const value of data.notice || []) {
-        const notice = headings.find((heading) => heading.id === 'notice' || heading.role === 'notice');
-        if (notice) notice.items.push({ kind: 'item', lines: [stripMarkdown(value)] });
-    }
     return { meta: data, headings };
 }
 
@@ -318,6 +314,24 @@ function setThemeStylesheet(html, themeHref) {
     return html.replace(/(<link\b[^>]*\bdata-theme-stylesheet\b[^>]*\bhref=")[^"]*(")/i, `$1${themeHref}$2`);
 }
 
+/** 仅允许安全的 CSS 尺寸值写入模板变量，避免 frontmatter 注入任意样式。 */
+function applyLayoutConfig(html, meta) {
+    const variables = {
+        decor_block_height: '--decor-block-height',
+        canvas_min_height: '--canvas-min-height',
+    };
+    for (const [metaKey, cssVariable] of Object.entries(variables)) {
+        if (!Object.prototype.hasOwnProperty.call(meta, metaKey)) continue;
+        const value = String(meta[metaKey]).trim();
+        if (!/^\d+(?:\.\d+)?(?:px|vh|vw|rem|em|%)$/.test(value)) {
+            throw new Error(`${metaKey} 必须是非负 CSS 尺寸，例如 100px 或 20vh`);
+        }
+        const variablePattern = new RegExp(`(${cssVariable.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}:\\s*)[^;]+;`);
+        html = html.replace(variablePattern, `$1${value};`);
+    }
+    return html;
+}
+
 /** 主标题也允许使用透明占位符，供后续手工加入艺术字。 */
 function renderTitleValue(title) {
     const placeholder = parsePlaceholder(title);
@@ -341,6 +355,7 @@ function renderDocument(document, options = {}) {
     const activeTemplatePath = options.templatePath || templatePath;
     let html = fs.readFileSync(activeTemplatePath, 'utf8');
     html = setThemeStylesheet(html, options.themeHref);
+    html = applyLayoutConfig(html, document.meta);
     const roles = ['section', 'card'];
     const slots = Object.fromEntries(roles.map((role) => [role, findSlots(html, role)]));
     const used = new Set();

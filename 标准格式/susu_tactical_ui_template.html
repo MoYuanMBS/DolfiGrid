@@ -21,7 +21,10 @@
     <link rel="stylesheet" href="../css/components.css">
     <link rel="stylesheet" href="../css/utilities.css">
     <style id="layout-config">
-        :root { --decor-block-height: 100px; }
+        :root {
+            --decor-block-height: 100px;
+            --canvas-min-height: 0px;
+        }
     </style>
 </head>
 <body>
@@ -56,8 +59,6 @@
                         <h3 class="card-title" data-bind="exp.card2.title" data-md-field="title" data-md-scope="exp-2"></h3>
                         <span class="card-badge" data-bind="label.experience_badge_2" data-md-field="badge" data-md-scope="exp-2">OPTION B</span>
                     </div>
-                    <div class="card-media-placeholder" data-bind-media="exp.card2.media" data-md-field="media" data-md-scope="exp-2" data-media-file="">
-                    </div>
                     <ul class="list-group" data-bind-list="exp.card2.items" data-md-field="items" data-md-scope="exp-2">
                     </ul>
                 </div>
@@ -86,6 +87,9 @@
                         <h3 class="card-title text-accent-violet" data-bind="escort.match.title" data-md-field="title" data-md-scope="escort-match" data-md-format="spaced-cjk">单 局</h3>
                         <span class="card-badge" data-bind="label.match_badge" data-md-field="badge" data-md-scope="escort-match">PER MATCH</span>
                     </div>
+                    <div class="card-media-placeholder" data-bind-media="exp.card2.media" data-md-field="media" data-md-scope="exp-2" data-media-file="">
+                    </div>
+
                     <ul class="list-group" data-bind-list="escort.match.items" data-md-field="items" data-md-scope="escort-match">
                     </ul>
                 </div>

@@ -21,6 +21,8 @@ template: "susu_tactical_ui_template"
 theme: "bright"
 subtitle: "TACTICAL SERVICE MENU & PRICE LIST"
 hud_tag: "TACTICAL SERVICE MENU // 战术导引菜单"
+decor_block_height: "100px"
+canvas_min_height: "7282px"
 label.experience_badge_1: "OPTION A"
 label.experience_badge_2: "OPTION B"
 label.guarantee_badge: "GUARANTEED"
@@ -36,10 +38,12 @@ notice:
 - `template` 指向 `标准格式/<template>.html`，只写文件名主体，不写路径或扩展名。
 - `theme` 指向 `css/themes/<theme>.css`，只写文件名主体，不写路径或扩展名。
 - `subtitle`、`hud_tag` 和 `label.*` 是可变模板文字。
+- `decor_block_height` 控制底部透明装饰区高度，例如 `100px`。
+- `canvas_min_height` 可选；只在必须固定画布最小高度时设置，例如 `7282px`。未设置时为 `0px`。
 - 主标题不能写在 frontmatter，必须写在 Markdown 正文中。
 - `label.*` 用于绑定可变装饰文字。
 - 没有提供的装饰文字使用模板默认值，或按模板规则隐藏。
-- `notice` 是须知列表。
+- 须知内容不写在 frontmatter，必须写在正文的 `## [section:notice]` 下。
 - 最终解释权不放入 Markdown，必须由 HTML 模板固定提供。
 
 ## 3. 标题等级与 HTML 模板映射
@@ -346,6 +350,14 @@ node .\new-project\build.js 体验护航.md
 ```text
 output/体验护航.html
 ```
+
+如需同时导出图片，在命令末尾开启 `--export=true`：
+
+```powershell
+node .\new-project\build.js 体验护航.md --export=true
+```
+
+此时会额外输出同名的 `output/体验护航.png` 和 `output/体验护航.svg`。不传该参数（或显式传入 `--export=false`）时，只生成 HTML。
 
 ## 9. 禁止内容
 

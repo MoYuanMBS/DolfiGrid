@@ -10,6 +10,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { generate, parseFrontmatter } = require('./generate.js');
+const { exportImageAssets } = require('./export-images.js');
 
 // 项目路径只在这里集中定义；Markdown 中不允许传入任意磁盘路径。
 const projectRoot = path.resolve(__dirname, '..');
@@ -40,6 +41,11 @@ function relativeHref(fromDirectory, targetPath) {
 
 // 命令行仅接收一个 Markdown 文件名，例如：node build.js 体验护航.md。
 const inputName = process.argv[2];
+const exportArgument = process.argv.slice(3).find((argument) => argument.startsWith('--export='));
+const exportEnabled = exportArgument ? exportArgument === '--export=true' : false;
+if (exportArgument && !['--export=true', '--export=false'].includes(exportArgument)) {
+    fail('export 参数只能是 --export=true 或 --export=false');
+}
 if (!inputName) fail('请提供 original-md-files 中的 Markdown 文件名，例如：体验护航.md');
 assertSimpleFileName(inputName, '.md');
 
@@ -82,4 +88,17 @@ const generatedPath = generate({
     imagesRoot: imageDirectory,
 });
 
-console.log(`已生成：${generatedPath}`);
+if (!exportEnabled) {
+    console.log(`已生成：${generatedPath}`);
+} else {
+    exportImageAssets({ htmlPath: generatedPath })
+        .then(({ pngPath, svgPath }) => {
+            console.log(`已生成：${generatedPath}`);
+            console.log(`已导出 PNG：${pngPath}`);
+            console.log(`已导出 SVG：${svgPath}`);
+        })
+        .catch((error) => {
+            console.error(`导出失败：${error.message}`);
+            process.exitCode = 1;
+        });
+}

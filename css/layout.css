@@ -1,6 +1,6 @@
 .canvas-container {
     width: 4096px;
-    min-height: 7282px;
+    min-height: var(--canvas-min-height, 0px);
     height: auto;
     background-color: var(--bg-canvas-fallback);
     background-image: var(--bg-pattern-dots), var(--bg-glow-mint), var(--bg-glow-ice), var(--bg-glow-violet), var(--bg-pattern-stripes), var(--bg-canvas);
