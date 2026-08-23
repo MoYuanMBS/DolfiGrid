@@ -22,13 +22,15 @@ theme: "bright"
 subtitle: "TACTICAL SERVICE MENU & PRICE LIST"
 hud_tag: "TACTICAL SERVICE MENU // 战术导引菜单"
 decor_block_height: "100px"
-canvas_min_height: "7282px"
+layout_width: "1280px"
+min_aspect_ratio: "9:16"
+export_scale: 4
+export_derive:
+  - 2
 label.experience_badge_1: "OPTION A"
 label.experience_badge_2: "OPTION B"
 label.guarantee_badge: "GUARANTEED"
 label.match_badge: "PER MATCH"
-notice:
-  - "消费前请老板务必查看点单须知。"
 ---
 ```
 
@@ -39,7 +41,11 @@ notice:
 - `theme` 指向 `css/themes/<theme>.css`，只写文件名主体，不写路径或扩展名。
 - `subtitle`、`hud_tag` 和 `label.*` 是可变模板文字。
 - `decor_block_height` 控制底部透明装饰区高度，例如 `100px`。
-- `canvas_min_height` 可选；只在必须固定画布最小高度时设置，例如 `7282px`。未设置时为 `0px`。
+- `layout_width` 是 HTML 的固定逻辑画布宽度，只允许使用 `px`；模板不得使用媒体查询把双栏改为单列。
+- `min_aspect_ratio` 是画布最小宽高比，例如 `9:16`。生成器在没有 `canvas_min_height` 时自动计算最小高度；内容超过后继续自然增长。
+- `canvas_min_height` 是可选手动覆盖项，优先级高于 `min_aspect_ratio`。
+- `export_scale` 是 PNG 母版的正整数倍率。`1280px × 4` 导出为 `5120px` 宽；最终母版宽必须大于 `4096px`。
+- `export_derive` 是可选的正整数列表，必须小于 `export_scale`；派生图从母版整数缩小。
 - 主标题不能写在 frontmatter，必须写在 Markdown 正文中。
 - `label.*` 用于绑定可变装饰文字。
 - 没有提供的装饰文字使用模板默认值，或按模板规则隐藏。
@@ -357,7 +363,17 @@ output/体验护航.html
 node .\new-project\build.js 体验护航.md --export=true
 ```
 
-此时会额外输出同名的 `output/体验护航.png` 和 `output/体验护航.svg`。不传该参数（或显式传入 `--export=false`）时，只生成 HTML。
+此时会输出 `output/体验护航@4x.png`，以及 frontmatter 的 `export_derive` 声明的派生 PNG（例如 `体验护航@2x.png`）。不传该参数（或显式传入 `--export=false`）时，只生成 HTML。
+
+长图推荐配置：
+
+```yaml
+layout_width: "1280px"   # 逻辑排版宽度；触发模板的窄画布规则
+min_aspect_ratio: "9:16" # 内容不足时的最低宽高比
+export_scale: 4           # 5120px 宽 PNG 母版
+export_derive:
+  - 2                     # 从母版缩小得到 2560px 宽派生图
+```
 
 ## 9. 禁止内容
 

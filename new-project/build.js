@@ -39,6 +39,42 @@ function relativeHref(fromDirectory, targetPath) {
     return path.relative(fromDirectory, targetPath).replace(/\\/g, '/');
 }
 
+/** 解析只允许使用 px 的画布宽度；排版尺寸不能随导出环境而产生歧义。 */
+function parsePixelWidth(value, fieldName, fallback) {
+    const resolvedValue = value === undefined || value === '' ? fallback : String(value).trim();
+    const match = resolvedValue.match(/^(\d+(?:\.\d+)?)px$/);
+    if (!match || Number(match[1]) <= 0) fail(`${fieldName} 必须是正数 px 尺寸，例如 4096px`);
+    return Number(match[1]);
+}
+
+/** 解析正数数值配置。 */
+function parsePositiveNumber(value, fieldName) {
+    const number = Number(value);
+    if (!Number.isFinite(number) || number <= 0) fail(`${fieldName} 必须是正数`);
+    return number;
+}
+
+/**
+ * 逻辑宽度与导出倍率彻底解耦：模板按固定 CSS 像素排版，PNG 按整数倍率截图。
+ * 1280px × 4 产出 5120px 母版，避免非整数缩放造成文字发虚。
+ */
+function resolveExportConfig(meta) {
+    const layoutWidth = parsePixelWidth(meta.layout_width, 'layout_width', '1280px');
+    const exportScale = parsePositiveNumber(meta.export_scale ?? 4, 'export_scale');
+    if (!Number.isInteger(exportScale)) fail('export_scale 必须是正整数，例如 4');
+    const outputWidth = layoutWidth * exportScale;
+    if (outputWidth <= 4096 || outputWidth > 32768) {
+        fail('layout_width × export_scale 必须大于 4096 且不超过 32768 像素');
+    }
+    const entries = meta.export_derive === undefined ? [] : Array.isArray(meta.export_derive) ? meta.export_derive : [meta.export_derive];
+    const deriveScales = entries.map((value) => {
+        const scale = parsePositiveNumber(value, 'export_derive');
+        if (!Number.isInteger(scale) || scale >= exportScale) fail('export_derive 中的倍率必须是小于 export_scale 的正整数');
+        return scale;
+    });
+    return { layoutWidth, exportScale, deriveScales };
+}
+
 // 命令行仅接收一个 Markdown 文件名，例如：node build.js 体验护航.md。
 const inputName = process.argv[2];
 const exportArgument = process.argv.slice(3).find((argument) => argument.startsWith('--export='));
@@ -64,6 +100,7 @@ const templatePath = path.join(templateDirectory, `${templateName}.html`);
 const themePath = path.join(themeDirectory, `${themeName}.css`);
 if (!fs.existsSync(templatePath)) fail(`模板不存在：${templateName}.html`);
 if (!fs.existsSync(themePath)) fail(`主题不存在：${themeName}.css`);
+const exportConfig = resolveExportConfig(meta);
 
 const outputPath = path.join(outputDirectory, `${path.basename(inputName, '.md')}.html`);
 // images 按列表顺序交给 generate.js，并绑定到未跳过的媒体槽位。
@@ -91,11 +128,11 @@ const generatedPath = generate({
 if (!exportEnabled) {
     console.log(`已生成：${generatedPath}`);
 } else {
-    exportImageAssets({ htmlPath: generatedPath })
-        .then(({ pngPath, svgPath }) => {
+    exportImageAssets({ htmlPath: generatedPath, ...exportConfig })
+        .then(({ masterPath, derivedPaths }) => {
             console.log(`已生成：${generatedPath}`);
-            console.log(`已导出 PNG：${pngPath}`);
-            console.log(`已导出 SVG：${svgPath}`);
+            console.log(`已导出 PNG 母版：${masterPath}`);
+            for (const derivedPath of derivedPaths) console.log(`已导出 PNG 派生图：${derivedPath}`);
         })
         .catch((error) => {
             console.error(`导出失败：${error.message}`);

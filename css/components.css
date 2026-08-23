@@ -7,11 +7,16 @@
 .section-header { width: 100%; background: linear-gradient(90deg, var(--bg-card-header), transparent); border-left: 12px solid var(--border-primary); padding: 20px 36px; display: flex; align-items: center; justify-content: space-between; position: relative; border-radius: 4px; }
 .section-header::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--border-primary), transparent); }
 .section-title-group { display: flex; align-items: baseline; gap: 24px; }
-.section-title-cn { font-size: 56px; font-weight: 900; color: var(--text-title); letter-spacing: 4px; }
+.section-title-cn { font-size: 56px; font-weight: 900; color: var(--text-title); letter-spacing: 4px; white-space: nowrap; }
 .section-title-en { font-size: 28px; font-weight: 700; color: var(--color-primary); letter-spacing: 4px; text-transform: uppercase; }
 .section-status-badge { font-size: 22px; color: var(--text-muted); background: var(--bg-badge); border: 2px solid var(--border-muted); padding: 6px 20px; border-radius: 20px; letter-spacing: 2px; font-weight: 700; }
 
 .card { background: var(--bg-card); border: 3px solid var(--card-border-color, var(--border-primary)); border-radius: 12px; padding: 40px; display: flex; flex-direction: column; gap: 28px; position: relative; box-shadow: 0 8px 24px var(--card-glow-color, var(--color-primary-glow)); }
+.pkg-grid > .card { min-height: 0; align-self: stretch; }
+/* 图片永远完整等比显示；图片高低只影响自己的卡片，不拉伸同一行另一张卡片。 */
+.card[data-fill="image"] .card-media-placeholder { flex: 0 0 auto; min-height: 0; }
+.card[data-fill="image"] .card-media-placeholder.has-image .media-image { width: 100%; height: auto; object-fit: contain; object-position: var(--media-focus, 50% 50%); }
+.card[data-fill="pad"] { justify-content: center; }
 .card.theme-a { --card-border-color: var(--card-theme-a-border); --card-glow-color: var(--card-theme-a-glow); --card-theme-bg: var(--card-theme-a-bg); }
 .card.theme-b { --card-border-color: var(--card-theme-b-border); --card-glow-color: var(--card-theme-b-glow); --card-theme-bg: var(--card-theme-b-bg); }
 .card.theme-c { --card-border-color: var(--card-theme-c-border); --card-glow-color: var(--card-theme-c-glow); --card-theme-bg: var(--card-theme-c-bg); }

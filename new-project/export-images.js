@@ -1,7 +1,7 @@
 /*
  * HTML 视觉导出模块。
- * 由 build.js 在 --export=true 时调用：使用 Playwright 打开生成后的本地 HTML，
- * 再在 Chromium 中执行 html-to-image 的 toPng / toSvg。
+ * 由 build.js 在 --export=true 时调用：使用 Playwright 对固定画布元素截图，
+ * 只输出高分辨率 PNG 母版及其整数倍率派生图，不再输出 SVG。
  */
 
 const fs = require('node:fs');
@@ -9,19 +9,10 @@ const path = require('node:path');
 const http = require('node:http');
 const { URL } = require('node:url');
 const { chromium } = require('playwright');
-
-function dataUrlToBuffer(dataUrl) {
-    const match = String(dataUrl).match(/^data:([^,]*),(.*)$/s);
-    if (!match) throw new Error('html-to-image 返回了无效的数据 URL');
-    const [, metadata, payload] = match;
-    return metadata.includes(';base64')
-        ? Buffer.from(payload, 'base64')
-        : Buffer.from(decodeURIComponent(payload), 'utf8');
-}
+const sharp = require('sharp');
 
 /**
- * html-to-image 在 file:// 页面中读取字体和图片容易触发浏览器安全限制。
- * 导出期间临时创建一个仅服务项目根目录的本地 HTTP 服务，使所有资源同源。
+ * 导出期间临时创建一个仅服务项目根目录的本地 HTTP 服务，确保字体、CSS 和图片同源加载。
  */
 function createStaticServer(rootDirectory) {
     const mimeTypes = {
@@ -72,42 +63,43 @@ async function launchBrowser() {
 }
 
 /**
- * 从已生成的 HTML 输出同名 PNG 与 SVG。
- * SVG 是 html-to-image 序列化 DOM 所产生的 SVG，不保证是 Illustrator 原生可编辑矢量。
+ * 从已生成的 HTML 输出 @Nx PNG 母版，并从母版做整数倍率缩小派生。
+ * Playwright 的 deviceScaleFactor 会让浏览器重新栅格化 CSS 和文字，禁止使用 CSS transform 缩放。
  */
-async function exportImageAssets({ htmlPath, rootSelector = '.canvas-container' }) {
+async function exportImageAssets({ htmlPath, rootSelector = '.canvas', layoutWidth = 1280, exportScale = 4, deriveScales = [] }) {
     const projectRoot = path.resolve(__dirname, '..');
     const { server, port } = await createStaticServer(projectRoot);
     let browser;
     try {
         browser = await launchBrowser();
-        const page = await browser.newPage({ viewport: { width: 4096, height: 1200 }, deviceScaleFactor: 1 });
         const htmlHref = `http://127.0.0.1:${port}/${path.relative(projectRoot, htmlPath).replace(/\\/g, '/')}`;
-        await page.goto(htmlHref, { waitUntil: 'networkidle' });
-        await page.evaluate(async () => document.fonts?.ready);
-        await page.addScriptTag({ path: path.join(__dirname, '..', 'node_modules', 'html-to-image', 'dist', 'html-to-image.js') });
-
-        const result = await page.evaluate(async (selector) => {
-            const node = document.querySelector(selector);
-            if (!node) throw new Error(`找不到导出节点：${selector}`);
-            const options = {
-                cacheBust: true,
-                pixelRatio: 1,
-                width: node.scrollWidth,
-                height: node.scrollHeight,
-            };
-            return {
-                png: await window.htmlToImage.toPng(node, options),
-                svg: await window.htmlToImage.toSvg(node, options),
-            };
-        }, rootSelector);
-
         const basePath = htmlPath.replace(/\.html$/i, '');
-        const pngPath = `${basePath}.png`;
-        const svgPath = `${basePath}.svg`;
-        fs.writeFileSync(pngPath, dataUrlToBuffer(result.png));
-        fs.writeFileSync(svgPath, dataUrlToBuffer(result.svg));
-        return { pngPath, svgPath };
+        const masterPath = `${basePath}@${exportScale}x.png`;
+        const context = await browser.newContext({
+            viewport: { width: Math.ceil(layoutWidth) + 120, height: 900 },
+            deviceScaleFactor: exportScale,
+        });
+        const page = await context.newPage();
+        try {
+            await page.goto(htmlHref, { waitUntil: 'networkidle' });
+            await page.evaluate(async () => document.fonts?.ready);
+            const canvas = page.locator(rootSelector);
+            if (await canvas.count() !== 1) throw new Error(`导出节点必须唯一：${rootSelector}`);
+            await canvas.screenshot({ path: masterPath });
+        } finally {
+            await context.close();
+        }
+
+        const derivedPaths = [];
+        for (const scale of [...new Set(deriveScales)]) {
+            const derivedPath = `${basePath}@${scale}x.png`;
+            await sharp(masterPath)
+                .resize({ width: Math.round(layoutWidth * scale), withoutEnlargement: true })
+                .png()
+                .toFile(derivedPath);
+            derivedPaths.push(derivedPath);
+        }
+        return { masterPath, derivedPaths };
     } finally {
         if (browser) await browser.close();
         await new Promise((resolve) => server.close(resolve));

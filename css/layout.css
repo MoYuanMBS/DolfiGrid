@@ -1,5 +1,6 @@
 .canvas-container {
-    width: 4096px;
+    /* 固定逻辑画布：预览窗口宽度不能改变双栏版式。 */
+    width: var(--canvas-layout-width, 1280px);
     min-height: var(--canvas-min-height, 0px);
     height: auto;
     background-color: var(--bg-canvas-fallback);
@@ -22,7 +23,9 @@
     background: linear-gradient(90deg, var(--color-primary), var(--color-mint), var(--color-ice), var(--color-violet));
 }
 
+.canvas-container > [data-layout-grow] { flex: var(--layout-grow, 1) 1 auto; min-height: 0; display: flex; flex-direction: column; }
+.canvas-container > [data-layout-grow] > .pkg-grid { flex: 1 1 auto; min-height: 0; }
 .section-block { width: 100%; display: flex; flex-direction: column; gap: 36px; }
-.grid-col-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; width: 100%; }
+.pkg-grid, .grid-col-2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; width: 100%; min-height: 0; align-items: stretch; }
 .grid-col-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; width: 100%; }
 .grid-col-1 { display: grid; grid-template-columns: 1fr; gap: 36px; width: 100%; }

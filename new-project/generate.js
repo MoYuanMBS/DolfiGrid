@@ -314,15 +314,36 @@ function setThemeStylesheet(html, themeHref) {
     return html.replace(/(<link\b[^>]*\bdata-theme-stylesheet\b[^>]*\bhref=")[^"]*(")/i, `$1${themeHref}$2`);
 }
 
+/** 解析“宽:高”最小比例；仅接受正数，避免把任意 CSS 注入模板。 */
+function parseAspectRatio(value) {
+    const match = String(value).trim().match(/^(\d+(?:\.\d+)?)\s*:\s*(\d+(?:\.\d+)?)$/);
+    if (!match || Number(match[1]) <= 0 || Number(match[2]) <= 0) {
+        throw new Error('min_aspect_ratio 必须是正数比例，例如 9:16');
+    }
+    return { width: Number(match[1]), height: Number(match[2]) };
+}
+
 /** 仅允许安全的 CSS 尺寸值写入模板变量，避免 frontmatter 注入任意样式。 */
 function applyLayoutConfig(html, meta) {
+    const layoutWidth = String(meta.layout_width || '1280px').trim();
+    const layoutWidthMatch = layoutWidth.match(/^(\d+(?:\.\d+)?)px$/);
+    if (!layoutWidthMatch || Number(layoutWidthMatch[1]) <= 0) {
+        throw new Error('layout_width 必须是正数 px 尺寸，例如 1280px');
+    }
+    // 手动 canvas_min_height 有最高优先级；否则按最小比例计算，内容可继续自然增高。
+    const computedMeta = { ...meta, layout_width: layoutWidth };
+    if (!Object.prototype.hasOwnProperty.call(meta, 'canvas_min_height') && meta.min_aspect_ratio !== undefined) {
+        const ratio = parseAspectRatio(meta.min_aspect_ratio);
+        computedMeta.canvas_min_height = `${Math.ceil(Number(layoutWidthMatch[1]) * ratio.height / ratio.width)}px`;
+    }
     const variables = {
         decor_block_height: '--decor-block-height',
         canvas_min_height: '--canvas-min-height',
+        layout_width: '--canvas-layout-width',
     };
     for (const [metaKey, cssVariable] of Object.entries(variables)) {
-        if (!Object.prototype.hasOwnProperty.call(meta, metaKey)) continue;
-        const value = String(meta[metaKey]).trim();
+        if (!Object.prototype.hasOwnProperty.call(computedMeta, metaKey)) continue;
+        const value = String(computedMeta[metaKey]).trim();
         if (!/^\d+(?:\.\d+)?(?:px|vh|vw|rem|em|%)$/.test(value)) {
             throw new Error(`${metaKey} 必须是非负 CSS 尺寸，例如 100px 或 20vh`);
         }

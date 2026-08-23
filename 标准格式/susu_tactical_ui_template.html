@@ -24,18 +24,19 @@
         :root {
             --decor-block-height: 100px;
             --canvas-min-height: 0px;
+            --canvas-layout-width: 1280px;
         }
     </style>
 </head>
 <body>
-    <div class="canvas-container">
+    <div class="canvas-container canvas">
         <header class="header-banner" data-section="header" data-md-role="document" data-md-id="header">
             <div class="hud-tag" data-bind="hud_tag" data-md-field="label" data-md-scope="header">TACTICAL SERVICE MENU // 战术导引菜单</div>
             <h1 class="main-title" data-bind="document.title" data-md-field="title" data-md-scope="header" data-md-empty="remove"></h1>
             <p class="sub-title" data-bind="subtitle" data-md-field="subtitle" data-md-scope="header" data-md-empty="remove"></p>
         </header>
 
-        <section class="section-block" data-section="experience" data-md-role="section" data-md-id="experience" data-md-heading-level="2">
+        <section class="section-block" data-section="experience" data-md-role="section" data-md-id="experience" data-md-heading-level="2" data-layout-grow style="--layout-grow: 1">
             <div class="section-header">
                 <div class="section-title-group">
                     <h2 class="section-title-cn" data-bind="sections.exp.title_cn" data-md-field="title" data-md-scope="experience" data-md-format="spaced-cjk">体 验</h2>
@@ -43,8 +44,8 @@
                 </div>
                 <span class="section-status-badge" data-bind="label.experience_status" data-md-field="status" data-md-scope="experience">SECTION // 01</span>
             </div>
-            <div class="grid-col-2">
-                <div class="card theme-a" data-card-id="exp-1" data-md-role="card" data-md-id="exp-1" data-md-heading-level="3">
+            <div class="pkg-grid grid-col-2">
+                <div class="card theme-a" data-fill="image" data-card-id="exp-1" data-md-role="card" data-md-id="exp-1" data-md-heading-level="3">
                     <div class="card-header">
                         <h3 class="card-title" data-bind="exp.card1.title" data-md-field="title" data-md-scope="exp-1"></h3>
                         <span class="card-badge" data-bind="label.experience_badge_1" data-md-field="badge" data-md-scope="exp-1">OPTION A</span>
@@ -65,7 +66,7 @@
             </div>
         </section>
 
-        <section class="section-block" data-section="escort" data-md-role="section" data-md-id="escort" data-md-heading-level="2">
+        <section class="section-block" data-section="escort" data-md-role="section" data-md-id="escort" data-md-heading-level="2" data-layout-grow style="--layout-grow: 1">
             <div class="section-header">
                 <div class="section-title-group">
                     <h2 class="section-title-cn" data-bind="sections.escort.title_cn" data-md-field="title" data-md-scope="escort" data-md-format="spaced-cjk">护 航</h2>
@@ -73,7 +74,7 @@
                 </div>
                 <span class="section-status-badge" data-bind="label.escort_status" data-md-field="status" data-md-scope="escort">SECTION // 02</span>
             </div>
-            <div class="grid-col-2">
+            <div class="pkg-grid grid-col-2">
                 <div class="card theme-a" data-card-id="escort-guarantee" data-md-role="card" data-md-id="escort-guarantee" data-md-heading-level="3">
                     <div class="card-header">
                         <h3 class="card-title text-accent-mint" data-bind="escort.guarantee.title" data-md-field="title" data-md-scope="escort-guarantee" data-md-format="spaced-cjk">保 低</h3>
@@ -82,7 +83,7 @@
                     <ul class="list-group" data-bind-list="escort.guarantee.items" data-md-field="items" data-md-scope="escort-guarantee">
                     </ul>
                 </div>
-                <div class="card theme-c" data-card-id="escort-match" data-md-role="card" data-md-id="escort-match" data-md-heading-level="3">
+                <div class="card theme-c" data-fill="image" data-card-id="escort-match" data-md-role="card" data-md-id="escort-match" data-md-heading-level="3">
                     <div class="card-header">
                         <h3 class="card-title text-accent-violet" data-bind="escort.match.title" data-md-field="title" data-md-scope="escort-match" data-md-format="spaced-cjk">单 局</h3>
                         <span class="card-badge" data-bind="label.match_badge" data-md-field="badge" data-md-scope="escort-match">PER MATCH</span>
