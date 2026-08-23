@@ -308,10 +308,17 @@ function applyMetadataBindings(html, meta) {
     return html;
 }
 
-/** 将模板中唯一的 data-theme-stylesheet 链接替换为 build.js 选定的主题。 */
+/**
+ * 将模板中标记为 data-theme-stylesheet 的链接替换为 Markdown frontmatter 选定的主题。
+ * 属性在 HTML 中没有固定顺序，因此先定位完整 link 标签，再仅替换其中的 href。
+ */
 function setThemeStylesheet(html, themeHref) {
     if (!themeHref) return html;
-    return html.replace(/(<link\b[^>]*\bdata-theme-stylesheet\b[^>]*\bhref=")[^"]*(")/i, `$1${themeHref}$2`);
+    return html.replace(/<link\b(?=[^>]*\bdata-theme-stylesheet\b)[^>]*>/gi, (tag) => {
+        const updatedTag = tag.replace(/\bhref=(['"])[^'"]*\1/i, `href="${themeHref}"`);
+        if (updatedTag === tag) throw new Error('data-theme-stylesheet 链接缺少 href 属性');
+        return updatedTag;
+    });
 }
 
 /** 解析“宽:高”最小比例；仅接受正数，避免把任意 CSS 注入模板。 */

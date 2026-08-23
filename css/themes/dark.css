@@ -1,0 +1,66 @@
+:root {
+    /* 核心主题色：保留原本的青蓝紫黄调性，提高饱和度与对比度 */
+    --color-primary: #5A609E;          /* 原 #787DB5 压深，更显沉稳 */
+    --color-primary-light: #1A1C29;    /* 深色容器底色 */
+    --color-primary-glow: rgba(90, 96, 158, 0.3);
+
+    --color-mint: #3EA893;             /* 原 #6cbcac 压深 */
+    --color-mint-light: #132421;
+    --color-mint-glow: rgba(62, 168, 147, 0.3);
+
+    --color-ice: #3CA1C7;              /* 原 #68C2E3 压深 */
+    --color-ice-light: #13222A;
+    --color-ice-glow: rgba(60, 161, 199, 0.3);
+
+    --color-violet: #7761A0;           /* 原 #9580B8 压深，去除粉感 */
+    --color-violet-light: #1D1826;
+    --color-violet-glow: rgba(119, 97, 160, 0.3);
+
+    --color-amber: #C9801C;            /* 原 #E69D2E 压深 */
+    --color-amber-light: #261A0D;
+
+    /* 全局背景色：整体加深，呈现质感暗色调 */
+    --bg-body: #12141F;
+    --bg-canvas-fallback: #181B2B;
+    --bg-canvas: linear-gradient(180deg, #1C1F30 0%, #161826 30%, #11131E 65%, #0C0D15 100%);
+    --bg-card: #181B29;
+    --bg-card-header: rgba(90, 96, 158, 0.15);
+    --bg-placeholder: #131522;
+    --bg-list-item: #1B1E2E;
+    --bg-badge: rgba(24, 27, 41, 0.85);
+
+    /* 背景纹理与光晕：降低明度，保留原本的冷调光晕 */
+    --bg-pattern-dots: radial-gradient(rgba(90, 96, 158, 0.3) 1.5px, transparent 1.5px);
+    --bg-glow-mint: radial-gradient(circle at 12% 10%, rgba(62, 168, 147, 0.2) 0%, transparent 40%);
+    --bg-glow-ice: radial-gradient(circle at 88% 22%, rgba(60, 161, 199, 0.2) 0%, transparent 45%);
+    --bg-glow-violet: radial-gradient(circle at 50% 75%, rgba(119, 97, 160, 0.2) 0%, transparent 50%);
+    --bg-pattern-stripes: repeating-linear-gradient(45deg, rgba(90, 96, 158, 0.05) 0, rgba(90, 96, 158, 0.05) 2px, transparent 2px, transparent 24px);
+
+    /* 边框与文字：适配深色背景的高清晰度对比 */
+    --border-primary: #454B7A;
+    --border-accent: #3EA893;
+    --border-muted: rgba(90, 96, 158, 0.3);
+
+    --text-title: #E6E9F5;            /* 浅灰白标题 */
+    --text-body: #B0B5D1;             /* 柔和浅蓝灰正文 */
+    --text-muted: #6B7094;            /* 暗紫灰次要文字 */
+    --text-highlight: #42C2AA;        /* 薄荷高亮 */
+    --text-on-accent: #FFFFFF;
+
+    /* 阴影效果 */
+    --shadow-canvas: 0 0 60px rgba(0, 0, 0, 0.6);
+    --shadow-header: 0 10px 30px rgba(0, 0, 0, 0.4);
+    --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.35);
+    --shadow-notice: 0 8px 24px rgba(201, 128, 28, 0.2);
+
+    /* 卡片主题 */
+    --card-theme-a-border: var(--color-mint);
+    --card-theme-a-bg: var(--color-mint-light);
+    --card-theme-a-glow: var(--color-mint-glow);
+    --card-theme-b-border: var(--color-ice);
+    --card-theme-b-bg: var(--color-ice-light);
+    --card-theme-b-glow: var(--color-ice-glow);
+    --card-theme-c-border: var(--color-violet);
+    --card-theme-c-bg: var(--color-violet-light);
+    --card-theme-c-glow: var(--color-violet-glow);
+}

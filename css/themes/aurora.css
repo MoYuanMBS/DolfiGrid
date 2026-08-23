@@ -1,0 +1,66 @@
+:root {
+    /* 核心主题色：抽离自参考图中的战术全息蓝、高亮紫与金橙 */
+    --color-primary: #757CB3;          /* 主战术紫蓝（外套与枪械过渡色） */
+    --color-primary-light: #1A1C2C;    /* 深色容器背景 */
+    --color-primary-glow: rgba(117, 124, 179, 0.35);
+
+    --color-mint: #3ECAAF;             /* 战术青绿 */
+    --color-mint-light: #122421;
+    --color-mint-glow: rgba(62, 202, 175, 0.3);
+
+    --color-ice: #4DBEE2;              /* 全息枪械/蓝光 UI */
+    --color-ice-light: #12222C;
+    --color-ice-glow: rgba(77, 190, 226, 0.35);
+
+    --color-violet: #A282CD;           /* 头发发色与发光紫 */
+    --color-violet-light: #1E1729;
+    --color-violet-glow: rgba(162, 130, 205, 0.35);
+
+    --color-amber: #E69A2E;            /* 战术警示灯/暖色火光 */
+    --color-amber-light: #2A1F13;
+
+    /* 全局背景色：暗色战场与机甲钢铁质感 */
+    --bg-body: #0F1017;
+    --bg-canvas-fallback: #161824;
+    --bg-canvas: linear-gradient(180deg, #1A1C28 0%, #13141D 40%, #0E0F16 100%);
+    --bg-card: #161824;
+    --bg-card-header: rgba(117, 124, 179, 0.12);
+    --bg-placeholder: #12131A;
+    --bg-list-item: #1B1D2A;
+    --bg-badge: rgba(22, 24, 36, 0.85);
+
+    /* 背景纹理与光晕：全息屏幕与战场氛围 */
+    --bg-pattern-dots: radial-gradient(rgba(117, 124, 179, 0.35) 1.5px, transparent 1.5px);
+    --bg-glow-mint: radial-gradient(circle at 12% 10%, rgba(62, 202, 175, 0.18) 0%, transparent 45%);
+    --bg-glow-ice: radial-gradient(circle at 88% 22%, rgba(77, 190, 226, 0.22) 0%, transparent 50%);
+    --bg-glow-violet: radial-gradient(circle at 50% 75%, rgba(162, 130, 205, 0.18) 0%, transparent 55%);
+    --bg-pattern-stripes: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.02) 0, rgba(255, 255, 255, 0.02) 2px, transparent 2px, transparent 24px);
+
+    /* 边框与文字：高对比度暗色 UI 设计 */
+    --border-primary: #3B3F5C;
+    --border-accent: #3ECAAF;
+    --border-muted: rgba(117, 124, 179, 0.3);
+    
+    --text-title: #E2E4F0;            /* 高亮冷白标题 */
+    --text-body: #A2A7C4;             /* 战术灰文本 */
+    --text-muted: #606480;            /* 低优先级文本 */
+    --text-highlight: #4DE0C1;        /* 高亮发光文本 */
+    --text-on-accent: #0D0E15;
+
+    /* 阴影与发光效果 */
+    --shadow-canvas: 0 0 60px rgba(0, 0, 0, 0.8);
+    --shadow-header: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 12px var(--color-primary-glow);
+    --shadow-notice: 0 8px 24px rgba(230, 154, 46, 0.2);
+
+    /* 卡片主题映射 */
+    --card-theme-a-border: var(--color-mint);
+    --card-theme-a-bg: var(--color-mint-light);
+    --card-theme-a-glow: var(--color-mint-glow);
+    --card-theme-b-border: var(--color-ice);
+    --card-theme-b-bg: var(--color-ice-light);
+    --card-theme-b-glow: var(--color-ice-glow);
+    --card-theme-c-border: var(--color-violet);
+    --card-theme-c-bg: var(--color-violet-light);
+    --card-theme-c-glow: var(--color-violet-glow);
+}
