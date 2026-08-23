@@ -315,9 +315,10 @@ function applyMetadataBindings(html, meta) {
 function setThemeStylesheet(html, themeHref) {
     if (!themeHref) return html;
     return html.replace(/<link\b(?=[^>]*\bdata-theme-stylesheet\b)[^>]*>/gi, (tag) => {
-        const updatedTag = tag.replace(/\bhref=(['"])[^'"]*\1/i, `href="${themeHref}"`);
-        if (updatedTag === tag) throw new Error('data-theme-stylesheet 链接缺少 href 属性');
-        return updatedTag;
+        if (!/\bhref=(['"])[^'"]*\1/i.test(tag)) {
+            throw new Error('data-theme-stylesheet 链接缺少 href 属性');
+        }
+        return tag.replace(/\bhref=(['"])[^'"]*\1/i, `href="${themeHref}"`);
     });
 }
 
