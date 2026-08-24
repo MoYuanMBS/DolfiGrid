@@ -20,9 +20,20 @@
     --color-amber-light: #261A0D;
 
     /* 全局背景色：整体加深，呈现质感暗色调 */
-    --bg-body: #12141F;
-    --bg-canvas-fallback: #181B2B;
-    --bg-canvas: linear-gradient(180deg, #1C1F30 0%, #161826 30%, #11131E 65%, #0C0D15 100%);
+    /* Background color tokens: css/background/ decides how these are layered. */
+    --background-body-color: #12141F;
+    --background-canvas-color: #181B2B;
+    --background-gradient-start: #1C1F30;
+    --background-gradient-middle: #161826;
+    --background-gradient-lower: #11131E;
+    --background-gradient-end: #0C0D15;
+    --background-dot-color: rgba(90, 96, 158, 0.3);
+    --background-glow-mint-color: rgba(62, 168, 147, 0.2);
+    --background-glow-ice-color: rgba(60, 161, 199, 0.2);
+    --background-glow-violet-color: rgba(119, 97, 160, 0.2);
+    --background-stripe-color: rgba(90, 96, 158, 0.05);
+
+    /* Component surface colors remain part of the color theme. */
     --bg-card: #181B29;
     --bg-card-header: rgba(90, 96, 158, 0.15);
     --bg-placeholder: #131522;
@@ -30,12 +41,6 @@
     --bg-badge: rgba(24, 27, 41, 0.85);
 
     /* 背景纹理与光晕：降低明度，保留原本的冷调光晕 */
-    --bg-pattern-dots: radial-gradient(rgba(90, 96, 158, 0.3) 1.5px, transparent 1.5px);
-    --bg-glow-mint: radial-gradient(circle at 12% 10%, rgba(62, 168, 147, 0.2) 0%, transparent 40%);
-    --bg-glow-ice: radial-gradient(circle at 88% 22%, rgba(60, 161, 199, 0.2) 0%, transparent 45%);
-    --bg-glow-violet: radial-gradient(circle at 50% 75%, rgba(119, 97, 160, 0.2) 0%, transparent 50%);
-    --bg-pattern-stripes: repeating-linear-gradient(45deg, rgba(90, 96, 158, 0.05) 0, rgba(90, 96, 158, 0.05) 2px, transparent 2px, transparent 24px);
-
     /* 边框与文字：适配深色背景的高清晰度对比 */
     --border-primary: #454B7A;
     --border-accent: #3EA893;

@@ -16,9 +16,6 @@
     gap: 28px;
     position: relative;
     overflow: hidden;
-    background-color: var(--bg-canvas-fallback);
-    background-image: var(--bg-pattern-dots), var(--bg-glow-mint), var(--bg-glow-ice), var(--bg-glow-violet), var(--bg-canvas);
-    background-size: 40px 40px, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
     box-shadow: var(--shadow-canvas);
 }
 

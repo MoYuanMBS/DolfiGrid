@@ -17,6 +17,7 @@ const projectRoot = path.resolve(__dirname, '..');
 const sourceDirectory = path.join(projectRoot, 'original-md-files');
 const templateDirectory = path.join(projectRoot, '标准格式');
 const themeDirectory = path.join(projectRoot, 'css', 'themes');
+const backgroundDirectory = path.join(projectRoot, 'css', 'background');
 const imageDirectory = path.join(projectRoot, 'assets', 'insert-png');
 const assetDirectory = path.join(projectRoot, 'assets');
 const outputDirectory = path.join(projectRoot, 'output');
@@ -94,13 +95,17 @@ const sourceText = fs.readFileSync(inputPath, 'utf8');
 const { data: meta } = parseFrontmatter(sourceText.replace(/^\uFEFF/, '').split(/\r?\n/));
 const templateName = String(meta.template || '').trim();
 const themeName = String(meta.theme || '').trim();
+const backgroundName = String(meta.background || '').trim();
 if (!/^[A-Za-z0-9_-]+$/.test(templateName)) fail('frontmatter 必须提供合法的 template 名称');
 if (!/^[A-Za-z0-9_-]+$/.test(themeName)) fail('frontmatter 必须提供合法的 theme 名称');
+if (!/^[A-Za-z0-9_-]+$/.test(backgroundName)) fail('frontmatter 必须提供合法的 background 名称');
 
 const templatePath = path.join(templateDirectory, `${templateName}.html`);
 const themePath = path.join(themeDirectory, `${themeName}.css`);
+const backgroundPath = path.join(backgroundDirectory, `${backgroundName}.css`);
 if (!fs.existsSync(templatePath)) fail(`模板不存在：${templateName}.html`);
 if (!fs.existsSync(themePath)) fail(`主题不存在：${themeName}.css`);
+if (!fs.existsSync(backgroundPath)) fail(`背景样式不存在：${backgroundName}.css`);
 const exportConfig = resolveExportConfig(meta);
 
 const outputPath = path.join(outputDirectory, `${path.basename(inputName, '.md')}.html`);
@@ -126,6 +131,7 @@ const generatedPath = generate({
     outputPath,
     templatePath,
     themeHref: relativeHref(path.dirname(outputPath), themePath),
+    backgroundHref: relativeHref(path.dirname(outputPath), backgroundPath),
     images,
     imagesRoot: imageDirectory,
 });

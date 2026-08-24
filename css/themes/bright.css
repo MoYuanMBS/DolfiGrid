@@ -15,20 +15,25 @@
     --color-amber: #E69D2E;
     --color-amber-light: #FFF9EF;
 
-    --bg-body: #E6E8F2;
-    --bg-canvas-fallback: #C8CEE8;
-    --bg-canvas: linear-gradient(180deg, #FFFFFF 0%, #EEF0F8 30%, #D8DCF0 65%, #C8CEE8 100%);
+    /* Background color tokens: css/background/ decides how these are layered. */
+    --background-body-color: #E6E8F2;
+    --background-canvas-color: #C8CEE8;
+    --background-gradient-start: #FFFFFF;
+    --background-gradient-middle: #EEF0F8;
+    --background-gradient-lower: #D8DCF0;
+    --background-gradient-end: #C8CEE8;
+    --background-dot-color: rgba(120, 125, 181, 0.28);
+    --background-glow-mint-color: rgba(62, 202, 175, 0.22);
+    --background-glow-ice-color: rgba(104, 194, 227, 0.25);
+    --background-glow-violet-color: rgba(120, 125, 181, 0.22);
+    --background-stripe-color: rgba(120, 125, 181, 0.035);
+
+    /* Component surface colors remain part of the color theme. */
     --bg-card: #FFFFFF;
     --bg-card-header: rgba(120, 125, 181, 0.06);
     --bg-placeholder: #F8F9FC;
     --bg-list-item: #F8F9FD;
     --bg-badge: rgba(255, 255, 255, 0.8);
-
-    --bg-pattern-dots: radial-gradient(rgba(120, 125, 181, 0.28) 1.5px, transparent 1.5px);
-    --bg-glow-mint: radial-gradient(circle at 12% 10%, rgba(62, 202, 175, 0.22) 0%, transparent 40%);
-    --bg-glow-ice: radial-gradient(circle at 88% 22%, rgba(104, 194, 227, 0.25) 0%, transparent 45%);
-    --bg-glow-violet: radial-gradient(circle at 50% 75%, rgba(120, 125, 181, 0.22) 0%, transparent 50%);
-    --bg-pattern-stripes: repeating-linear-gradient(45deg, rgba(120, 125, 181, 0.035) 0, rgba(120, 125, 181, 0.035) 2px, transparent 2px, transparent 24px);
 
     --border-primary: #9FA4D0;
     --border-accent: #6cbcac;

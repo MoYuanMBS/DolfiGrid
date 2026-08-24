@@ -1,0 +1,17 @@
+/*
+ * Background composition only.
+ * Concrete colors live in css/themes/*.css, so this file can be paired with
+ * any color theme without changing its layout or visual layering.
+ */
+:root {
+    --background-canvas-image:
+        radial-gradient(var(--background-dot-color) 1.5px, transparent 1.5px),
+        radial-gradient(circle at 12% 10%, var(--background-glow-mint-color) 0%, transparent 40%),
+        radial-gradient(circle at 88% 22%, var(--background-glow-ice-color) 0%, transparent 45%),
+        radial-gradient(circle at 50% 75%, var(--background-glow-violet-color) 0%, transparent 50%),
+        repeating-linear-gradient(45deg, var(--background-stripe-color) 0, var(--background-stripe-color) 2px, transparent 2px, transparent 24px),
+        linear-gradient(180deg, var(--background-gradient-start) 0%, var(--background-gradient-middle) 30%, var(--background-gradient-lower) 65%, var(--background-gradient-end) 100%);
+    --background-canvas-size: 40px 40px, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    --background-canvas-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
+    --background-canvas-repeat: repeat, no-repeat, no-repeat, no-repeat, repeat, no-repeat;
+}

@@ -19,6 +19,7 @@
 ---
 template: "susu_tactical_ui_template"
 theme: "bright"
+background: "soft-glow"
 subtitle: "TACTICAL SERVICE MENU & PRICE LIST"
 hud_tag: "TACTICAL SERVICE MENU // 战术导引菜单"
 decor_block_height: "100px"
@@ -39,6 +40,9 @@ label.match_badge: "PER MATCH"
 - 正文中没有一级文档标题时，删除对应标题元素。
 - `template` 指向 `标准格式/<template>.html`，只写文件名主体，不写路径或扩展名。
 - `theme` 指向 `css/themes/<theme>.css`，只写文件名主体，不写路径或扩展名。
+- `background` 指向 `css/background/<background>.css`，只写描述背景构图的文件名主体，不写颜色或路径；该字段必填。
+- `theme` 仅提供颜色表，`background` 仅提供背景的图层、位置、尺寸与重复方式。背景 CSS 必须通过颜色表中的变量取色，不能写入独立配色方案。
+- 背景名称必须只描述构图，例如 `soft-glow`、`dot-grid`、`corner-orbit`；不得使用 `dark`、`bright`、`aurora` 等颜色或主题名称。
 - `subtitle`、`hud_tag` 和 `label.*` 是可变模板文字。
 - `decor_block_height` 控制底部透明装饰区高度，例如 `100px`。
 - `layout_width` 是 HTML 的固定逻辑画布宽度，只允许使用 `px`；模板不得使用媒体查询把双栏改为单列。

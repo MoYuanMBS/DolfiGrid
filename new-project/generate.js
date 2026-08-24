@@ -308,17 +308,23 @@ function applyMetadataBindings(html, meta) {
 }
 
 /**
- * 将模板中标记为 data-theme-stylesheet 的链接替换为 Markdown frontmatter 选定的主题。
- * 属性在 HTML 中没有固定顺序，因此先定位完整 link 标签，再仅替换其中的 href。
+ * 替换模板中带指定 data 标记的唯一 CSS 链接。主题和背景分别有独立入口，
+ * 以便 Markdown 可以独立选择颜色表与背景构图。
  */
-function setThemeStylesheet(html, themeHref) {
-    if (!themeHref) return html;
-    return html.replace(/<link\b(?=[^>]*\bdata-theme-stylesheet\b)[^>]*>/gi, (tag) => {
+function setStylesheetLink(html, marker, href) {
+    if (!href) return html;
+    const escapedMarker = String(marker).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const linkPattern = new RegExp(`<link\\b(?=[^>]*\\b${escapedMarker}\\b)[^>]*>`, 'gi');
+    let replacementCount = 0;
+    const result = html.replace(linkPattern, (tag) => {
+        replacementCount += 1;
         if (!/\bhref=(['"])[^'"]*\1/i.test(tag)) {
-            throw new Error('data-theme-stylesheet 链接缺少 href 属性');
+            throw new Error(`${marker} 链接缺少 href 属性`);
         }
-        return tag.replace(/\bhref=(['"])[^'"]*\1/i, `href="${themeHref}"`);
+        return tag.replace(/\bhref=(['"])[^'"]*\1/i, `href="${href}"`);
     });
+    if (replacementCount !== 1) throw new Error(`模板必须且只能包含一个 ${marker} 链接`);
+    return result;
 }
 
 /** 解析“宽:高”最小比例；仅接受正数，避免把任意 CSS 注入模板。 */
@@ -382,7 +388,8 @@ function insertMedia(html, scope, image) {
 function renderDocument(document, options = {}) {
     const activeTemplatePath = options.templatePath || templatePath;
     let html = fs.readFileSync(activeTemplatePath, 'utf8');
-    html = setThemeStylesheet(html, options.themeHref);
+    html = setStylesheetLink(html, 'data-theme-stylesheet', options.themeHref);
+    html = setStylesheetLink(html, 'data-background-stylesheet', options.backgroundHref);
     html = applyLayoutConfig(html, document.meta);
     const roles = ['section', 'card'];
     const slots = Object.fromEntries(roles.map((role) => [role, findSlots(html, role)]));

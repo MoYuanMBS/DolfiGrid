@@ -20,9 +20,20 @@
     --color-amber-light: #2A1F13;
 
     /* 全局背景色：暗色战场与机甲钢铁质感 */
-    --bg-body: #0F1017;
-    --bg-canvas-fallback: #161824;
-    --bg-canvas: linear-gradient(180deg, #1A1C28 0%, #13141D 40%, #0E0F16 100%);
+    /* Background color tokens: css/background/ decides how these are layered. */
+    --background-body-color: #0F1017;
+    --background-canvas-color: #161824;
+    --background-gradient-start: #1A1C28;
+    --background-gradient-middle: #13141D;
+    --background-gradient-lower: #0E0F16;
+    --background-gradient-end: #0E0F16;
+    --background-dot-color: rgba(117, 124, 179, 0.35);
+    --background-glow-mint-color: rgba(62, 202, 175, 0.18);
+    --background-glow-ice-color: rgba(77, 190, 226, 0.22);
+    --background-glow-violet-color: rgba(162, 130, 205, 0.18);
+    --background-stripe-color: rgba(255, 255, 255, 0.02);
+
+    /* Component surface colors remain part of the color theme. */
     --bg-card: #161824;
     --bg-card-header: rgba(117, 124, 179, 0.12);
     --bg-placeholder: #12131A;
@@ -30,12 +41,6 @@
     --bg-badge: rgba(22, 24, 36, 0.85);
 
     /* 背景纹理与光晕：全息屏幕与战场氛围 */
-    --bg-pattern-dots: radial-gradient(rgba(117, 124, 179, 0.35) 1.5px, transparent 1.5px);
-    --bg-glow-mint: radial-gradient(circle at 12% 10%, rgba(62, 202, 175, 0.18) 0%, transparent 45%);
-    --bg-glow-ice: radial-gradient(circle at 88% 22%, rgba(77, 190, 226, 0.22) 0%, transparent 50%);
-    --bg-glow-violet: radial-gradient(circle at 50% 75%, rgba(162, 130, 205, 0.18) 0%, transparent 55%);
-    --bg-pattern-stripes: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.02) 0, rgba(255, 255, 255, 0.02) 2px, transparent 2px, transparent 24px);
-
     /* 边框与文字：高对比度暗色 UI 设计 */
     --border-primary: #3B3F5C;
     --border-accent: #3ECAAF;
