@@ -77,8 +77,7 @@ function stripMarkdown(text) {
         .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
         .replace(/\*\*([^*]+)\*\*/g, '$1')
         .replace(/__([^_]+)__/g, '$1')
-        .replace(/`([^`]+)`/g, '$1')
-        .trim();
+        .replace(/`([^`]+)`/g, '$1');
 }
 
 /** 解析标题开头可选的 [role:id] 显式模板覆盖标记。 */
@@ -134,7 +133,7 @@ function parseDocument(text) {
             continue;
         }
 
-        const heading = line.match(/^(#{1,6})\s+(.+?)\s*$/);
+        const heading = line.match(/^(#{1,6})\s+(.+)$/);
         if (heading) {
             const binding = parseBinding(heading[2]);
             current = {
@@ -150,7 +149,7 @@ function parseDocument(text) {
             continue;
         }
 
-        const list = line.match(/^(\s*)-\s+(.+?)\s*$/);
+        const list = line.match(/^(\s*)-\s+(.+)$/);
         if (list) {
             if (!current) throw new Error(`第 ${index + 1} 行列表没有所属标题`);
             const continuation = [];
@@ -255,7 +254,7 @@ function renderItem(item) {
     const lineHtml = (line) => `<span class="item-line">${escapeHtml(line)}</span>`;
     if (columns.length === 2) {
         const continuation = item.lines.slice(1).map(lineHtml).join('');
-        return `<li class="list-item"><span class="bullet"></span><span class="item-content"><span class="price-row"><span class="price-left">${escapeHtml(columns[0].trim())}</span><span class="price-right">${escapeHtml(columns[1].trim())}</span></span>${continuation}</span></li>`;
+        return `<li class="list-item"><span class="bullet"></span><span class="item-content"><span class="price-row"><span class="price-left">${escapeHtml(columns[0])}</span><span class="price-right">${escapeHtml(columns[1])}</span></span>${continuation}</span></li>`;
     }
     return `<li class="list-item"><span class="bullet"></span><span class="item-content">${item.lines.map(lineHtml).join('')}</span></li>`;
 }
