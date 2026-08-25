@@ -1,0 +1,10 @@
+/* Price-block-only overrides. Kept outside themes so other modules are unaffected. */
+.prepaid-canvas .vip-card .benefits li:first-child {
+  --price-block-text: #FFE600;
+  color: var(--price-block-text);
+}
+
+.prepaid-canvas .vip-card .benefits li:first-child .price-left,
+.prepaid-canvas .vip-card .benefits li:first-child .price-right {
+  color: var(--price-block-text);
+}

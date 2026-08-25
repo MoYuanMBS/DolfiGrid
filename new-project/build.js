@@ -96,7 +96,7 @@ const { data: meta } = parseFrontmatter(sourceText.replace(/^\uFEFF/, '').split(
 const templateName = String(meta.template || '').trim();
 const themeName = String(meta.theme || '').trim();
 const backgroundName = String(meta.background || '').trim();
-if (!/^[A-Za-z0-9_-]+$/.test(templateName)) fail('frontmatter 必须提供合法的 template 名称');
+if (!/^[A-Za-z0-9_ -]+$/.test(templateName)) fail('frontmatter 必须提供合法的 template 名称');
 if (!/^[A-Za-z0-9_-]+$/.test(themeName)) fail('frontmatter 必须提供合法的 theme 名称');
 if (!/^[A-Za-z0-9_-]+$/.test(backgroundName)) fail('frontmatter 必须提供合法的 background 名称');
 

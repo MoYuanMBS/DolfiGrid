@@ -1,0 +1,60 @@
+/* Prepaid theme using the project's shared theme contract. */
+:root {
+  --color-primary: #5b214e;
+  --color-primary-light: #fffaf2;
+  --color-primary-glow: rgba(91, 33, 78, .18);
+  --color-mint: #a52d63;
+  --color-mint-light: #f7dce3;
+  --color-mint-glow: rgba(165, 45, 99, .22);
+  --color-ice: #e34b52;
+  --color-ice-light: #fff3ee;
+  --color-ice-glow: rgba(227, 75, 82, .22);
+  --color-violet: #8d2865;
+  --color-violet-light: #f3dce6;
+  --color-violet-glow: rgba(141, 40, 101, .22);
+  --color-amber: #ffb83f;
+  --color-amber-light: #fff8ef;
+
+  --background-body-color: #f1d9d8;
+  --background-canvas-color: #fff3ee;
+  --background-gradient-start: #fffaf2;
+  --background-gradient-middle: #fff3ee;
+  --background-gradient-lower: #f7dce3;
+  --background-gradient-end: #f1d9d8;
+  --background-dot-color: rgba(165, 45, 99, .16);
+  --background-glow-mint-color: rgba(165, 45, 99, .12);
+  --background-glow-ice-color: rgba(227, 75, 82, .12);
+  --background-glow-violet-color: rgba(141, 40, 101, .12);
+  --background-stripe-color: rgba(91, 33, 78, .04);
+  --background-dolphin-color: rgba(165, 45, 99, .12);
+
+  --bg-card: rgba(255, 255, 255, .84);
+  --bg-card-header: rgba(165, 45, 99, .06);
+  --bg-placeholder: #fff3ee;
+  --bg-list-item: #fff8ef;
+  --bg-badge: rgba(255, 255, 255, .75);
+
+  --border-primary: #f0c8c1;
+  --border-accent: #a52d63;
+  --border-muted: #efd8cf;
+  --text-title: #5b214e;
+  --text-body: #4b3949;
+  --text-muted: #806b7d;
+  --text-highlight: #e34b52;
+  --text-on-accent: #fff8ef;
+
+  --shadow-canvas: 0 18px 50px rgba(91, 33, 78, .18);
+  --shadow-header: 0 14px 34px rgba(165, 45, 99, .12);
+  --shadow-card: 0 12px 22px rgba(91, 33, 78, .10);
+  --shadow-notice: 0 16px 30px rgba(91, 33, 78, .20);
+
+  --card-theme-a-border: var(--color-mint);
+  --card-theme-a-bg: var(--color-mint-light);
+  --card-theme-a-glow: var(--color-mint-glow);
+  --card-theme-b-border: var(--color-ice);
+  --card-theme-b-bg: var(--color-ice-light);
+  --card-theme-b-glow: var(--color-ice-glow);
+  --card-theme-c-border: var(--color-violet);
+  --card-theme-c-bg: var(--color-violet-light);
+  --card-theme-c-glow: var(--color-violet-glow);
+}

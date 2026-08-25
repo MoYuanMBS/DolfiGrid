@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>预存福利</title>
+  <link rel="stylesheet" href="../css/themes/prepaid.css" data-theme-stylesheet>
+  <link rel="stylesheet" href="../css/background/soft-glow.css" data-background-stylesheet>
+  <link rel="stylesheet" href="../css/prepaid-benefits.css">
+  <link rel="stylesheet" href="../css/diff/prepaid-price.css">
+  <style id="layout-config">:root { --decor-block-height: 0px; --canvas-min-height: 0px; --canvas-layout-width: 1280px; }</style>
+</head>
+<body>
+  <main class="prepaid-canvas canvas">
+    <header class="hero" data-section="header" data-md-role="document" data-md-id="header">
+      <div class="eyebrow" data-bind="hud_tag"></div>
+      <h1 data-md-scope="header" data-md-field="title"></h1>
+      <p data-bind="subtitle" data-md-empty="remove"></p>
+      <div class="hero-mark" data-bind="hero_mark"></div>
+    </header>
+    <section class="intro" data-section="benefits" data-md-role="section" data-md-id="benefits">
+      <h2 data-md-scope="benefits" data-md-field="title"></h2>
+      <span data-bind="label.benefits_en"></span>
+    </section>
+    <section class="vip-grid" aria-label="VIP预存档位">
+      <article class="vip-card" data-md-role="card" data-md-id="vip1"><div class="vip-name" data-md-scope="vip1" data-md-field="title"></div><div class="vip-caption" data-bind="label.vip1_caption"></div><ul class="benefits" data-md-scope="vip1" data-md-field="items"></ul><div class="vip-cta" data-bind="label.vip1_cta"></div></article>
+      <article class="vip-card" data-md-role="card" data-md-id="vip2"><div class="vip-name" data-md-scope="vip2" data-md-field="title"></div><div class="vip-caption" data-bind="label.vip2_caption"></div><ul class="benefits" data-md-scope="vip2" data-md-field="items"></ul><div class="vip-cta" data-bind="label.vip2_cta"></div></article>
+      <article class="vip-card" data-md-role="card" data-md-id="vip3"><div class="vip-name" data-md-scope="vip3" data-md-field="title"></div><div class="vip-caption" data-bind="label.vip3_caption"></div><ul class="benefits" data-md-scope="vip3" data-md-field="items"></ul><div class="vip-cta" data-bind="label.vip3_cta"></div></article>
+      <article class="vip-card" data-md-role="card" data-md-id="vip4"><div class="vip-name" data-md-scope="vip4" data-md-field="title"></div><div class="vip-caption" data-bind="label.vip4_caption"></div><ul class="benefits" data-md-scope="vip4" data-md-field="items"></ul><div class="vip-cta" data-bind="label.vip4_cta"></div></article>
+      <article class="vip-card" data-md-role="card" data-md-id="vip5"><div class="vip-name" data-md-scope="vip5" data-md-field="title"></div><div class="vip-caption" data-bind="label.vip5_caption"></div><ul class="benefits" data-md-scope="vip5" data-md-field="items"></ul><div class="vip-cta" data-bind="label.vip5_cta"></div></article>
+    </section>
+    <section class="notice" data-section="notice" data-md-role="section" data-md-id="notice">
+      <h2 data-md-scope="notice" data-md-field="title"></h2>
+      <div class="notice-grid" data-md-scope="notice" data-md-field="items"></div>
+    </section>
+    <footer class="footer"><span class="tag" data-bind="footer_tag"></span><span>*以上内容最终解释权归溯流电竞所有</span></footer>
+    <img class="dolphin" src="../assets/svg/dolphin-boble.svg" alt="">
+  </main>
+</body>
+</html>
