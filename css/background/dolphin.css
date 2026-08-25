@@ -1,0 +1,91 @@
+/*
+ * Dolphin composition only. Colors are supplied by the active css/themes/ file.
+ * The supplied black SVG is used as an alpha mask, so its fill is recolored by
+ * --background-dolphin-color instead of becoming a fixed black illustration.
+ */
+:root {
+    --background-canvas-image:
+        linear-gradient(160deg, var(--background-gradient-start) 0%, var(--background-gradient-middle) 48%, var(--background-gradient-end) 100%);
+    --background-canvas-size: 100% 100%;
+    --background-canvas-position: 0 0;
+    --background-canvas-repeat: no-repeat;
+}
+
+.background-decor {
+    background-image:
+        /* Distributed across the remaining negative space; none crosses a dolphin zone. */
+        radial-gradient(circle at 13% 14%, var(--background-dolphin-color) 0 6.8%, transparent 6.95%),
+        radial-gradient(circle at 31% 12%, var(--background-dolphin-color) 0 2.5%, transparent 2.65%),
+        radial-gradient(circle at 56% 13%, var(--background-dolphin-color) 0 4.5%, transparent 4.65%),
+        radial-gradient(circle at 25% 34%, var(--background-dolphin-color) 0 5.1%, transparent 5.25%),
+        radial-gradient(circle at 69% 48%, var(--background-dolphin-color) 0 7.5%, transparent 7.65%),
+        radial-gradient(circle at 89% 44%, var(--background-dolphin-color) 0 4.8%, transparent 4.95%),
+        radial-gradient(circle at 33% 55%, var(--background-dolphin-color) 0 2.7%, transparent 2.85%),
+        radial-gradient(circle at 60% 59%, var(--background-dolphin-color) 0 3.5%, transparent 3.65%),
+        radial-gradient(circle at 65% 73%, var(--background-dolphin-color) 0 7.5%, transparent 7.65%),
+        radial-gradient(circle at 48% 92%, var(--background-dolphin-color) 0 4%, transparent 4.15%);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+.background-decor .background-dolphin {
+    display: block;
+    position: absolute;
+    width: var(--dolphin-size);
+    aspect-ratio: 262.6218 / 252.7552;
+    background-color: var(--background-dolphin-color);
+    -webkit-mask-image: url('../../assets/svg/dolphin-background.svg');
+    mask-image: url('../../assets/svg/dolphin-background.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-position: center;
+    mask-position: center;
+}
+
+.dolphin-1 {
+    /* Required upper-right anchor. */
+    --dolphin-size: 29%;
+    top: -2%;
+    left: 70%;
+    transform: rotate(0deg) scale(.92);
+}
+
+.dolphin-2 {
+    --dolphin-size: 16%;
+    top: 50%;
+    left: 3%;
+    transform: rotate(-120deg) scale(.9);
+}
+
+.dolphin-3 {
+    /* Required lower-left anchor. */
+    --dolphin-size: 32%;
+    top: 75%;
+    left: 1%;
+    transform: rotate(180deg) scale(1);
+}
+
+.dolphin-4 {
+    --dolphin-size: 14%;
+    top: 22%;
+    left: 44%;
+    transform: rotate(-60deg) scale(.96);
+}
+
+.dolphin-5 {
+    /* Small lower-right fill, deliberately isolated from nearby circles. */
+    --dolphin-size: 10%;
+    top: 61%;
+    left: 84%;
+    transform: rotate(120deg) scale(1.04);
+}
+
+.dolphin-6 {
+    /* A second, smaller lower-right accent balances the large lower-left dolphin. */
+    --dolphin-size: 9%;
+    top: 87%;
+    left: 67%;
+    transform: rotate(-60deg) scale(.9);
+}

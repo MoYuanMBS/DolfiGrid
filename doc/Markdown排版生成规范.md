@@ -56,6 +56,34 @@ label.match_badge: "PER MATCH"
 - 须知内容不写在 frontmatter，必须写在正文的 `## [section:notice]` 下。
 - 最终解释权不放入 Markdown，必须由 HTML 模板固定提供。
 
+### 2.1 颜色表与背景样式
+
+`theme` 与 `background` 是两个独立选择：
+
+```md
+theme: "aurora"
+background: "dolphin"
+```
+
+- `css/themes/<theme>.css` 是颜色表，负责所有实际色值，包括 `--background-dolphin-color`。
+- `css/background/<background>.css` 只负责背景构图、图层、位置、缩放和重复方式，禁止写入固定的十六进制或 RGB 颜色。
+- 背景名称只能描述构图，例如 `soft-glow`、`dolphin`、`dot-grid`；不能使用颜色或主题名称。
+- 每个模板的唯一 `.canvas` 都带有空的 `.background-decor` 层。它被画布的 `overflow: hidden` 裁切，正文位于该层之上；背景不得遮挡内容或溢出画布。
+
+#### `dolphin` 背景
+
+`dolphin` 使用 `assets/svg/dolphin-background.svg` 作为 CSS mask。原 SVG 的黑色填充不直接显示，而是由当前颜色表的 `--background-dolphin-color` 单色重着色，因此可与任意 theme 配合。
+
+构图固定且无动画：圆形均匀分布在海豚之外，不能与海豚重合。六只海豚使用独立的装饰节点；右上为 `rotate(0deg) scale(.92)`，左下为更大的 `rotate(180deg) scale(1)`，右下使用两只小型海豚填充留白，其余装饰分散摆放。
+
+仅检查颜色和背景时，可直接打开独立静态页面：
+
+```text
+preview/dolphin-background-preview.html
+```
+
+该页面不解析 Markdown，也不调用生成器；切换其中的 theme CSS 链接即可查看同一背景的配色效果。
+
 ## 3. 标题等级与 HTML 模板映射
 
 标题等级只表示 Markdown 文档中的层级关系，不直接规定 HTML 使用 `h1`、`h2` 还是某个固定组件。
@@ -355,7 +383,7 @@ assets/insert-png/
 node .\new-project\build.js 体验护航.md
 ```
 
-它会读取 frontmatter 的 `template`、`theme` 和 `images`，输出到：
+它会读取 frontmatter 的 `template`、`theme`、`background` 和 `images`，输出到：
 
 ```text
 output/体验护航.html
@@ -418,6 +446,7 @@ JS 生成前必须检查：
 
 - Markdown 是否可以读取。
 - frontmatter 是否闭合。
+- `template`、`theme` 和 `background` 是否为安全文件名，且分别存在于约定目录中。
 - 标题等级是否在 1 到 6 之间。
 - `section ID` 是否重复。
 - `card ID` 是否重复。

@@ -17,9 +17,30 @@ body {
 
 /* Every fixed-layout template marks its export surface with .canvas. */
 .canvas {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
     background-color: var(--background-canvas-color);
     background-image: var(--background-canvas-image, none);
     background-size: var(--background-canvas-size, auto);
     background-position: var(--background-canvas-position, 0 0);
     background-repeat: var(--background-canvas-repeat, repeat);
+}
+
+/* Templates provide this empty layer so a background can animate independently of content. */
+.background-decor {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.background-motif {
+    display: none;
+}
+
+.canvas > :not(.background-decor) {
+    position: relative;
+    z-index: 1;
 }

@@ -32,6 +32,7 @@
     --background-glow-ice-color: rgba(60, 161, 199, 0.2);
     --background-glow-violet-color: rgba(119, 97, 160, 0.2);
     --background-stripe-color: rgba(90, 96, 158, 0.05);
+    --background-dolphin-color: rgba(102, 174, 190, 0.16);
 
     /* Component surface colors remain part of the color theme. */
     --bg-card: #181B29;

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dolphin Background Preview</title>
+
+    <!-- Change only this href to preview another color theme. -->
+    <link rel="stylesheet" href="../css/themes/aurora.css">
+    <!-- Change only this href to preview another background composition. -->
+    <link rel="stylesheet" href="../css/background/dolphin.css">
+    <link rel="stylesheet" href="../css/base.css">
+
+    <style>
+        html,
+        body {
+            min-height: 100%;
+            background-color: var(--background-body-color);
+        }
+
+        body {
+            min-width: 1280px;
+        }
+
+        .canvas {
+            width: 1280px;
+            min-height: 1800px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Empty fixed canvas: only the background decor layer is rendered. -->
+    <main class="canvas" aria-label="Dolphin background preview">
+        <div class="background-decor" aria-hidden="true">
+            <span class="background-motif background-dolphin dolphin-1"></span>
+            <span class="background-motif background-dolphin dolphin-2"></span>
+            <span class="background-motif background-dolphin dolphin-3"></span>
+            <span class="background-motif background-dolphin dolphin-4"></span>
+            <span class="background-motif background-dolphin dolphin-5"></span>
+            <span class="background-motif background-dolphin dolphin-6"></span>
+        </div>
+    </main>
+</body>
+</html>
