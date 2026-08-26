@@ -62,7 +62,8 @@
 .dolphin-3 {
     /* Required lower-left anchor. */
     --dolphin-size: 32%;
-    top: 75%;
+    /* Its 180-degree motif must meet the canvas's bottom edge. */
+    bottom: 0;
     left: 1%;
     transform: rotate(180deg) scale(1);
 }

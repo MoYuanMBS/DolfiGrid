@@ -1,0 +1,70 @@
+/* Aqua Mint Blue theme: airy white surfaces with lavender, mint, and blue-gray accents. */
+:root {
+  /* Core palette: requested #8B90C4, Aqua Mint Blue, and #9BACBE. */
+  --color-primary: #8B90C4;
+  --color-primary-light: #F0F0F8;
+  --color-primary-glow: rgba(139, 144, 196, .18);
+
+  --color-mint: #79C8C0;
+  --color-mint-light: #E9F5F3;
+  --color-mint-glow: rgba(121, 200, 192, .20);
+
+  --color-ice: #9BACBE;
+  --color-ice-light: #EDF2F5;
+  --color-ice-glow: rgba(155, 172, 190, .20);
+
+  --color-violet: #9A81AD;
+  --color-violet-light: #F2EDF6;
+  --color-violet-glow: rgba(154, 129, 173, .18);
+
+  /* Notice layer stays a high-visibility yellow-orange by design. */
+  --color-amber: #E69D2E;
+  --color-amber-light: #FFF0C7;
+
+  /* Background tokens: a cool blue-gray to soft violet gradient. */
+  --background-body-color: #A992BA;
+  --background-canvas-color: #B7A8C7;
+  --background-gradient-start: #BDCCDB;
+  --background-gradient-middle: #B8B9D1;
+  --background-gradient-lower: #A997C0;
+  --background-gradient-end: #9A81AD;
+  /* Light decoration colors are intentionally lifted above the gradient. */
+  --background-dot-color: rgba(255, 255, 255, .26);
+  --background-glow-mint-color: rgba(246, 255, 253, .34);
+  --background-glow-ice-color: rgba(246, 251, 255, .30);
+  --background-glow-violet-color: rgba(253, 248, 255, .30);
+  --background-stripe-color: rgba(255, 255, 255, .055);
+  --background-dolphin-color: rgba(249, 255, 255, .32);
+
+  /* Component surfaces: softly tinted cards; avoid stark pure white. */
+  --bg-card: #F3EDF6;
+  --bg-card-header: rgba(139, 144, 196, .06);
+  --bg-placeholder: #EAF0F4;
+  --bg-list-item: #E9EFF3;
+  --bg-badge: rgba(243, 237, 246, .94);
+
+  --border-primary: #737AAF;
+  --border-accent: #63B7B0;
+  --border-muted: rgba(113, 130, 157, .46);
+
+  --text-title: #3D3C59;
+  --text-body: #4A4E67;
+  --text-muted: #666B84;
+  --text-highlight: #469E98;
+  --text-on-accent: #FFFFFF;
+
+  --shadow-canvas: 0 0 60px rgba(70, 72, 104, .14);
+  --shadow-header: 0 10px 30px rgba(139, 144, 196, .10);
+  --shadow-card: 0 8px 24px rgba(93, 94, 125, .12), 0 0 12px var(--color-primary-glow);
+  --shadow-notice: 0 8px 24px rgba(230, 157, 46, .20);
+
+  --card-theme-a-border: #63B7B0;
+  --card-theme-a-bg: var(--color-mint-light);
+  --card-theme-a-glow: var(--color-mint-glow);
+  --card-theme-b-border: #7893AD;
+  --card-theme-b-bg: var(--color-ice-light);
+  --card-theme-b-glow: var(--color-ice-glow);
+  --card-theme-c-border: #8E719F;
+  --card-theme-c-bg: var(--color-violet-light);
+  --card-theme-c-glow: var(--color-violet-glow);
+}

@@ -1,0 +1,100 @@
+/* “单价及接单要求”专用的纵向模式表；颜色全部取自选中的主题。 */
+.price-requirements-canvas .pricing-mode {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.price-requirements-canvas .pricing-table {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+}
+
+.price-requirements-canvas .pricing-table-header,
+.price-requirements-canvas .pricing-table-row .card-header {
+    display: grid;
+    grid-template-columns: minmax(180px, 1fr) minmax(240px, 1.1fr) minmax(300px, 1.5fr);
+    column-gap: 36px;
+    align-items: center;
+}
+
+.price-requirements-canvas .pricing-table-header {
+    padding: 0 38px;
+    min-height: 62px;
+    color: var(--text-muted);
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 4px;
+}
+
+.price-requirements-canvas .pricing-table-header > :nth-child(2) { text-align: center; }
+.price-requirements-canvas .pricing-table-header > :nth-child(3) { text-align: right; }
+
+.price-requirements-canvas .pricing-table-row {
+    padding: 0;
+    gap: 0;
+}
+
+.price-requirements-canvas .pricing-table-row .card-header {
+    padding: 28px 38px;
+    border-bottom: 0;
+}
+
+.price-requirements-canvas .pricing-table-row .card-title {
+    color: var(--card-border-color, var(--text-title));
+    font-size: 42px;
+    line-height: 1.15;
+}
+
+.price-requirements-canvas .pricing-table-row .list-group { display: contents; }
+
+.price-requirements-canvas .pricing-table-row .list-item {
+    display: block;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--text-body);
+    font-size: 30px;
+    line-height: 1.35;
+}
+
+.price-requirements-canvas .pricing-table-row .list-item .bullet { display: none; }
+.price-requirements-canvas .pricing-table-row .list-item .item-content,
+.price-requirements-canvas .pricing-table-row .list-item .price-row { display: block; width: 100%; }
+
+.price-requirements-canvas .pricing-table-row .list-item:first-child { grid-column: 2; }
+.price-requirements-canvas .pricing-table-row .list-item:nth-child(2) { grid-column: 3; }
+
+.price-requirements-canvas .pricing-table-row .list-item:first-child .price-left,
+.price-requirements-canvas .pricing-table-row .list-item:nth-child(2) .price-left { display: none; }
+
+.price-requirements-canvas .pricing-table-row .list-item:first-child .price-right {
+    display: block;
+    color: var(--card-border-color, var(--color-mint));
+    font-size: 56px;
+    font-weight: 900;
+    line-height: 1;
+    text-align: center;
+}
+
+.price-requirements-canvas .pricing-table-row .list-item:nth-child(2) .price-right {
+    display: block;
+    text-align: right;
+}
+
+.price-requirements-canvas .pricing-table-row .list-item:nth-child(n + 3) {
+    grid-column: 1 / -1;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--border-muted);
+}
+
+.price-requirements-canvas .pricing-table-row .list-item:nth-child(n + 3) .price-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 120px;
+}

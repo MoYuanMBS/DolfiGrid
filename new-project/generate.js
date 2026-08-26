@@ -296,13 +296,28 @@ function applyMetadataBindings(html, meta) {
         if (!Object.prototype.hasOwnProperty.call(meta, binding)) continue;
         const value = meta[binding];
         if (Array.isArray(value)) continue;
-        const range = findElementRange(html, { 'data-bind': binding });
-        if (!range) continue;
-        const opening = html.slice(range.openStart, range.openEnd);
-        const removeWhenEmpty = /data-md-empty="remove"/.test(opening);
-        html = value === '' && removeWhenEmpty
-            ? html.slice(0, range.openStart) + html.slice(range.closeEnd)
-            : html.slice(0, range.openEnd) + escapeHtml(value) + html.slice(range.closeStart);
+        const ranges = [];
+        let remaining = html;
+        let offset = 0;
+        while (true) {
+            const range = findElementRange(remaining, { 'data-bind': binding });
+            if (!range) break;
+            ranges.push({
+                openStart: range.openStart + offset,
+                openEnd: range.openEnd + offset,
+                closeStart: range.closeStart + offset,
+                closeEnd: range.closeEnd + offset,
+            });
+            offset += range.closeEnd;
+            remaining = remaining.slice(range.closeEnd);
+        }
+        for (const range of ranges.reverse()) {
+            const opening = html.slice(range.openStart, range.openEnd);
+            const removeWhenEmpty = /data-md-empty="remove"/.test(opening);
+            html = value === '' && removeWhenEmpty
+                ? html.slice(0, range.openStart) + html.slice(range.closeEnd)
+                : html.slice(0, range.openEnd) + escapeHtml(value) + html.slice(range.closeStart);
+        }
     }
     return html;
 }
