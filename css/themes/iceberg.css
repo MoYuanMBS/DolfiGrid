@@ -1,0 +1,69 @@
+/* Iceberg theme: frosted blue-gray surfaces with deep navy structure and a restrained champagne tier. */
+:root {
+  /* Core palette: deep ocean navy, glacial cyan, steel blue, and a muted champagne accent. */
+  --color-primary: #17345B;
+  --color-primary-light: #E8F0F6;
+  --color-primary-glow: rgba(23, 52, 91, .18);
+
+  --color-mint: #56A8D4;
+  --color-mint-light: #D9EFFB;
+  --color-mint-glow: rgba(86, 168, 212, .22);
+
+  --color-ice: #8FAFC9;
+  --color-ice-light: #E5EEF5;
+  --color-ice-glow: rgba(143, 175, 201, .22);
+
+  --color-violet: #718BA8;
+  --color-violet-light: #D7E2EC;
+  --color-violet-glow: rgba(113, 139, 168, .20);
+
+  --color-amber: #c0ad6d;
+  --color-amber-light: #e2d29f;
+
+  /* Background tokens: the cool, layered fog-blue field from the reference image. */
+  --background-body-color: #9EAFBF;
+  --background-canvas-color: #C6D2DD;
+  --background-gradient-start: #E8F0F5;
+  --background-gradient-middle: #D1DDE7;
+  --background-gradient-lower: #B6C7D5;
+  --background-gradient-end: #9EAFBF;
+  --background-dot-color: rgba(23, 52, 91, .17);
+  --background-glow-mint-color: rgba(217, 239, 251, .42);
+  --background-glow-ice-color: rgba(232, 240, 246, .36);
+  --background-glow-violet-color: rgba(215, 226, 236, .34);
+  --background-stripe-color: rgba(23, 52, 91, .045);
+  --background-dolphin-color: rgba(232, 244, 251, .30);
+
+  /* Component surfaces: frosted cards with enough contrast against the pale canvas. */
+  --bg-card: rgba(232, 240, 246, .82);
+  --bg-card-header: rgba(23, 52, 91, .06);
+  --bg-placeholder: #DCE7EF;
+  --bg-list-item: #E6EEF4;
+  --bg-badge: rgba(244, 248, 251, .88);
+
+  --border-primary: #6F8BA7;
+  --border-accent: #4C9BC8;
+  --border-muted: rgba(49, 76, 103, .42);
+
+  --text-title: #17345B;
+  --text-body: #1D2D3E;
+  --text-muted: #5E6F7D;
+  --text-highlight: #2E88B8;
+  --text-on-accent: #F5F8FA;
+
+  --shadow-canvas: 0 18px 50px rgba(23, 52, 91, .20);
+  --shadow-header: 0 14px 34px rgba(23, 52, 91, .14);
+  --shadow-card: 0 10px 24px rgba(23, 52, 91, .13), 0 0 12px var(--color-primary-glow);
+  --shadow-notice: 0 14px 30px rgba(23, 52, 91, .20);
+
+  /* Shared card-theme mapping used by the non-prepaid templates. */
+  --card-theme-a-border: var(--color-mint);
+  --card-theme-a-bg: var(--color-mint-light);
+  --card-theme-a-glow: var(--color-mint-glow);
+  --card-theme-b-border: var(--color-ice);
+  --card-theme-b-bg: var(--color-ice-light);
+  --card-theme-b-glow: var(--color-ice-glow);
+  --card-theme-c-border: var(--color-violet);
+  --card-theme-c-bg: var(--color-violet-light);
+  --card-theme-c-glow: var(--color-violet-glow);
+}

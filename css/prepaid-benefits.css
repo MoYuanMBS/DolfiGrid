@@ -19,10 +19,10 @@ body { font-family: 'Source Han Sans CN', 'Microsoft YaHei', sans-serif; color: 
 .vip-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; align-items: stretch; position: relative; z-index: 1; }
 .vip-card { min-height: 0; padding: 20px 16px 18px; position: relative; overflow: hidden; display: flex; flex-direction: column; border: 1px solid var(--border-muted); border-radius: 20px; background: var(--bg-card); box-shadow: var(--shadow-card); }
 .vip-card::before { content: ''; height: 9px; position: absolute; inset: 0 0 auto; background: var(--tier); }
-.vip-card:nth-child(1) { --tier: var(--color-mint); --price-tier: var(--color-primary); }
-.vip-card:nth-child(2) { --tier: var(--color-ice); --price-tier: var(--color-mint); }
-.vip-card:nth-child(3) { --tier: var(--color-violet); --price-tier: var(--color-ice); box-shadow: var(--shadow-card); }
-.vip-card:nth-child(4) { --tier: var(--color-primary); --price-tier: var(--color-violet); }
+.vip-card:nth-child(1) { --tier: var(--color-primary); --price-tier: var(--color-primary); }
+.vip-card:nth-child(2) { --tier: var(--color-violet); --price-tier: var(--color-violet); }
+.vip-card:nth-child(3) { --tier: var(--color-mint); --price-tier: var(--color-mint); box-shadow: var(--shadow-card); }
+.vip-card:nth-child(4) { --tier: var(--color-ice); --price-tier: var(--color-ice); }
 .vip-card:nth-child(5) { --tier: var(--color-amber); --price-tier: var(--color-amber); }
 .vip-name { margin-top: 12px; color: var(--tier); font-size: 28px; letter-spacing: 2px; font-weight: 900; }
 .vip-caption { margin-top: 3px; color: var(--text-muted); font-size: 14px; letter-spacing: 1px; }
@@ -47,6 +47,7 @@ body { font-family: 'Source Han Sans CN', 'Microsoft YaHei', sans-serif; color: 
 .notice b { color: var(--color-amber); }
 .footer { position: relative; z-index: 1; margin-top: 16px; display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 15px; letter-spacing: 1px; }
 .footer .tag { color: var(--color-mint); font-weight: 800; }
+.decorative-block { width: 100%; height: var(--decor-block-height); background: transparent; border: none; border-radius: 12px; position: relative; box-sizing: border-box; flex-shrink: 0; pointer-events: none; }
 .dolphin { position: absolute; right: -35px; bottom: -110px; width: 300px; opacity: .12; transform: rotate(-9deg); }
 .prepaid-canvas--step .vip-grid { align-items: end; }
 .prepaid-canvas--step .vip-card { align-self: end; }

@@ -7,10 +7,13 @@
   <link rel="stylesheet" href="../css/background/soft-glow.css" data-background-stylesheet>
   <link rel="stylesheet" href="../css/prepaid-benefits.css">
   <link rel="stylesheet" href="../css/diff/prepaid-price.css">
-  <style id="layout-config">:root { --decor-block-height: 0px; --canvas-min-height: 0px; --canvas-layout-width: 1280px; }</style>
+  <style id="layout-config">:root { --decor-block-height: 100px; --canvas-min-height: 0px; --canvas-layout-width: 1280px; }</style>
 </head>
-<body>
+  <body>
   <main class="prepaid-canvas canvas">
+    <section class="section-block" data-section="decorative" data-md-role="placeholder" data-md-id="decorative">
+      <div class="decorative-block" data-bind="decorative.block" data-placeholder="art-text" data-placeholder-lines="1"></div>
+    </section>
     <header class="hero" data-section="header" data-md-role="document" data-md-id="header">
       <div class="eyebrow" data-bind="hud_tag"></div>
       <h1 data-md-scope="header" data-md-field="title"></h1>

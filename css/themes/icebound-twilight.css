@@ -1,0 +1,118 @@
+/* Icebound Twilight theme: the Iceberg shell with frosted, individually tinted VIP cards. */
+:root {
+  --color-primary: #17345B;
+  --color-primary-light: #E8F0F6;
+  --color-primary-glow: rgba(23, 52, 91, .18);
+  --color-mint: #56A8D4;
+  --color-mint-light: #D9EFFB;
+  --color-mint-glow: rgba(86, 168, 212, .22);
+  --color-ice: #8FAFC9;
+  --color-ice-light: #E5EEF5;
+  --color-ice-glow: rgba(143, 175, 201, .22);
+  --color-violet: #718BA8;
+  --color-violet-light: #D7E2EC;
+  --color-violet-glow: rgba(113, 139, 168, .20);
+  --color-amber: #c0ad6d;
+  --color-amber-light: #e2d29f;
+
+  --background-body-color: #9EAFBF;
+  --background-canvas-color: #C6D2DD;
+  --background-gradient-start: #E8F0F5;
+  --background-gradient-middle: #D1DDE7;
+  --background-gradient-lower: #B6C7D5;
+  --background-gradient-end: #9EAFBF;
+  --background-dot-color: rgba(23, 52, 91, .17);
+  --background-glow-mint-color: rgba(217, 239, 251, .42);
+  --background-glow-ice-color: rgba(232, 240, 246, .36);
+  --background-glow-violet-color: rgba(215, 226, 236, .34);
+  --background-stripe-color: rgba(23, 52, 91, .045);
+  --background-dolphin-color: rgba(232, 244, 251, .30);
+
+  --bg-card: rgba(232, 240, 246, .82);
+  --bg-card-header: rgba(23, 52, 91, .06);
+  --bg-placeholder: #DCE7EF;
+  --bg-list-item: #E6EEF4;
+  --bg-badge: rgba(244, 248, 251, .88);
+  --border-primary: #6F8BA7;
+  --border-accent: #4C9BC8;
+  --border-muted: rgba(49, 76, 103, .42);
+  --text-title: #17345B;
+  --text-body: #1D2D3E;
+  --text-muted: #5E6F7D;
+  --text-highlight: #2E88B8;
+  --text-on-accent: #F5F8FA;
+  --shadow-canvas: 0 18px 50px rgba(23, 52, 91, .20);
+  --shadow-header: 0 14px 34px rgba(23, 52, 91, .14);
+  --shadow-card: 0 10px 24px rgba(23, 52, 91, .13), 0 0 12px var(--color-primary-glow);
+  --shadow-notice: 0 14px 30px rgba(23, 52, 91, .20);
+
+  --card-theme-a-border: var(--color-mint);
+  --card-theme-a-bg: var(--color-mint-light);
+  --card-theme-a-glow: var(--color-mint-glow);
+  --card-theme-b-border: var(--color-ice);
+  --card-theme-b-bg: var(--color-ice-light);
+  --card-theme-b-glow: var(--color-ice-glow);
+  --card-theme-c-border: var(--color-violet);
+  --card-theme-c-bg: var(--color-violet-light);
+  --card-theme-c-glow: var(--color-violet-glow);
+}
+
+/* VIP-only variant: keep the page shell on the Iceberg palette. */
+.prepaid-canvas .vip-card::before {
+  background: var(--tier-gradient, var(--tier));
+}
+
+.prepaid-canvas .vip-card:nth-child(1) {
+  --bg-card: linear-gradient(165deg, #FBF9F4 0%, #F2EEE7 48%, #DED8CE 100%);
+  --tier: #8B7C68;
+  --tier-gradient: linear-gradient(90deg, #D8CCB8 0%, #BBAE99 52%, #E2D8C6 100%);
+  --price-block-gradient: radial-gradient(circle at 14% 8%, rgba(229, 226, 218, .34) 0%, transparent 48%), linear-gradient(145deg, #E8E0D2 0%, #C7BBA8 58%, #A99A83 100%);
+  --price-tier: #D7CDBD;
+  --color-primary: #C7BBA8;
+  --border-muted: rgba(111, 99, 82, .42);
+}
+
+.prepaid-canvas .vip-card:nth-child(2) {
+  --bg-card: linear-gradient(165deg, #EDF2F4 0%, #E2E5E4 48%, #C9D1D5 100%);
+  --tier: #687080;
+  --tier-gradient: linear-gradient(90deg, #B5C4D5 0%, #8999B0 52%, #CAD7E1 100%);
+  --price-block-gradient: radial-gradient(circle at 14% 8%, rgba(216, 224, 230, .48) 0%, rgba(216, 224, 230, .16) 30%, transparent 58%), linear-gradient(145deg, #D6E1ED 0%, #A9B8CC 55%, #8292AA 100%);
+  --price-tier: #A9B8CC;
+  --color-primary: #8999B0;
+  --border-muted: rgba(78, 91, 111, .40);
+}
+
+.prepaid-canvas .vip-card:nth-child(3) {
+  --bg-card: linear-gradient(165deg, #E8F2F1 0%, #D9E8E8 48%, #BFD5D5 100%);
+  --tier: #527C7B;
+  --tier-gradient: linear-gradient(90deg, #B7D5D2 0%, #7FAEAC 52%, #C6DEDC 100%);
+  --price-block-gradient: radial-gradient(circle at 14% 8%, rgba(214, 227, 224, .32) 0%, transparent 48%), linear-gradient(145deg, #B9D6D3 0%, #8FBDBB 55%, #659D9D 100%);
+  --price-tier: #8FBDBB;
+  --color-primary: #6FA4A5;
+  --border-muted: rgba(69, 111, 111, .40);
+}
+
+.prepaid-canvas .vip-card:nth-child(4) {
+  --bg-card: linear-gradient(165deg, #EEEFF4 0%, #E0E0E8 48%, #C9CAD6 100%);
+  --tier: #5F637A;
+  --tier-gradient: linear-gradient(90deg, #A8ADC1 0%, #6F7698 52%, #B8BDD0 100%);
+  --price-block-gradient: radial-gradient(circle at 14% 8%, rgba(220, 221, 228, .34) 0%, transparent 48%), linear-gradient(145deg, #AEB4C9 0%, #737A9B 55%, #555C7C 100%);
+  --price-tier: #737A9B;
+  --color-primary: #5F6687;
+  --border-muted: rgba(74, 78, 103, .42);
+}
+
+.prepaid-canvas .vip-card:nth-child(5) {
+  --bg-card: linear-gradient(165deg, #F1E8CF 0%, #E8DDBE 48%, #CBB989 100%);
+  --tier: #806A35;
+  --tier-gradient: linear-gradient(90deg, #D9C996 0%, #B39850 52%, #E3D19B 100%);
+  --price-block-gradient: radial-gradient(circle at 14% 8%, rgba(226, 215, 181, .36) 0%, transparent 48%), linear-gradient(145deg, #D7C78E 0%, #B39850 55%, #947832 100%);
+  --price-tier: #B39850;
+  --color-primary: #967C35;
+  --border-muted: rgba(126, 104, 49, .48);
+}
+
+/* Give every recharge/bonus price block the same frosted highlight treatment. */
+.prepaid-canvas .vip-card .benefits li:first-child {
+  background: var(--price-block-gradient);
+}
