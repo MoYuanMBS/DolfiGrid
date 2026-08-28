@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Staggered Four-Grid Layout</title>
+    <link rel="stylesheet" href="../css/themes/reference-paper.css" data-theme-stylesheet>
+    <link rel="stylesheet" href="../css/background/plain-paper.css" data-background-stylesheet>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/svg/assets.css">
+    <link rel="stylesheet" href="../css/svg/icons.css">
+    <link rel="stylesheet" href="../css/staggered-four-grid-layout.css">
+    <style id="layout-config">
+        :root {
+            --canvas-layout-width: 800px;
+            --canvas-height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <main class="canvas staggered-four-grid-layout">
+        <header class="staggered-header" data-section="header" aria-label="品牌与主标题">
+            <img class="staggered-logo" data-brand-logo="logo1" src="../assets/素材/logo1.png" alt="溯流电竞">
+            <div class="staggered-title-panel">
+                <span class="staggered-title-mark" aria-hidden="true"></span>
+                <h1 data-md-role="document" data-md-id="header" data-md-field="title" data-md-scope="header" data-md-empty="remove"></h1>
+            </div>
+        </header>
+
+        <section class="staggered-grid" data-section="four-grid" aria-label="四格内容">
+            <div class="staggered-column staggered-column--left">
+                <article class="staggered-card staggered-card--style-a" data-md-role="card" data-md-id="grid-1" data-md-heading-level="2">
+                    <div class="staggered-card-heading">
+                        <span class="staggered-icon staggered-icon--shock svg-colorized svg-colorized--shock" aria-hidden="true"></span>
+                        <h2 data-md-field="title" data-md-scope="grid-1"></h2>
+                    </div>
+                    <div class="staggered-card-items" data-md-field="items" data-md-scope="grid-1"></div>
+                </article>
+
+                <article class="staggered-card staggered-card--style-b" data-md-role="card" data-md-id="grid-3" data-md-heading-level="2">
+                    <div class="staggered-card-heading">
+                        <span class="staggered-icon staggered-icon--shield svg-colorized svg-colorized--shield" aria-hidden="true"></span>
+                        <h2 data-md-field="title" data-md-scope="grid-3"></h2>
+                    </div>
+                    <div class="staggered-card-items" data-md-field="items" data-md-scope="grid-3"></div>
+                </article>
+            </div>
+
+            <div class="staggered-column staggered-column--right">
+                <article class="staggered-card staggered-card--style-b" data-md-role="card" data-md-id="grid-2" data-md-heading-level="2">
+                    <div class="staggered-card-heading">
+                        <span class="staggered-icon staggered-icon--boom svg-colorized svg-colorized--boom" aria-hidden="true"></span>
+                        <h2 data-md-field="title" data-md-scope="grid-2"></h2>
+                    </div>
+                    <div class="staggered-card-items" data-md-field="items" data-md-scope="grid-2"></div>
+                </article>
+
+                <article class="staggered-card staggered-card--style-a" data-md-role="card" data-md-id="grid-4" data-md-heading-level="2">
+                    <div class="staggered-card-heading">
+                        <span class="staggered-icon staggered-icon--money svg-art svg-art--money" aria-hidden="true"></span>
+                        <h2 data-md-field="title" data-md-scope="grid-4"></h2>
+                    </div>
+                    <div class="staggered-card-items" data-md-field="items" data-md-scope="grid-4"></div>
+                </article>
+
+                <footer class="staggered-footer" data-section="copyright">
+                    <span>*以上内容最终解释权归溯流电竞所有</span>
+                </footer>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

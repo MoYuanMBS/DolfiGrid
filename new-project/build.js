@@ -80,7 +80,7 @@ function resolveExportConfig(meta, specVersion) {
     const exportScale = parsePositiveNumber(meta.export_scale ?? 4, 'export_scale');
     if (!Number.isInteger(exportScale)) fail('export_scale 必须是正整数，例如 4');
     const outputWidth = layoutWidth * exportScale;
-    if (outputWidth <= 4096 || outputWidth > 32768) {
+    if (outputWidth <= 100 || outputWidth > 32768) {
         fail('layout_width × export_scale 必须大于 4096 且不超过 32768 像素');
     }
     const entries = meta.export_derive === undefined ? [] : Array.isArray(meta.export_derive) ? meta.export_derive : [meta.export_derive];

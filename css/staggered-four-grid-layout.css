@@ -1,0 +1,193 @@
+.staggered-four-grid-layout {
+    width: var(--canvas-layout-width);
+    height: var(--canvas-height);
+    color: var(--text-body);
+    padding: 14px 16px 12px;
+    display: grid;
+    grid-template-rows: 104px 1fr;
+    gap: 6px;
+}
+
+.staggered-header {
+    position: relative;
+    width: 50%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.staggered-logo {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    width: 180px;
+    height: 70px;
+    object-fit: contain;
+    transform: translateX(-50%);
+}
+
+.staggered-title-panel {
+    width: 350px;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 5px 18px;
+    border-radius: 11px;
+    background: color-mix(in srgb, var(--background-canvas-color) 78%, transparent);
+    box-shadow: 0 5px 12px color-mix(in srgb, var(--text-body) 20%, transparent);
+}
+
+.staggered-title-panel h1 {
+    font-size: 27px;
+    line-height: 1.1;
+    letter-spacing: .08em;
+}
+
+.staggered-title-mark {
+    width: 15px;
+    height: 15px;
+    border-radius: 50% 50% 50% 0;
+    background: var(--svg-ink-primary);
+    transform: rotate(-45deg);
+}
+
+.staggered-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 12px;
+    align-items: start;
+}
+
+.staggered-column {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.staggered-column--left {
+    padding-top: 22px;
+}
+
+.staggered-column--right {
+    padding-top: 0;
+    transform: translateY(-116px);
+}
+
+.staggered-card {
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 9px 10px 8px;
+    border: 1px solid color-mix(in srgb, var(--svg-ink-highlight) 24%, transparent);
+    border-radius: 11px;
+    background: color-mix(in srgb, var(--background-canvas-color) 82%, transparent);
+    box-shadow: 0 5px 14px color-mix(in srgb, var(--text-body) 18%, transparent);
+}
+
+.staggered-card--style-a {
+    background: color-mix(in srgb, var(--background-canvas-color) 82%, var(--svg-ink-primary) 18%);
+    border-color: color-mix(in srgb, var(--svg-ink-primary) 45%, transparent);
+}
+
+.staggered-card--style-b {
+    background: color-mix(in srgb, var(--background-canvas-color) 82%, var(--svg-ink-highlight) 18%);
+    border-color: color-mix(in srgb, var(--svg-ink-highlight) 40%, transparent);
+}
+
+.staggered-card-heading {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 22px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid color-mix(in srgb, var(--svg-ink-highlight) 18%, transparent);
+}
+
+.staggered-card-heading h2 {
+    min-width: 0;
+    font-size: 16px;
+    line-height: 1.15;
+    letter-spacing: .04em;
+}
+
+.staggered-icon {
+    flex: 0 0 22px;
+    width: 22px;
+    height: 22px;
+}
+
+.staggered-icon--shock {
+    width: 32px;
+    height: 32px;
+    transform: scale(1.08);
+}
+
+.staggered-icon--shield {
+    width: 30px;
+    height: 30px;
+    transform: scale(1.18);
+}
+
+.staggered-icon--boom {
+    width: 34px;
+    height: 34px;
+    transform: scale(1.04);
+}
+
+.staggered-icon--money {
+    width: 36px;
+    height: 36px;
+    transform: scale(1.12);
+}
+
+.staggered-card-items {
+    min-height: 0;
+    flex: 1 1 auto;
+    padding-top: 6px;
+    font-size: 7.5px;
+    line-height: 1.2;
+    overflow: hidden;
+}
+
+.staggered-card-items .list-item {
+    display: flex;
+    gap: 4px;
+    margin: 0 0 2px;
+}
+
+.staggered-card-items .bullet {
+    flex: 0 0 3px;
+    width: 3px;
+    height: 3px;
+    margin-top: 4px;
+    border-radius: 50%;
+    background: var(--svg-ink-primary);
+}
+
+.staggered-card-items .item-content,
+.staggered-card-items .item-line {
+    min-width: 0;
+    white-space: pre-wrap;
+}
+
+.staggered-card-items .item-line { display: block; }
+
+.canvas .staggered-footer {
+    position: static;
+    width: max-content;
+    height: auto;
+    align-self: flex-end;
+    margin: 0;
+    transform: translateY(116px);
+    font-size: 9px;
+    letter-spacing: .04em;
+    color: var(--text-body);
+    line-height: 1.2;
+    text-align: right;
+    white-space: nowrap;
+}

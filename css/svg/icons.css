@@ -1,4 +1,5 @@
 /* SVG asset calls only. Themes provide the --svg-* color tokens. */
+@import url('./assets.css');
 .benefit-icon {
     background-color: var(--svg-ink-primary, var(--color-amber));
     -webkit-mask-repeat: no-repeat;
@@ -15,9 +16,11 @@
 .icon-add-friend { -webkit-mask-image: url('../../assets/svg/add-friend.svg'); mask-image: url('../../assets/svg/add-friend.svg'); }
 .notice-icon { background: var(--svg-ink-highlight, var(--text-highlight)); -webkit-mask: url('../../assets/svg/sound.svg') center / 75% 75% no-repeat; mask: url('../../assets/svg/sound.svg') center / 75% 75% no-repeat; }
 
-/* Multi-color assets keep their base colors; only matching *-ink masks are themed. */
-.svg-colorized { position: relative; display: block; background-position: center; background-repeat: no-repeat; background-size: contain; }
-.svg-colorized::after { content: ''; position: absolute; inset: 0; background: var(--svg-ink-primary, var(--color-amber)); -webkit-mask: var(--svg-ink-mask) center / contain no-repeat; mask: var(--svg-ink-mask) center / contain no-repeat; }
-.svg-colorized--boom { background-image: url('../../assets/svg/boom.svg'); --svg-ink-mask: url('../../assets/svg/boom-ink.svg'); }
-.svg-colorized--shield { background-image: url('../../assets/svg/shield.svg'); --svg-ink-mask: url('../../assets/svg/shield-ink.svg'); }
-.svg-colorized--shock { background-image: url('../../assets/svg/shock.svg'); --svg-ink-mask: url('../../assets/svg/shock-ink.svg'); }
+/* Multi-color assets use separate ink and color layers; color must remain above ink. */
+.svg-colorized { position: relative; display: block; }
+.svg-colorized::before, .svg-colorized::after { content: ''; position: absolute; inset: 0; background-position: center; background-repeat: no-repeat; background-size: contain; }
+.svg-colorized::before { background: var(--svg-ink-primary, var(--color-amber)); -webkit-mask: var(--svg-ink-mask) center / contain no-repeat; mask: var(--svg-ink-mask) center / contain no-repeat; }
+.svg-colorized::after { background-image: var(--svg-color-layer); }
+.svg-colorized--boom { --svg-ink-mask: url('../../assets/svg/boom-ink.svg'); --svg-color-layer: url('../../assets/svg/boom-color.svg'); }
+.svg-colorized--shield { --svg-ink-mask: url('../../assets/svg/shield-ink.svg'); --svg-color-layer: url('../../assets/svg/shield-color.svg'); }
+.svg-colorized--shock { --svg-ink-mask: url('../../assets/svg/shock-ink.svg'); --svg-color-layer: url('../../assets/svg/shock-color.svg'); }

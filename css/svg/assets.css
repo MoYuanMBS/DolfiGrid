@@ -1,0 +1,6 @@
+/* Complete SVG asset registry. Color-preserving assets use their original SVG as a base layer. */
+.svg-art { display: block; background-position: center; background-repeat: no-repeat; background-size: contain; }
+.svg-art--dolphin { background-image: url('../../assets/svg/dolphin.svg'); }
+.svg-art--dolphin-boble { background-image: url('../../assets/svg/dolphin-boble.svg'); }
+.svg-art--money { background-image: url('../../assets/svg/money.svg'); }
+.svg-art--wave-colored { background-image: url('../../assets/svg/wave_colored.svg'); }
