@@ -246,12 +246,21 @@ function renderPlaceholder(lines) {
 }
 
 /** 将普通多行项目或 /| 左右栏项目渲染为列表 HTML。 */
-function renderItem(item) {
+function renderItem(item, scope) {
     if (item.kind === 'placeholder') return `<li class="list-item"><span class="bullet"></span><span class="item-content">${renderPlaceholder(item.lines)}</span></li>`;
     if (item.kind === 'image') return '';
     const first = item.lines[0] || '';
     const columns = first.split('/|');
-    const lineHtml = (line) => `<span class="item-line">${escapeHtml(line)}</span>`;
+    const lineHtml = (line) => {
+        // Markdown 清洗阶段可能在中文与数字之间插入排版空格，因此金额匹配需容忍空白。
+        const benefitAmount = /^(补偿老板\s*)(\d+\s*元)(\s*预存)$/.exec(line)
+            || /^(奖励老板\s*)(\d+\s*元)(\s*红包)$/.exec(line);
+        const isBenefitArticle = /^article-[5-9]$/.test(String(scope || ''));
+        const content = benefitAmount && isBenefitArticle
+            ? `${escapeHtml(benefitAmount[1])}<span class="benefit-amount">${escapeHtml(benefitAmount[2])}</span>${escapeHtml(benefitAmount[3])}`
+            : escapeHtml(line);
+        return `<span class="item-line">${content}</span>`;
+    };
     if (columns.length === 2) {
         const continuation = item.lines.slice(1).map(lineHtml).join('');
         return `<li class="list-item"><span class="bullet"></span><span class="item-content"><span class="price-row"><span class="price-left">${escapeHtml(columns[0])}</span><span class="price-right">${escapeHtml(columns[1])}</span></span>${continuation}</span></li>`;
@@ -260,8 +269,8 @@ function renderItem(item) {
 }
 
 /** 过滤图片项后批量渲染列表内容；图片交给独立媒体槽位处理。 */
-function renderItems(items) {
-    return items.filter((item) => item.kind !== 'image').map(renderItem).join('\n');
+function renderItems(items, scope) {
+    return items.filter((item) => item.kind !== 'image').map((item) => renderItem(item, scope)).join('\n');
 }
 
 /** 兼容正文内 [image] 写法；常规图片优先使用 frontmatter images 顺序列表。 */
@@ -445,7 +454,7 @@ function renderDocument(document, options = {}) {
             'data-md-scope': target.id,
             'data-md-field': field,
         }));
-        if (hasList) html = bindField(html, target.id, field, renderItems(heading.items), { raw: true });
+        if (hasList) html = bindField(html, target.id, field, renderItems(heading.items, target.id), { raw: true });
     }
 
     for (const role of roles) {

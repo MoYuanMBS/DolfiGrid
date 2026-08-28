@@ -8,19 +8,11 @@
     <link rel="stylesheet" href="../css/background/soft-glow.css" data-background-stylesheet>
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/longform-rules.css">
-    <style id="layout-config">
-        :root {
-            --decor-block-height: 0px;
-            --canvas-min-height: 0px;
-            --canvas-layout-width: 1280px;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/diff/longform-compensation.css">
+    <style id="layout-config">:root { --decor-block-height: 100px; --canvas-min-height: 0px; --canvas-layout-width: 1280px; }</style>
 </head>
 <body>
     <main class="canvas-container canvas longform-canvas">
-        <section class="section-block" data-section="decorative" data-md-role="placeholder" data-md-id="decorative">
-            <div class="decorative-block" data-bind="decorative.block" data-placeholder="art-text" data-placeholder-lines="1"></div>
-        </section>
         <div class="background-decor" aria-hidden="true">
             <span class="background-motif background-dolphin dolphin-1"></span>
             <span class="background-motif background-dolphin dolphin-2"></span>
@@ -31,6 +23,7 @@
         </div>
         <header class="document-masthead" data-section="header" data-md-role="document" data-md-id="header">
             <div class="masthead-rule"><span></span><i></i><span></span></div>
+            <div class="decorative-block masthead-logo-placeholder" data-placeholder="logo-space"></div>
             <p class="document-kicker" data-bind="hud_tag" data-md-field="label" data-md-scope="header"></p>
             <h1 data-bind="document.title" data-md-field="title" data-md-scope="header" data-md-empty="remove"></h1>
             <p class="document-subtitle" data-bind="subtitle" data-md-field="subtitle" data-md-scope="header" data-md-empty="remove"></p>
@@ -77,6 +70,7 @@
             </section>
 
             <div class="page-repeat-masthead" aria-hidden="true">
+                <div class="page-repeat-masthead-decorative-block" style="--page-repeat-masthead-decor-block-height: 100px;"></div>
                 <p class="document-kicker">SERVICE RULES &amp; AFTER-SALES GUIDE</p>
                 <h1>老板须知与售后规则</h1>
                 <p>下单前请完整阅读 · 游玩规则 · 权益保障 · 售后说明</p>
@@ -116,6 +110,7 @@
             </section>
 
             <div class="page-repeat-masthead" aria-hidden="true">
+                <div class="page-repeat-masthead-decorative-block" style="--page-repeat-masthead-decor-block-height: 100px;"></div>
                 <p class="document-kicker">SERVICE RULES &amp; AFTER-SALES GUIDE</p>
                 <h1>老板须知与售后规则</h1>
                 <p>下单前请完整阅读 · 游玩规则 · 权益保障 · 售后说明</p>

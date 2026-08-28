@@ -19,6 +19,7 @@
     box-shadow: var(--shadow-canvas);
 }
 
+.decorative-block { width: 100%; height: var(--decor-block-height, 0px); flex: 0 0 var(--decor-block-height, 0px); background: transparent; pointer-events: none; }
 .document-masthead { padding: 10px 110px 4px; text-align: center; }
 .masthead-rule, .heading-ornament { display: flex; align-items: center; justify-content: center; gap: 10px; }
 .masthead-rule span, .heading-ornament span { width: 96px; height: 1px; background: var(--border-primary); }
@@ -38,9 +39,10 @@
 
 .page-heading { position: relative; z-index: 1; display: grid; grid-template-columns: 92px minmax(0, 1fr) 250px; align-items: center; gap: 22px; padding-bottom: 20px; border-bottom: 1px solid var(--border-primary); }
 .page-repeat-masthead { padding: 18px 90px 2px; text-align: center; }
+.page-repeat-masthead-decorative-block { width: 100%; height: var(--page-repeat-masthead-decor-block-height, 0px); background: transparent; pointer-events: none; }
 .page-repeat-masthead .document-kicker { margin-top: 0; }
 .page-repeat-masthead h1 { margin-top: 4px; font-size: 30px; line-height: 1.18; letter-spacing: .14em; color: var(--text-title); }
-.page-repeat-masthead > p:last-child { margin-top: 7px; font-size: 13px; letter-spacing: .1em; color: var(--text-body); }
+.page-repeat-masthead > p:last-of-type { margin-top: 7px; font-size: 13px; letter-spacing: .1em; color: var(--text-body); }
 .page-tab { align-self: start; padding: 8px 12px; border-radius: 999px 999px 999px 5px; text-align: center; font-size: 12px; font-weight: 800; letter-spacing: .08em; color: var(--text-on-accent); background: var(--color-primary); }
 .heading-copy h2 { font-size: 31px; line-height: 1.2; letter-spacing: .14em; color: var(--text-title); white-space: pre-wrap; }
 .heading-copy p { min-height: 1em; margin-top: 5px; font-size: 12px; letter-spacing: .12em; color: var(--text-muted); }

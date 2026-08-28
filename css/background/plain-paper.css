@@ -1,0 +1,9 @@
+:root {
+    --background-canvas-image:
+        radial-gradient(circle at 4% 44%, rgba(138, 188, 255, 0.22), transparent 22%),
+        radial-gradient(circle at 95% 80%, rgba(191, 133, 239, 0.19), transparent 23%),
+        linear-gradient(155deg, #f9fbff 0%, #f3f0fb 55%, #edf2ff 100%);
+    --background-canvas-size: 100% 100%;
+    --background-canvas-position: 0 0;
+    --background-canvas-repeat: no-repeat;
+}

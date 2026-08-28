@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基础版与进阶版套餐</title>
+    <style id="local-fonts">
+        @font-face {
+            font-family: 'Source Han Sans CN';
+            src: url('../fonts/SourceHanSansCN-VF.woff2') format('woff2-variations');
+            font-weight: 100 900;
+            font-style: normal;
+            font-display: swap;
+        }
+    </style>
+    <link rel="stylesheet" href="../css/themes/reference-paper.css" data-theme-stylesheet>
+    <link rel="stylesheet" href="../css/background/plain-paper.css" data-background-stylesheet>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/basic-advanced-menu.css">
+    <style id="layout-config">
+        :root { --canvas-min-height: 0px; --canvas-layout-width: 1280px; }
+    </style>
+</head>
+<body>
+    <main class="canvas basic-advanced-canvas">
+        <h1 class="sr-only" data-md-role="document" data-md-id="header" data-bind="document.title" data-md-field="title" data-md-scope="header" data-md-empty="remove"></h1>
+        <header class="menu-logo-panel" aria-label="品牌标识">
+            <img class="menu-logo" src="../assets/素材/logo1.png" alt="溯流电竞">
+        </header>
+
+        <section class="menu-main-grid" aria-label="套餐内容">
+            <article class="basic-plan" data-md-role="card" data-md-id="basic" data-md-heading-level="2">
+                <h1 class="plan-title" data-bind="basic_label" data-md-field="title" data-md-scope="basic">基础版</h1>
+                <div class="plan-items" data-bind-list="basic.items" data-md-field="items" data-md-scope="basic"></div>
+            </article>
+
+            <article class="advanced-plan" data-md-role="card" data-md-id="advanced" data-md-heading-level="2">
+                <div class="manual-image-slot" data-md-field="media" data-md-scope="advanced">
+                    <span class="manual-image-name" data-bind="image_file">人物主图.png</span>
+                </div>
+                <div class="advanced-copy">
+                    <h2 class="plan-title" data-bind="advanced_label" data-md-field="title" data-md-scope="advanced">进阶版</h2>
+                    <div class="plan-items" data-bind-list="advanced.items" data-md-field="items" data-md-scope="advanced"></div>
+                </div>
+            </article>
+        </section>
+
+        <section class="notice-panel" data-md-role="section" data-md-id="notice" data-md-heading-level="2">
+            <h2 class="sr-only" data-md-field="title" data-md-scope="notice">下单须知</h2>
+            <div class="notice-items" data-bind-list="notice.items" data-md-field="items" data-md-scope="notice"></div>
+        </section>
+        <p class="sr-only" data-section="copyright">*以上内容最终解释权归溯流电竞所有</p>
+    </main>
+</body>
+</html>

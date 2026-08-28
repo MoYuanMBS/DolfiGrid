@@ -1,0 +1,9 @@
+/* Longform rules only: benefit amounts in article-5 through article-9 are independently tunable. */
+.longform-canvas .benefit-amount {
+  color: var(--compensation-amount-color, var(--color-amber));
+  font-size: var(--compensation-amount-font-size, 1.50em);
+}
+
+.longform-canvas .benefit-reward .benefit-amount {
+  color: #b12134;
+}
