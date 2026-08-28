@@ -1,0 +1,41 @@
+.season-menu-canvas { width: var(--canvas-layout-width); height: var(--canvas-height); position: relative; padding: 20px; color: var(--text-body); background: var(--background-canvas-color); }
+.season-menu-canvas > .header-banner, .season-menu-canvas > .main-content, .season-menu-canvas > .footer-card, .season-menu-canvas > .copyright-section { position: absolute; }
+
+.header-banner { left: 20px; right: 20px; top: 20px; height: 370px; padding-top: 285px; }
+.character-media { position: absolute; inset: 0; overflow: hidden; z-index: 1; display: flex; align-items: flex-start; justify-content: center; }
+.character-media.has-image img { width: 100%; height: auto; max-height: none; object-fit: contain; object-position: center top; }
+.season-logo { position: absolute; left: 15px; bottom: 28px; width: 300px; height: 150px; object-fit: contain; object-position: left bottom; z-index: 3; }
+
+.title-card { position: relative; z-index: 2; height: 84px; display: flex; align-items: center; justify-content: center; padding: 10px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-card); text-align: center; }
+.title-card h1 { color: var(--text-title); font-size: 40px; font-weight: 700; line-height: 1.1; letter-spacing: 2px; white-space: pre-wrap; }
+
+.main-content { left: 20px; right: 20px; top: 410px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+.grid-card { min-width: 0; aspect-ratio: 1 / 1; align-self: start; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); gap: 6px; padding: 12px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-card); }
+.grid-cell { min-width: 0; min-height: 0; border: 1px dashed var(--border-color); border-radius: 4px; background: color-mix(in srgb, var(--color-primary) 8%, transparent); }
+
+.version-wrapper { min-width: 0; align-self: start; display: flex; flex-direction: column; gap: 10px; }
+.version-card { min-height: 0; overflow: hidden; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-card); }
+.version-header { padding: 6px 12px; background: var(--color-primary); color: var(--text-on-accent); font-size: 27px; font-weight: 700; line-height: 1.2; text-align: center; white-space: pre-wrap; }
+.version-body { min-height: 0; padding: 10px; font-size: 15px; line-height: 1.55; }
+.version-items { display: flex; flex-direction: column; gap: 6px; }
+.version-items .list-item, .footer-content .list-item { display: flex; gap: 8px; width: 100%; margin: 3px 0; }
+.version-items .bullet, .footer-content .bullet { flex: 0 0 5px; width: 5px; height: 5px; margin-top: 9px; border-radius: 50%; background: var(--color-primary); }
+.version-items .item-content, .footer-content .item-content, .version-items .item-line, .footer-content .item-line { min-width: 0; white-space: pre-wrap; }
+.version-items .item-content { flex: 1 1 auto; }
+.version-items .item-line, .footer-content .item-line { display: block; }
+.version-items .price-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; width: 100%; align-items: baseline; }
+.version-items .price-left, .version-items .price-right { display: block; white-space: normal; text-align: left; }
+.version-items .price-row .price-right { white-space: nowrap; text-align: right; }
+.version-items .price-triple { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; width: 100%; align-items: baseline; }
+.version-items .price-triple .price-left, .version-items .price-triple .price-middle { min-width: 0; white-space: nowrap; }
+.version-items .price-triple .price-middle { text-align: center; }
+.version-items .price-triple .price-right { white-space: nowrap; text-align: right; }
+.version-items .price-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; width: 100%; align-items: baseline; }
+.version-items .price-left { min-width: 0; }
+.version-items .price-right { white-space: nowrap; text-align: right; }
+.price-tag { margin-top: 4px; color: var(--color-amber); font-weight: 700; text-align: right; }
+
+.footer-card { left: 20px; right: 20px; top: 860px; min-height: 110px; overflow: hidden; display: flex; align-items: flex-start; gap: 15px; padding: 10px 14px; border: 2px solid var(--border-color); border-radius: 8px; background: var(--bg-card); }
+.footer-title { flex: 0 0 auto; color: var(--text-title); font-size: 25px; font-weight: 700; line-height: 1.2; white-space: nowrap; }
+.footer-content { min-width: 0; padding-left: 8px; font-size: 14px; line-height: 1.5; }
+.copyright-section { left: 20px; right: 20px; top: 980px; bottom: auto; color: var(--text-muted); font-size: 11px; line-height: 14px; text-align: right; }

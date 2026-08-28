@@ -261,6 +261,10 @@ function renderItem(item, scope) {
             : escapeHtml(line);
         return `<span class="item-line">${content}</span>`;
     };
+    if (columns.length === 3) {
+        const continuation = item.lines.slice(1).map(lineHtml).join('');
+        return `<li class="list-item"><span class="bullet"></span><span class="item-content"><span class="price-triple"><span class="price-left">${escapeHtml(columns[0])}</span><span class="price-middle">${escapeHtml(columns[1])}</span><span class="price-right">${escapeHtml(columns[2])}</span></span>${continuation}</span></li>`;
+    }
     if (columns.length === 2) {
         const continuation = item.lines.slice(1).map(lineHtml).join('');
         return `<li class="list-item"><span class="bullet"></span><span class="item-content"><span class="price-row"><span class="price-left">${escapeHtml(columns[0])}</span><span class="price-right">${escapeHtml(columns[1])}</span></span>${continuation}</span></li>`;

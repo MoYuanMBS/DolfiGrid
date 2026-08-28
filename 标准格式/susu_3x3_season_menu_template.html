@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>潮流电竞 - 3*3新赛季</title>
+    <style id="local-fonts">
+        @font-face { font-family: 'Source Han Sans CN'; src: url('../fonts/SourceHanSansCN-VF.woff2') format('woff2-variations'); font-weight: 100 900; font-display: swap; }
+    </style>
+    <link rel="stylesheet" href="../css/themes/reference-paper.css" data-theme-stylesheet>
+    <link rel="stylesheet" href="../css/background/plain-paper.css" data-background-stylesheet>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/susu-3x3-season-menu.css">
+    <style id="layout-config">
+        :root { --canvas-layout-width: 900px; --canvas-height: 1000px; }
+    </style>
+</head>
+<body>
+    <main class="canvas season-menu-canvas">
+        <header class="header-banner" data-section="header" aria-label="品牌与主标题">
+            <div class="character-media" data-md-field="media" data-md-scope="hero"></div>
+            <img class="season-logo" data-brand-logo="logo2" src="../assets/素材/logo.png" alt="溯流电竞">
+            <div class="title-card">
+                <h1 data-md-role="document" data-md-id="header" data-md-field="title" data-md-scope="header" data-md-empty="remove"></h1>
+            </div>
+        </header>
+
+        <section class="main-content" data-section="content" aria-label="赛季菜单内容">
+            <!-- 纯装饰九宫格：不承载 Markdown 内容，也不设置 data-md 绑定。 -->
+            <div class="grid-card" aria-hidden="true">
+                <span class="grid-cell"></span><span class="grid-cell"></span><span class="grid-cell"></span>
+                <span class="grid-cell"></span><span class="grid-cell"></span><span class="grid-cell"></span>
+                <span class="grid-cell"></span><span class="grid-cell"></span><span class="grid-cell"></span>
+            </div>
+            <div class="version-wrapper">
+                <article class="version-card" data-md-role="card" data-md-id="basic" data-md-heading-level="2">
+                    <h2 class="version-header" data-md-field="title" data-md-scope="basic"></h2>
+                    <div class="version-body">
+                        <div class="version-items" data-md-field="items" data-md-scope="basic"></div>
+                        <div class="price-tag" data-bind="basic.price"></div>
+                    </div>
+                </article>
+                <article class="version-card" data-md-role="card" data-md-id="advanced" data-md-heading-level="2">
+                    <h2 class="version-header" data-md-field="title" data-md-scope="advanced"></h2>
+                    <div class="version-body">
+                        <div class="version-items" data-md-field="items" data-md-scope="advanced"></div>
+                        <div class="price-tag" data-bind="advanced.price"></div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="footer-card" data-section="notice" data-md-role="section" data-md-id="notice" data-md-heading-level="2">
+            <h2 class="footer-title" data-md-field="title" data-md-scope="notice"></h2>
+            <div class="footer-content" data-md-field="items" data-md-scope="notice"></div>
+        </section>
+
+        <section class="copyright-section" data-section="copyright">
+            <span>*以上内容最终解释权归溯流电竞所有</span>
+        </section>
+    </main>
+</body>
+</html>
