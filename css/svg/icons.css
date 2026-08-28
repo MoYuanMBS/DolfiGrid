@@ -1,7 +1,10 @@
 /* SVG asset calls only. Themes provide the --svg-* color tokens. */
 @import url('./assets.css');
 .benefit-icon {
-    background-color: var(--svg-ink-primary, var(--color-amber));
+    width: 44px;
+    height: 44px;
+    display: block;
+    background-color: var(--color-amber);
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     -webkit-mask-position: center;
