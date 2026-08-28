@@ -361,7 +361,23 @@ function parseAspectRatio(value) {
 }
 
 /** 仅允许安全的 CSS 尺寸值写入模板变量，避免 frontmatter 注入任意样式。 */
-function applyLayoutConfig(html, meta) {
+function applyLayoutConfig(html, meta, specVersion = 'legacy-v1') {
+    if (specVersion === 'fixed-canvas-v2') {
+        const canvasWidth = String(meta.canvas_width || '').trim();
+        const canvasHeight = String(meta.canvas_height || '').trim();
+        if (!/^\d+(?:\.\d+)?px$/.test(canvasWidth) || !/^\d+(?:\.\d+)?px$/.test(canvasHeight)) {
+            throw new Error('fixed-canvas-v2 必须提供正数 px 的 canvas_width 与 canvas_height');
+        }
+        if (!html.includes('--canvas-layout-width:') || !html.includes('--canvas-height:')) {
+            throw new Error('fixed-canvas-v2 模板必须声明 --canvas-layout-width 与 --canvas-height');
+        }
+        const variables = { canvas_width: '--canvas-layout-width', canvas_height: '--canvas-height' };
+        for (const [metaKey, cssVariable] of Object.entries(variables)) {
+            const pattern = new RegExp(`(${cssVariable.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}:\\s*)[^;]+;`);
+            html = html.replace(pattern, `$1${String(meta[metaKey]).trim()};`);
+        }
+        return html;
+    }
     const layoutWidth = String(meta.layout_width || '1280px').trim();
     const layoutWidthMatch = layoutWidth.match(/^(\d+(?:\.\d+)?)px$/);
     if (!layoutWidthMatch || Number(layoutWidthMatch[1]) <= 0) {
@@ -390,6 +406,32 @@ function applyLayoutConfig(html, meta) {
     return html;
 }
 
+function validateV2Template(html) {
+    const logoAttributes = [...html.matchAll(/\bdata-brand-logo=(['"])([^'"]+)\1/gi)];
+    if (logoAttributes.length !== 1) throw new Error('fixed-canvas-v2 模板必须且只能包含一个 data-brand-logo');
+    const variant = logoAttributes[0][2];
+    if (!['logo', 'logo1', 'logo2'].includes(variant)) throw new Error(`data-brand-logo 必须是 logo、logo1 或 logo2，当前为：${variant}`);
+    const logoTag = html.match(new RegExp(`<img\\b(?=[^>]*\\bdata-brand-logo=(['"])${variant}\\1)[^>]*>`, 'i'));
+    if (!logoTag) throw new Error('data-brand-logo 必须标记在 img Logo 节点上');
+    if (!/\bsrc=(['"])[^'"]*assets\/素材\/(?:logo|logo1|logo2)\.png\1/i.test(logoTag[0])) {
+        throw new Error('fixed-canvas-v2 Logo 必须引用 assets/素材 下的预登记 Logo 文件');
+    }
+}
+
+function findMediaSlots(html) {
+    const regex = /<([a-z][a-z0-9]*)\b(?=[^>]*\bdata-md-field="media")(?=[^>]*\bdata-md-scope="([^"]+)")[^>]*>/gi;
+    return [...html.matchAll(regex)].map((match) => ({ tag: match[1], scope: match[2] }));
+}
+
+function bindV2Media(html, images) {
+    const slots = findMediaSlots(html);
+    if (images.length > slots.length) throw new Error(`图片数量超过媒体槽位：提供 ${images.length} 张，模板仅有 ${slots.length} 个槽位`);
+    images.forEach((image, index) => {
+        html = insertMedia(html, slots[index].scope, image);
+    });
+    return html;
+}
+
 /** 主标题也允许使用透明占位符，供后续手工加入艺术字。 */
 function renderTitleValue(title) {
     const placeholder = parsePlaceholder(title);
@@ -414,7 +456,9 @@ function renderDocument(document, options = {}) {
     let html = fs.readFileSync(activeTemplatePath, 'utf8');
     html = setStylesheetLink(html, 'data-theme-stylesheet', options.themeHref);
     html = setStylesheetLink(html, 'data-background-stylesheet', options.backgroundHref);
-    html = applyLayoutConfig(html, document.meta);
+    const specVersion = options.specVersion || 'legacy-v1';
+    html = applyLayoutConfig(html, document.meta, specVersion);
+    if (specVersion === 'fixed-canvas-v2') validateV2Template(html);
     const roles = ['section', 'card'];
     const slots = Object.fromEntries(roles.map((role) => [role, findSlots(html, role)]));
     const used = new Set();
@@ -446,7 +490,7 @@ function renderDocument(document, options = {}) {
         const inlineSource = inlineImage
             ? { sourcePath: path.resolve(options.imagesRoot || path.dirname(activeTemplatePath), inlineImage), href: inlineImage.replace(/\\/g, '/') }
             : null;
-        const nextImage = target.role === 'card' && !inlineSource ? orderedImages.shift() : null;
+        const nextImage = specVersion === 'legacy-v1' && target.role === 'card' && !inlineSource ? orderedImages.shift() : null;
         html = insertMedia(html, target.id, inlineSource || nextImage);
         const field = 'items';
         // 不依赖 HTML 属性书写顺序，避免 data-md-field 与 data-md-scope 调换后失效。
@@ -463,7 +507,14 @@ function renderDocument(document, options = {}) {
         }
     }
 
-    if (orderedImages.length > 0) throw new Error(`图片数量超过已绑定的卡片媒体槽位：剩余 ${orderedImages.length} 张`);
+    if (specVersion === 'fixed-canvas-v2') {
+        if (document.headings.some((heading) => imageFromItems(heading.items))) {
+            throw new Error('fixed-canvas-v2 图片必须使用 frontmatter images，不支持正文 [image] 写法');
+        }
+        html = bindV2Media(html, orderedImages);
+    } else if (orderedImages.length > 0) {
+        throw new Error(`图片数量超过已绑定的卡片媒体槽位：剩余 ${orderedImages.length} 张`);
+    }
 
     if (!html.includes('*以上内容最终解释权归溯流电竞所有')) throw new Error('固定最终解释权区域缺失');
     if (/\[[^\]]*(占位|placeholder)[^\]]*\]/i.test(html) || /标题占位符|SUBTITLE PLACEHOLDER/.test(html)) throw new Error('生成结果残留可见占位文本');

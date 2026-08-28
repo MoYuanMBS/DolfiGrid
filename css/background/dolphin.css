@@ -1,3 +1,5 @@
+@import url('../svg/dolphin-background.css');
+
 /*
  * Dolphin composition only. Colors are supplied by the active css/themes/ file.
  * The supplied black SVG is used as an alpha mask, so its fill is recolored by
@@ -34,14 +36,6 @@
     width: var(--dolphin-size);
     aspect-ratio: 262.6218 / 252.7552;
     background-color: var(--background-dolphin-color);
-    -webkit-mask-image: url('../../assets/svg/dolphin-background.svg');
-    mask-image: url('../../assets/svg/dolphin-background.svg');
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-size: contain;
-    mask-size: contain;
-    -webkit-mask-position: center;
-    mask-position: center;
 }
 
 .dolphin-1 {

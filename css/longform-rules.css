@@ -1,4 +1,5 @@
 /* Long-form editorial layout. All colors are inherited from css/themes/. */
+@import url('./svg/icons.css');
 @font-face {
     font-family: 'Source Han Sans CN';
     src: url('../fonts/SourceHanSansCN-VF.woff2') format('woff2-variations');
@@ -96,17 +97,6 @@
 .benefit-row h3 { font-size: 17px; line-height: 1.4; color: var(--text-title); }
 .row-number { width: 30px; height: 30px; border-radius: 50%; }
 .row-number:empty { border-radius: 0; }
-.benefit-icon { width: 44px; height: 44px; display: block; background-color: var(--color-amber); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; -webkit-mask-size: contain; mask-size: contain; }
-.icon-backpack { -webkit-mask-image: url('../assets/svg/backpack.svg'); mask-image: url('../assets/svg/backpack.svg'); }
-.icon-angry { -webkit-mask-image: url('../assets/svg/angry.svg'); mask-image: url('../assets/svg/angry.svg'); }
-.icon-stress {
-    -webkit-mask-image: url('../assets/svg/stress2.svg');
-    mask-image: url('../assets/svg/stress2.svg');
-    transform: scale(1.85);
-    transform-origin: center;
-}
-.icon-chat { -webkit-mask-image: url('../assets/svg/chat.svg'); mask-image: url('../assets/svg/chat.svg'); }
-.icon-add-friend { -webkit-mask-image: url('../assets/svg/add-friend.svg'); mask-image: url('../assets/svg/add-friend.svg'); }
 .row-details { padding-left: 1.35em; columns: 2; column-gap: 30px; }
 .benefit-row .row-details { justify-self: end; width: 330px; padding-left: 0; columns: 1; }
 .benefit-row .row-details .list-item { display: flex; align-items: flex-start; justify-content: flex-start; gap: 12px; position: relative; left: 0; }
@@ -117,7 +107,7 @@
 .row-media.has-image { display: flex; justify-content: center; }
 .row-media .media-image { width: 76px; height: 76px; object-fit: contain; }
 .page-notice { position: relative; z-index: 1; display: grid; grid-template-columns: auto 30px minmax(0, 1fr); align-items: center; gap: 18px; margin-top: 26px; padding: 17px 22px; border: 1px dashed var(--border-accent); border-radius: 9px; background: var(--bg-list-item); font-size: 13px; line-height: 1.65; color: var(--text-body); }
-.notice-icon { width: 28px; height: 28px; display: block; margin-left: 0px; margin-right: 10px; background: var(--text-highlight); -webkit-mask: url('../assets/svg/sound.svg') center / 75% 75% no-repeat; mask: url('../assets/svg/sound.svg') center / 75% 75% no-repeat; }
+.notice-icon { width: 28px; height: 28px; display: block; margin-left: 0px; margin-right: 10px; }
 .page-notice strong { min-width: 5; white-space: nowrap; color: var(--text-highlight); }
 
 .service-layout { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.28fr) minmax(0, .72fr); grid-template-areas: "standard hourly" "escort hourly" "exemption exemption-other"; gap: 18px; }

@@ -66,7 +66,7 @@ async function launchBrowser() {
  * 从已生成的 HTML 输出 @Nx PNG 母版，并从母版做整数倍率缩小派生。
  * Playwright 的 deviceScaleFactor 会让浏览器重新栅格化 CSS 和文字，禁止使用 CSS transform 缩放。
  */
-async function exportImageAssets({ htmlPath, rootSelector = '.canvas', layoutWidth = 1280, exportScale = 4, deriveScales = [] }) {
+async function exportImageAssets({ htmlPath, rootSelector = '.canvas', layoutWidth = 1280, canvasHeight, exportScale = 4, deriveScales = [], specVersion = 'legacy-v1' }) {
     const projectRoot = path.resolve(__dirname, '..');
     const { server, port } = await createStaticServer(projectRoot);
     let browser;
@@ -85,6 +85,35 @@ async function exportImageAssets({ htmlPath, rootSelector = '.canvas', layoutWid
             await page.evaluate(async () => document.fonts?.ready);
             const canvas = page.locator(rootSelector);
             if (await canvas.count() !== 1) throw new Error(`导出节点必须唯一：${rootSelector}`);
+            if (specVersion === 'fixed-canvas-v2') {
+                const result = await canvas.evaluate((node, expected) => {
+                    const rect = node.getBoundingClientRect();
+                    const frame = (element) => {
+                        const style = getComputedStyle(element);
+                        const borders = ['Top', 'Right', 'Bottom', 'Left'].some((side) => parseFloat(style[`border${side}Width`]) > 0);
+                        return borders || (style.outlineStyle !== 'none' && parseFloat(style.outlineWidth) > 0);
+                    };
+                    const logo = node.querySelector('[data-brand-logo]');
+                    const logoHasFrame = logo && (() => {
+                        for (let element = logo; element && element !== node; element = element.parentElement) if (frame(element)) return true;
+                        return false;
+                    })();
+                    const mediaHasFrame = [...node.querySelectorAll('[data-md-field="media"]')].some((slot) => frame(slot) || Boolean(slot.querySelector('img')) && frame(slot.querySelector('img')));
+                    return {
+                        width: rect.width,
+                        height: rect.height,
+                        overflow: node.scrollWidth > node.clientWidth || node.scrollHeight > node.clientHeight,
+                        logoHasFrame,
+                        mediaHasFrame,
+                    };
+                }, { width: layoutWidth, height: canvasHeight });
+                if (Math.abs(result.width - layoutWidth) > 0.01 || Math.abs(result.height - canvasHeight) > 0.01) {
+                    throw new Error(`fixed-canvas-v2 画布尺寸不符：实际 ${result.width}×${result.height}px，应为 ${layoutWidth}×${canvasHeight}px`);
+                }
+                if (result.overflow) throw new Error('fixed-canvas-v2 内容溢出画布');
+                if (result.logoHasFrame) throw new Error('fixed-canvas-v2 Logo 或其容器存在边框/描边');
+                if (result.mediaHasFrame) throw new Error('fixed-canvas-v2 业务图片或媒体槽位存在边框/描边');
+            }
             await canvas.screenshot({ path: masterPath });
         } finally {
             await context.close();

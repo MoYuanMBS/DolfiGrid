@@ -42,9 +42,9 @@ function relativeHref(fromDirectory, targetPath) {
 }
 
 /** 解析只允许使用 px 的画布宽度；排版尺寸不能随导出环境而产生歧义。 */
-function parsePixelWidth(value, fieldName, fallback) {
+function parsePixelSize(value, fieldName, fallback) {
     const resolvedValue = value === undefined || value === '' ? fallback : String(value).trim();
-    const match = resolvedValue.match(/^(\d+(?:\.\d+)?)px$/);
+    const match = String(resolvedValue ?? '').match(/^(\d+(?:\.\d+)?)px$/);
     if (!match || Number(match[1]) <= 0) fail(`${fieldName} 必须是正数 px 尺寸，例如 4096px`);
     return Number(match[1]);
 }
@@ -60,8 +60,23 @@ function parsePositiveNumber(value, fieldName) {
  * 逻辑宽度与导出倍率彻底解耦：模板按固定 CSS 像素排版，PNG 按整数倍率截图。
  * 1280px × 4 产出 5120px 母版，避免非整数缩放造成文字发虚。
  */
-function resolveExportConfig(meta) {
-    const layoutWidth = parsePixelWidth(meta.layout_width, 'layout_width', '1280px');
+function resolveSpecVersion(meta) {
+    const version = String(meta.spec_version || 'legacy-v1').trim();
+    if (!['legacy-v1', 'fixed-canvas-v2'].includes(version)) {
+        fail('spec_version 只能是 legacy-v1 或 fixed-canvas-v2');
+    }
+    return version;
+}
+
+function resolveExportConfig(meta, specVersion) {
+    const isV2 = specVersion === 'fixed-canvas-v2';
+    if (isV2 && ['layout_width', 'min_aspect_ratio', 'canvas_min_height'].some((key) => Object.prototype.hasOwnProperty.call(meta, key))) {
+        fail('fixed-canvas-v2 不能使用 layout_width、min_aspect_ratio 或 canvas_min_height');
+    }
+    const layoutWidth = isV2
+        ? parsePixelSize(meta.canvas_width, 'canvas_width')
+        : parsePixelSize(meta.layout_width, 'layout_width', '1280px');
+    const canvasHeight = isV2 ? parsePixelSize(meta.canvas_height, 'canvas_height') : undefined;
     const exportScale = parsePositiveNumber(meta.export_scale ?? 4, 'export_scale');
     if (!Number.isInteger(exportScale)) fail('export_scale 必须是正整数，例如 4');
     const outputWidth = layoutWidth * exportScale;
@@ -74,7 +89,7 @@ function resolveExportConfig(meta) {
         if (!Number.isInteger(scale) || scale >= exportScale) fail('export_derive 中的倍率必须是小于 export_scale 的正整数');
         return scale;
     });
-    return { layoutWidth, exportScale, deriveScales };
+    return { layoutWidth, canvasHeight, exportScale, deriveScales, specVersion };
 }
 
 // 命令行仅接收一个 Markdown 文件名，例如：node build.js 体验护航.md。
@@ -106,7 +121,11 @@ const backgroundPath = path.join(backgroundDirectory, `${backgroundName}.css`);
 if (!fs.existsSync(templatePath)) fail(`模板不存在：${templateName}.html`);
 if (!fs.existsSync(themePath)) fail(`主题不存在：${themeName}.css`);
 if (!fs.existsSync(backgroundPath)) fail(`背景样式不存在：${backgroundName}.css`);
-const exportConfig = resolveExportConfig(meta);
+const specVersion = resolveSpecVersion(meta);
+const exportConfig = resolveExportConfig(meta, specVersion);
+if (specVersion === 'legacy-v1') {
+    console.warn('归档兼容模式：按 legacy-v1 构建。');
+}
 
 const outputPath = path.join(outputDirectory, `${path.basename(inputName, '.md')}.html`);
 // images 按列表顺序交给 generate.js，并绑定到未跳过的媒体槽位。
@@ -134,6 +153,7 @@ const generatedPath = generate({
     backgroundHref: relativeHref(path.dirname(outputPath), backgroundPath),
     images,
     imagesRoot: imageDirectory,
+    specVersion,
 });
 
 if (!exportEnabled) {

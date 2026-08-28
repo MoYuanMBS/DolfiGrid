@@ -1,0 +1,11 @@
+/* The source dolphin is final-rendered black, so this is a single-color mask. */
+.background-decor .background-dolphin {
+    -webkit-mask-image: url('../../assets/svg/dolphin-background.svg');
+    mask-image: url('../../assets/svg/dolphin-background.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-position: center;
+    mask-position: center;
+}

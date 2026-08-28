@@ -1,0 +1,23 @@
+/* SVG asset calls only. Themes provide the --svg-* color tokens. */
+.benefit-icon {
+    background-color: var(--svg-ink-primary, var(--color-amber));
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+}
+.icon-backpack { -webkit-mask-image: url('../../assets/svg/backpack.svg'); mask-image: url('../../assets/svg/backpack.svg'); }
+.icon-angry { -webkit-mask-image: url('../../assets/svg/angry.svg'); mask-image: url('../../assets/svg/angry.svg'); }
+.icon-stress { -webkit-mask-image: url('../../assets/svg/stress2.svg'); mask-image: url('../../assets/svg/stress2.svg'); transform: scale(1.85); transform-origin: center; }
+.icon-chat { -webkit-mask-image: url('../../assets/svg/chat.svg'); mask-image: url('../../assets/svg/chat.svg'); }
+.icon-add-friend { -webkit-mask-image: url('../../assets/svg/add-friend.svg'); mask-image: url('../../assets/svg/add-friend.svg'); }
+.notice-icon { background: var(--svg-ink-highlight, var(--text-highlight)); -webkit-mask: url('../../assets/svg/sound.svg') center / 75% 75% no-repeat; mask: url('../../assets/svg/sound.svg') center / 75% 75% no-repeat; }
+
+/* Multi-color assets keep their base colors; only matching *-ink masks are themed. */
+.svg-colorized { position: relative; display: block; background-position: center; background-repeat: no-repeat; background-size: contain; }
+.svg-colorized::after { content: ''; position: absolute; inset: 0; background: var(--svg-ink-primary, var(--color-amber)); -webkit-mask: var(--svg-ink-mask) center / contain no-repeat; mask: var(--svg-ink-mask) center / contain no-repeat; }
+.svg-colorized--boom { background-image: url('../../assets/svg/boom.svg'); --svg-ink-mask: url('../../assets/svg/boom-ink.svg'); }
+.svg-colorized--shield { background-image: url('../../assets/svg/shield.svg'); --svg-ink-mask: url('../../assets/svg/shield-ink.svg'); }
+.svg-colorized--shock { background-image: url('../../assets/svg/shock.svg'); --svg-ink-mask: url('../../assets/svg/shock-ink.svg'); }

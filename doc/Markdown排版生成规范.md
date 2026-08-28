@@ -1,6 +1,8 @@
 # Markdown 固定排版生成规范
 
-本文档是本项目 Markdown → 固定尺寸 HTML 排版图片的输入规范。
+本文档是本项目 Markdown → 固定尺寸 HTML 排版图片的输入规范。成品画布、Logo 和业务图片的新增规则以 [成品画布与品牌视觉规范.md](成品画布与品牌视觉规范.md) 为准；该规范优先于本文中“最低比例 + 内容自然增长”的旧约定。
+
+> 兼容说明：未声明 `spec_version` 的历史 Markdown 按 `legacy-v1` 构建，保留本文件中的旧画布字段。后续新 Markdown 必须声明 `spec_version: "fixed-canvas-v2"`，并按《成品画布与品牌视觉规范》使用固定 `canvas_width` 与 `canvas_height`。
 
 ## 1. 项目原则
 

@@ -59,4 +59,6 @@
     --card-theme-c-border: var(--color-violet);
     --card-theme-c-bg: var(--color-violet-light);
     --card-theme-c-glow: var(--color-violet-glow);
+    --svg-ink-primary: var(--color-amber);
+    --svg-ink-highlight: var(--text-highlight);
 }
