@@ -1,0 +1,73 @@
+/* 薰衣草 (Lavender) Theme: Low-saturation soft pastel lavender, icy blue, and muted warm accents. */
+:root {
+  /* Core palette: Softened pastel lavender, gentle icy cyan, and muted slate blue-gray. */
+  --color-primary: #A2A4CD;
+  --color-primary-light: #F4F4FA;
+  --color-primary-glow: rgba(162, 164, 205, .15);
+
+  --color-mint: #94CFC8;
+  --color-mint-light: #F0F8F7;
+  --color-mint-glow: rgba(148, 207, 200, .16);
+
+  --color-ice: #B1C2D3;
+  --color-ice-light: #F3F6F8;
+  --color-ice-glow: rgba(177, 194, 211, .16);
+
+  --color-violet: #B69ECA;
+  --color-violet-light: #F7F3FA;
+  --color-violet-glow: rgba(182, 158, 202, .15);
+
+  /* Notice layer: Muted warm amber with soft cream background for gentle callouts. */
+  --color-amber: #D8A563;
+  --color-amber-light: #FAF4E8;
+
+  /* Background tokens: Soft desaturated gradient transitioning from cool mist blue to dreamy pale lavender. */
+  --background-body-color: #BEC2D8;
+  --background-canvas-color: #CBCAE1;
+  --background-gradient-start: #D5DFE8;
+  --background-gradient-middle: #CFCEE2;
+  --background-gradient-lower: #C8BEDC;
+  --background-gradient-end: #BAA9CB;
+  
+  /* Background decorations: Very soft muted highlights. */
+  --background-dot-color: rgba(255, 255, 255, .32);
+  --background-glow-mint-color: rgba(248, 255, 254, .30);
+  --background-glow-ice-color: rgba(248, 252, 255, .28);
+  --background-glow-violet-color: rgba(254, 250, 255, .28);
+  --background-stripe-color: rgba(255, 255, 255, .04);
+  --background-dolphin-color: rgba(255, 255, 255, .30);
+
+  /* Component surfaces: Ultra-soft tinted surfaces for a gentle, cohesive look. */
+  --bg-card: #F6F3F9;
+  --bg-card-header: rgba(162, 164, 205, .05);
+  --bg-placeholder: #F0F4F7;
+  --bg-list-item: #EFF3F6;
+  --bg-badge: rgba(248, 245, 250, .92);
+
+  --border-primary: #8E91BC;
+  --border-accent: #82BFB8;
+  --border-muted: rgba(138, 151, 172, .38);
+
+  --text-title: #4E4E68;
+  --text-body: #5B5F79;
+  --text-muted: #7A7E96;
+  --text-highlight: #5EA8A1;
+  --text-on-accent: #FFFFFF;
+
+  --shadow-canvas: 0 0 60px rgba(90, 92, 120, .10);
+  --shadow-header: 0 10px 30px rgba(162, 164, 205, .08);
+  --shadow-card: 0 8px 24px rgba(110, 111, 138, .08), 0 0 12px var(--color-primary-glow);
+  --shadow-notice: 0 8px 24px rgba(216, 165, 99, .15);
+
+  --card-theme-a-border: #82BFB8;
+  --card-theme-a-bg: var(--color-mint-light);
+  --card-theme-a-glow: var(--color-mint-glow);
+  --card-theme-b-border: #92A7C0;
+  --card-theme-b-bg: var(--color-ice-light);
+  --card-theme-b-glow: var(--color-ice-glow);
+  --card-theme-c-border: #A68DB8;
+  --card-theme-c-bg: var(--color-violet-light);
+  --card-theme-c-glow: var(--color-violet-glow);
+  --svg-ink-primary: var(--color-amber);
+  --svg-ink-highlight: var(--text-highlight);
+}

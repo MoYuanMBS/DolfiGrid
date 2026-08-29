@@ -1,100 +1,52 @@
-/* “单价及接单要求”专用的纵向模式表；颜色全部取自选中的主题。 */
-.price-requirements-canvas .pricing-mode {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.price-requirements-canvas .pricing-table {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    width: 100%;
-}
-
-.price-requirements-canvas .pricing-table-header,
-.price-requirements-canvas .pricing-table-row .card-header {
-    display: grid;
-    grid-template-columns: minmax(180px, 1fr) minmax(240px, 1.1fr) minmax(300px, 1.5fr);
-    column-gap: 36px;
-    align-items: center;
-}
-
-.price-requirements-canvas .pricing-table-header {
-    padding: 0 38px;
-    min-height: 62px;
-    color: var(--text-muted);
-    font-size: 24px;
-    font-weight: 800;
-    letter-spacing: 4px;
-}
-
+/* 4:3 portrait poster layout for the current fixed-canvas-v2 template. */
+.price-requirements-canvas { width: var(--canvas-layout-width); height: var(--canvas-height); padding: 52px 52px 30px; gap: 24px; display: flex; flex-direction: column; }
+.price-requirements-canvas .header-banner { flex: 0 0 172px; min-height: 0; padding: 28px 34px; border-left-width: 10px; border-radius: 7px; }
+.price-requirements-canvas .header-banner .hud-tag { font-size: 16px; letter-spacing: 3px; margin-bottom: 7px; }
+.price-requirements-canvas .header-banner .hud-tag::before { width: 10px; height: 10px; }
+.price-requirements-canvas .header-banner .main-title { font-size: 48px; letter-spacing: 3px; line-height: 1.15; }
+.price-requirements-canvas .header-banner .sub-title { font-size: 18px; margin-top: 8px; }
+.price-requirements-canvas .header-logo { position: absolute; z-index: 3; top: 75px; right: 74px; width: 285px; height: 156px; object-fit: contain; object-position: right bottom; }
+.price-requirements-canvas .pricing-pair { flex: 0 0 340px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; min-height: 0; }
+.price-requirements-canvas .pricing-mode { min-width: 0; min-height: 0; display: flex; flex-direction: column; gap: 8px; }
+.price-requirements-canvas .pricing-mode--entertainment { flex: 0 0 185px; overflow: hidden; }
+.price-requirements-canvas .section-header { min-height: 58px; padding: 10px 16px; border-left-width: 7px; }
+.price-requirements-canvas .section-title-group { gap: 10px; min-width: 0; }
+.price-requirements-canvas .section-title-cn { font-size: 30px; letter-spacing: 2px; }
+.price-requirements-canvas .section-title-en { font-size: 13px; letter-spacing: 1px; }
+.price-requirements-canvas .section-status-badge { font-size: 11px; padding: 3px 8px; white-space: nowrap; }
+.price-requirements-canvas .pricing-table { display: flex; flex-direction: column; gap: 7px; width: 100%; }
+.price-requirements-canvas .pricing-table-header, .price-requirements-canvas .pricing-table-row .card-header { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) minmax(0, .9fr); column-gap: 8px; align-items: center; }
+.price-requirements-canvas .pricing-table-header { padding: 0 12px; min-height: 28px; color: var(--text-muted); font-size: 14px; font-weight: 800; letter-spacing: 1px; }
 .price-requirements-canvas .pricing-table-header > :nth-child(2) { text-align: center; }
 .price-requirements-canvas .pricing-table-header > :nth-child(3) { text-align: right; }
-
-.price-requirements-canvas .pricing-table-row {
-    padding: 0;
-    gap: 0;
-}
-
-.price-requirements-canvas .pricing-table-row .card-header {
-    padding: 28px 38px;
-    border-bottom: 0;
-}
-
-.price-requirements-canvas .pricing-table-row .card-title {
-    color: var(--card-border-color, var(--text-title));
-    font-size: 42px;
-    line-height: 1.15;
-}
-
+.price-requirements-canvas .pricing-table-row { padding: 0; gap: 0; border-width: 2px; border-radius: 7px; }
+.price-requirements-canvas .pricing-table-row .card-header { padding: 9px 12px; border-bottom: 0; }
+.price-requirements-canvas .pricing-table-row .card-title { color: var(--card-border-color, var(--text-title)); font-size: 24px; line-height: 1.1; }
 .price-requirements-canvas .pricing-table-row .list-group { display: contents; }
-
-.price-requirements-canvas .pricing-table-row .list-item {
-    display: block;
-    min-width: 0;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    color: var(--text-body);
-    font-size: 30px;
-    line-height: 1.35;
-}
-
+.price-requirements-canvas .pricing-table-row .list-item { display: block; min-width: 0; padding: 0; border: 0; background: transparent; color: var(--text-body); font-size: 14px; line-height: 1.2; }
 .price-requirements-canvas .pricing-table-row .list-item .bullet { display: none; }
-.price-requirements-canvas .pricing-table-row .list-item .item-content,
-.price-requirements-canvas .pricing-table-row .list-item .price-row { display: block; width: 100%; }
-
+.price-requirements-canvas .pricing-table-row .list-item .item-content, .price-requirements-canvas .pricing-table-row .list-item .price-row { display: block; width: 100%; }
 .price-requirements-canvas .pricing-table-row .list-item:first-child { grid-column: 2; }
 .price-requirements-canvas .pricing-table-row .list-item:nth-child(2) { grid-column: 3; }
-
-.price-requirements-canvas .pricing-table-row .list-item:first-child .price-left,
-.price-requirements-canvas .pricing-table-row .list-item:nth-child(2) .price-left { display: none; }
-
-.price-requirements-canvas .pricing-table-row .list-item:first-child .price-right {
-    display: block;
-    color: var(--card-border-color, var(--color-mint));
-    font-size: 56px;
-    font-weight: 900;
-    line-height: 1;
-    text-align: center;
+.price-requirements-canvas .pricing-table-row .list-item:first-child .price-left, .price-requirements-canvas .pricing-table-row .list-item:nth-child(2) .price-left { display: none; }
+.price-requirements-canvas .pricing-table-row .list-item:first-child .price-right { display: block; color: var(--card-border-color, var(--color-mint)); font-size: 25px; font-weight: 900; line-height: 1; text-align: center; }
+.price-requirements-canvas .pricing-table-row .list-item:nth-child(2) .price-right { display: block; text-align: right; }
+.price-requirements-canvas .pricing-table-row .list-item:nth-child(n + 3) { grid-column: 1 / -1; margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--border-muted); }
+.price-requirements-canvas .pricing-table-row .list-item:nth-child(n + 3) .price-row { display: flex; justify-content: space-between; gap: 20px; }
+/* 明星陪使用独立的低饱和玫红色槽，保留原有档位顺序与Markdown绑定。 */
+.price-requirements-canvas [data-card-id="top-secret-star"] {
+    --card-border-color: #b67391;
+    --card-glow-color: rgba(183, 126, 152, .16);
 }
-
-.price-requirements-canvas .pricing-table-row .list-item:nth-child(2) .price-right {
-    display: block;
-    text-align: right;
-}
-
-.price-requirements-canvas .pricing-table-row .list-item:nth-child(n + 3) {
-    grid-column: 1 / -1;
-    margin-top: 18px;
-    padding-top: 18px;
-    border-top: 1px dashed var(--border-muted);
-}
-
-.price-requirements-canvas .pricing-table-row .list-item:nth-child(n + 3) .price-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 120px;
-}
+.price-requirements-canvas .pricing-mode--entertainment .pricing-table-row .card-header { padding: 12px 16px; }
+.price-requirements-canvas .pricing-mode--entertainment .pricing-table-row .card-title { font-size: 25px; }
+.price-requirements-canvas .pricing-mode--entertainment .pricing-table-row .list-item:first-child .price-right { font-size: 28px; }
+.price-requirements-canvas .section-block[data-section="notice"] { flex: 0 0 270px; min-height: 0; gap: 20px; overflow: hidden; }
+.price-requirements-canvas .notice-box { flex: 1 1 auto; min-height: 0; padding: 22px 18px 14px; gap: 8px; border-width: 2px; border-radius: 7px; }
+.price-requirements-canvas .notice-box::before { display: none; }
+.price-requirements-canvas .notice-label { top: -14px; left: 18px; font-size: 11px; padding: 2px 8px; }
+.price-requirements-canvas .notice-content-list { gap: 5px; font-size: 16px; line-height: 1.25; }
+.price-requirements-canvas .notice-content-list .list-item { gap: 8px; padding: 7px 10px; font-size: 16px; line-height: 1.25; }
+.price-requirements-canvas .notice-content-list .list-item .bullet { width: 8px; height: 8px; margin-top: 7px; }
+.price-requirements-canvas .copyright-section { margin-top: auto; padding-right: 2px; }
+.price-requirements-canvas .copyright-text { font-size: 11px; letter-spacing: 1px; }

@@ -22,9 +22,8 @@
     <link rel="stylesheet" href="../css/price-requirements.css">
     <style id="layout-config">
         :root {
-            --decor-block-height: 0px;
-            --canvas-min-height: 0px;
-            --canvas-layout-width: 1280px;
+            --canvas-layout-width: 960px;
+            --canvas-height: 1280px;
         }
     </style>
 </head>
@@ -44,26 +43,9 @@
             <h1 class="main-title" data-bind="document.title" data-md-field="title" data-md-scope="header" data-md-empty="remove">单价及接单要求</h1>
             <p class="sub-title" data-bind="subtitle" data-md-field="subtitle" data-md-scope="header" data-md-empty="remove"></p>
         </header>
+        <img class="header-logo" data-brand-logo="logo1" src="../assets/素材/logo1.png" alt="">
 
-        <section class="pricing-mode" data-section="entertainment" data-md-role="section" data-md-id="entertainment" data-md-heading-level="2">
-            <div class="section-header">
-                <div class="section-title-group">
-                    <h2 class="section-title-cn" data-md-field="title" data-md-scope="entertainment">娱乐</h2>
-                    <span class="section-title-en" data-bind="label.entertainment_en">ENTERTAINMENT</span>
-                </div>
-                <span class="section-status-badge" data-bind="label.entertainment_status">MODE // 01</span>
-            </div>
-            <div class="pricing-table" role="table">
-                <div class="pricing-table-header" role="row"><span role="columnheader" data-bind="label.table_tier"></span><span role="columnheader" data-bind="label.table_price"></span><span role="columnheader" data-bind="label.table_requirement"></span></div>
-                <article class="card theme-a pricing-table-row" role="row" data-card-id="entertainment-basic" data-md-role="card" data-md-id="entertainment-basic" data-md-heading-level="3">
-                    <div class="card-header">
-                        <h3 class="card-title" role="cell" data-md-field="title" data-md-scope="entertainment-basic">娱乐</h3>
-                        <ul class="list-group" data-md-field="items" data-md-scope="entertainment-basic"></ul>
-                    </div>
-                </article>
-            </div>
-        </section>
-
+        <div class="pricing-pair" data-section="tier-pair">
         <section class="pricing-mode" data-section="confidential" data-md-role="section" data-md-id="confidential" data-md-heading-level="2">
             <div class="section-header">
                 <div class="section-title-group">
@@ -74,14 +56,11 @@
             </div>
             <div class="pricing-table" role="table">
                 <div class="pricing-table-header" role="row"><span role="columnheader" data-bind="label.table_tier"></span><span role="columnheader" data-bind="label.table_price"></span><span role="columnheader" data-bind="label.table_requirement"></span></div>
-                <article class="card theme-a pricing-table-row" role="row" data-card-id="confidential-tech" data-md-role="card" data-md-id="confidential-tech" data-md-heading-level="3">
-                    <div class="card-header"><h3 class="card-title" role="cell" data-md-field="title" data-md-scope="confidential-tech">技术</h3><ul class="list-group" data-md-field="items" data-md-scope="confidential-tech"></ul></div>
+                <article class="card theme-a pricing-table-row" role="row" data-card-id="confidential-tech" data-md-role="card" data-md-id="confidential-tech" data-md-heading-level="3"><div class="card-header"><h3 class="card-title" role="cell" data-md-field="title" data-md-scope="confidential-tech">技术</h3><ul class="list-group" data-md-field="items" data-md-scope="confidential-tech"></ul></div>
                 </article>
-                <article class="card theme-b pricing-table-row" role="row" data-card-id="confidential-gold" data-md-role="card" data-md-id="confidential-gold" data-md-heading-level="3">
-                    <div class="card-header"><h3 class="card-title" role="cell" data-md-field="title" data-md-scope="confidential-gold">金牌</h3><ul class="list-group" data-md-field="items" data-md-scope="confidential-gold"></ul></div>
+                <article class="card theme-b pricing-table-row" role="row" data-card-id="confidential-gold" data-md-role="card" data-md-id="confidential-gold" data-md-heading-level="3"><div class="card-header"><h3 class="card-title" role="cell" data-md-field="title" data-md-scope="confidential-gold">金牌</h3><ul class="list-group" data-md-field="items" data-md-scope="confidential-gold"></ul></div>
                 </article>
-                <article class="card theme-c pricing-table-row" role="row" data-card-id="confidential-elite" data-md-role="card" data-md-id="confidential-elite" data-md-heading-level="3">
-                    <div class="card-header"><h3 class="card-title" role="cell" data-md-field="title" data-md-scope="confidential-elite">顶尖</h3><ul class="list-group" data-md-field="items" data-md-scope="confidential-elite"></ul></div>
+                <article class="card theme-c pricing-table-row" role="row" data-card-id="confidential-elite" data-md-role="card" data-md-id="confidential-elite" data-md-heading-level="3"><div class="card-header"><h3 class="card-title" role="cell" data-md-field="title" data-md-scope="confidential-elite">顶尖</h3><ul class="list-group" data-md-field="items" data-md-scope="confidential-elite"></ul></div>
                 </article>
             </div>
         </section>
@@ -107,6 +86,24 @@
                 </article>
                 <article class="card theme-a pricing-table-row" role="row" data-card-id="top-secret-star" data-md-role="card" data-md-id="top-secret-star" data-md-heading-level="3">
                     <div class="card-header"><h3 class="card-title" role="cell" data-md-field="title" data-md-scope="top-secret-star">明星</h3><ul class="list-group" data-md-field="items" data-md-scope="top-secret-star"></ul></div>
+                </article>
+            </div>
+        </section>
+
+        </div>
+
+        <section class="pricing-mode pricing-mode--entertainment" data-section="entertainment" data-md-role="section" data-md-id="entertainment" data-md-heading-level="2">
+            <div class="section-header">
+                <div class="section-title-group">
+                    <h2 class="section-title-cn" data-md-field="title" data-md-scope="entertainment">娱乐</h2>
+                    <span class="section-title-en" data-bind="label.entertainment_en">ENTERTAINMENT</span>
+                </div>
+                <span class="section-status-badge" data-bind="label.entertainment_status">MODE // 01</span>
+            </div>
+            <div class="pricing-table" role="table">
+                <div class="pricing-table-header" role="row"><span role="columnheader" data-bind="label.table_tier"></span><span role="columnheader" data-bind="label.table_price"></span><span role="columnheader" data-bind="label.table_requirement"></span></div>
+                <article class="card theme-a pricing-table-row" role="row" data-card-id="entertainment-basic" data-md-role="card" data-md-id="entertainment-basic" data-md-heading-level="3">
+                    <div class="card-header"><h3 class="card-title" role="cell" data-md-field="title" data-md-scope="entertainment-basic">娱乐</h3><ul class="list-group" data-md-field="items" data-md-scope="entertainment-basic"></ul></div>
                 </article>
             </div>
         </section>

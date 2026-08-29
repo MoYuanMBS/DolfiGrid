@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单价及接单要求 - 竖排档位</title>
+    <style id="local-fonts">
+        @font-face { font-family: 'Source Han Sans CN'; src: url('../fonts/SourceHanSansCN-VF.woff2') format('woff2-variations'); font-weight: 100 900; font-style: normal; font-display: swap; }
+    </style>
+    <link rel="stylesheet" href="../css/themes/bright.css" data-theme-stylesheet>
+    <link rel="stylesheet" href="../css/background/soft-glow.css" data-background-stylesheet>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components.css">
+    <link rel="stylesheet" href="../css/utilities.css">
+    <link rel="stylesheet" href="../css/price-requirements.css">
+    <link rel="stylesheet" href="../css/price-requirements-vertical-title.css">
+    <style id="layout-config">
+        :root { --canvas-layout-width: 960px; --canvas-height: 1280px; }
+    </style>
+</head>
+<body>
+    <main class="canvas-container canvas price-requirements-canvas price-requirements-vertical-title-canvas">
+        <div class="background-decor" aria-hidden="true">
+            <span class="background-motif background-dolphin dolphin-1"></span><span class="background-motif background-dolphin dolphin-2"></span><span class="background-motif background-dolphin dolphin-3"></span><span class="background-motif background-dolphin dolphin-4"></span><span class="background-motif background-dolphin dolphin-5"></span><span class="background-motif background-dolphin dolphin-6"></span>
+        </div>
+        <header class="header-banner" data-section="header" data-md-role="document" data-md-id="header">
+            <div class="hud-tag" data-bind="hud_tag" data-md-field="label" data-md-scope="header">PRICE &amp; ORDER REQUIREMENTS</div>
+            <h1 class="main-title" data-bind="document.title" data-md-field="title" data-md-scope="header" data-md-empty="remove">单价及接单要求</h1>
+            <p class="sub-title" data-bind="subtitle" data-md-field="subtitle" data-md-scope="header" data-md-empty="remove"></p>
+        </header>
+        <img class="header-logo" data-brand-logo="logo1" src="../assets/素材/logo1.png" alt="">
+        <div class="pricing-pair" data-section="tier-pair">
+            <section class="pricing-mode" data-section="confidential" data-md-role="section" data-md-id="confidential" data-md-heading-level="2">
+                <div class="section-header"><div class="section-title-group"><h2 class="section-title-cn" data-md-field="title" data-md-scope="confidential">机密</h2><span class="section-title-en" data-bind="label.confidential_en">CONFIDENTIAL</span></div><span class="section-status-badge" data-bind="label.confidential_status">MODE // 02</span></div>
+                <div class="pricing-table" role="table"><div class="pricing-table-header" role="row"><span role="columnheader" data-bind="label.table_tier"></span><span role="columnheader" data-bind="label.table_price"></span><span role="columnheader" data-bind="label.table_requirement"></span></div>
+                    <article class="card theme-a pricing-table-row" role="row" data-md-role="card" data-md-id="confidential-tech" data-md-heading-level="3"><div class="card-header"><h3 class="card-title" role="cell" data-md-field="title" data-md-scope="confidential-tech">技术</h3><ul class="list-group" data-md-field="items" data-md-scope="confidential-tech"></ul></div></article>
+                    <article class="card theme-b pricing-table-row" role="row" data-md-role="card" data-md-id="confidential-gold" data-md-heading-level="3"><div class="card-header"><h3 class="card-title" role="cell" data-md-field="title" data-md-scope="confidential-gold">金牌</h3><ul class="list-group" data-md-field="items" data-md-scope="confidential-gold"></ul></div></article>
+                    <article class="card theme-c pricing-table-row" role="row" data-md-role="card" data-md-id="confidential-elite" data-md-heading-level="3"><div class="card-header"><h3 class="card-title" role="cell" data-md-field="title" data-md-scope="confidential-elite">顶尖</h3><ul class="list-group" data-md-field="items" data-md-scope="confidential-elite"></ul></div></article>
+                </div>
+            </section>
+            <section class="pricing-mode" data-section="top-secret" data-md-role="section" data-md-id="top-secret" data-md-heading-level="2">
+                <div class="section-header"><div class="section-title-group"><h2 class="section-title-cn" data-md-field="title" data-md-scope="top-secret">绝密</h2><span class="section-title-en" data-bind="label.top_secret_en">TOP SECRET</span></div><span class="section-status-badge" data-bind="label.top_secret_status">MODE // 03</span></div>
+                <div class="pricing-table" role="table"><div class="pricing-table-header" role="row"><span role="columnheader" data-bind="label.table_tier"></span><span role="columnheader" data-bind="label.table_price"></span><span role="columnheader" data-bind="label.table_requirement"></span></div>
+                    <article class="card theme-a pricing-table-row" role="row" data-md-role="card" data-md-id="top-secret-peak" data-md-heading-level="3"><div class="card-header"><h3 class="card-title" role="cell" data-md-field="title" data-md-scope="top-secret-peak">巅峰</h3><ul class="list-group" data-md-field="items" data-md-scope="top-secret-peak"></ul></div></article>
+                    <article class="card theme-b pricing-table-row" role="row" data-md-role="card" data-md-id="top-secret-pro" data-md-heading-level="3"><div class="card-header"><h3 class="card-title" role="cell" data-md-field="title" data-md-scope="top-secret-pro">Pro</h3><ul class="list-group" data-md-field="items" data-md-scope="top-secret-pro"></ul></div></article>
+                    <article class="card theme-c pricing-table-row" role="row" data-md-role="card" data-md-id="top-secret-demon" data-md-heading-level="3"><div class="card-header"><h3 class="card-title" role="cell" data-md-field="title" data-md-scope="top-secret-demon">魔王</h3><ul class="list-group" data-md-field="items" data-md-scope="top-secret-demon"></ul></div></article>
+                    <article class="card theme-a pricing-table-row" role="row" data-md-role="card" data-md-id="top-secret-star" data-md-heading-level="3"><div class="card-header"><h3 class="card-title" role="cell" data-md-field="title" data-md-scope="top-secret-star">明星</h3><ul class="list-group" data-md-field="items" data-md-scope="top-secret-star"></ul></div></article>
+                </div>
+            </section>
+        </div>
+        <section class="pricing-mode pricing-mode--entertainment" data-section="entertainment" data-md-role="section" data-md-id="entertainment" data-md-heading-level="2">
+            <div class="section-header"><div class="section-title-group"><h2 class="section-title-cn" data-md-field="title" data-md-scope="entertainment">娱乐</h2><span class="section-title-en" data-bind="label.entertainment_en">ENTERTAINMENT</span></div><span class="section-status-badge" data-bind="label.entertainment_status">MODE // 01</span></div>
+            <div class="pricing-table" role="table"><div class="pricing-table-header" role="row"><span role="columnheader" data-bind="label.table_tier"></span><span role="columnheader" data-bind="label.table_price"></span><span role="columnheader" data-bind="label.table_requirement"></span></div><article class="card theme-a pricing-table-row" role="row" data-md-role="card" data-md-id="entertainment-basic" data-md-heading-level="3"><div class="card-header"><h3 class="card-title" role="cell" data-md-field="title" data-md-scope="entertainment-basic">娱乐</h3><ul class="list-group" data-md-field="items" data-md-scope="entertainment-basic"></ul></div></article></div>
+        </section>
+        <section class="section-block" data-section="notice" data-md-role="section" data-md-id="notice" data-md-heading-level="2"><div class="section-header"><div class="section-title-group"><h2 class="section-title-cn" data-md-field="title" data-md-scope="notice"></h2><span class="section-title-en" data-bind="label.notice_en"></span></div><span class="section-status-badge" data-bind="label.notice_status"></span></div><div class="notice-box"><span class="notice-label" data-bind="label.notice_tag"></span><ul class="notice-content-list" data-md-field="items" data-md-scope="notice"></ul></div></section>
+        <section class="copyright-section" data-section="copyright"><span class="copyright-text" data-bind="copyright.text">*以上内容最终解释权归溯流电竞所有</span></section>
+    </main>
+</body>
+</html>

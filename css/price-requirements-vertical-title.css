@@ -1,0 +1,146 @@
+/* 竖卡变体增量：只作用于机密与绝密；娱乐区完全复用基础横向样式。 */
+.price-requirements-vertical-title-canvas .pricing-pair { flex-basis: 390px; grid-template-columns: .9fr 1.1fr; }
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-mode { height: 100%; }
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table {
+    display: grid;
+    grid-template-columns: 24px repeat(4, minmax(0, 1fr));
+    gap: 7px;
+    align-items: stretch;
+    flex: 1 1 auto;
+    min-height: 0;
+    height: 100%;
+}
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-header {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 0;
+    height: 100%;
+    padding: 0;
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: 0;
+}
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-header > span {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    white-space: nowrap;
+}
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-header > :nth-child(2),
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-header > :nth-child(3) { text-align: center; }
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row {
+    grid-row: 1;
+    min-width: 0;
+    height: 100%;
+    padding: 0;
+}
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row:nth-child(2) { grid-column: 2; }
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row:nth-child(3) { grid-column: 3; }
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row:nth-child(4) { grid-column: 4; }
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row:nth-child(5) { grid-column: 5; }
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row .card-header {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 0;
+    height: 100%;
+    padding: 12px 10px;
+    position: relative;
+}
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row .card-title {
+    width: auto;
+    min-height: 0;
+    font-size: 20px;
+    line-height: 1.15;
+    text-align: center;
+    white-space: nowrap;
+}
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row .list-group {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0;
+    min-width: 0;
+    position: relative;
+}
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row .list-item,
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row .list-item:first-child,
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row .list-item:nth-child(2),
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row .list-item:nth-child(n + 3) {
+    display: block;
+    grid-column: auto;
+    margin-top: 0;
+    padding: 0;
+    border: 0;
+    font-size: 13px;
+    line-height: 1.2;
+    text-align: center;
+}
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row .list-item:first-child .price-left,
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row .list-item:nth-child(2) .price-left { display: none; }
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row .list-item:first-child .price-right {
+    display: block;
+    color: var(--card-border-color, var(--color-mint));
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 1;
+    white-space: nowrap;
+}
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row .list-item:first-child {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+}
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row .list-item:nth-child(2) {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row .list-item:nth-child(2) .price-right,
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row .list-item:nth-child(n + 3) .price-row {
+    text-align: center;
+}
+
+/* 两组竖卡使用同一套四等分轨道，确保每张 cell 宽度完全一致。 */
+.price-requirements-vertical-title-canvas .pricing-pair { grid-template-columns: 1fr 1fr; }
+
+/* 标签栏与卡片共用同一行高度：顶部=档位，中部=价格，底部=结单要求。 */
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row .card-header {
+    display: block;
+    position: relative;
+    padding: 0 10px;
+}
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row .card-title {
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    left: 10px;
+}
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row .list-group {
+    position: absolute;
+    inset: 0 10px;
+    display: block;
+}
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row .list-item:first-child {
+    top: 50%;
+    right: 0;
+    bottom: auto;
+    left: 0;
+    transform: translateY(-50%);
+}
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row .list-item:nth-child(2) {
+    top: auto;
+    right: 0;
+    bottom: 12px;
+    left: 0;
+}
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row .list-item:nth-child(2) .price-right { display: block; }
+.price-requirements-vertical-title-canvas .pricing-pair .pricing-table-row .list-item:nth-child(n + 3) .price-row { display: block; }
