@@ -21,11 +21,14 @@
     <link rel="stylesheet" href="../css/layout.css">
     <link rel="stylesheet" href="../css/components.css">
     <link rel="stylesheet" href="../css/utilities.css">
+    <link rel="stylesheet" href="../css/price-requirements.css">
+    <link rel="stylesheet" href="../css/tactical-portrait.css">
     <style id="layout-config">
         :root {
             --decor-block-height: 0px;
-            --canvas-min-height: 0px;
-            --canvas-layout-width: 1280px;
+            --canvas-min-height: 1200px;
+            --canvas-layout-width: 900px;
+            --canvas-height: 1200px;
         }
     </style>
 </head>
@@ -40,9 +43,12 @@
             <span class="background-motif background-dolphin dolphin-6"></span>
         </div>
         <header class="header-banner" data-section="header" data-md-role="document" data-md-id="header">
+            <img class="brand-logo" src="../assets/素材/logo1.png" data-brand-logo="logo1" alt="">
             <div class="hud-tag" data-bind="hud_tag" data-md-field="label" data-md-scope="header">TACTICAL SERVICE MENU // 战术导引菜单</div>
-            <h1 class="main-title" data-bind="document.title" data-md-field="title" data-md-scope="header" data-md-empty="remove"></h1>
-            <p class="sub-title" data-bind="subtitle" data-md-field="subtitle" data-md-scope="header" data-md-empty="remove"></p>
+            <div class="title-stack">
+                <h1 class="main-title" data-bind="document.title" data-md-field="title" data-md-scope="header" data-md-empty="remove"></h1>
+                <p class="sub-title" data-bind="subtitle" data-md-field="subtitle" data-md-scope="header" data-md-empty="remove"></p>
+            </div>
         </header>
 
         <section class="section-block" data-section="experience" data-md-role="section" data-md-id="experience" data-md-heading-level="2" data-layout-grow style="--layout-grow: 1">
@@ -114,9 +120,11 @@
                 </div>
                 <span class="section-status-badge" data-bind="label.notice_status" data-md-field="status" data-md-scope="notice">SECTION // 03</span>
             </div>
-            <div class="notice-box">
-                <span class="notice-label" data-bind="label.notice_tag" data-md-field="tag" data-md-scope="notice">NOTICE / 须知说明</span>
-                <div class="notice-content-list" data-bind-list="notice.items" data-md-field="items" data-md-scope="notice">
+            <div class="price-requirements-canvas">
+                <div class="notice-box">
+                    <span class="notice-label" data-bind="label.notice_tag" data-md-field="tag" data-md-scope="notice">NOTICE / 须知说明</span>
+                    <div class="notice-content-list" data-bind-list="notice.items" data-md-field="items" data-md-scope="notice">
+                    </div>
                 </div>
             </div>
         </section>

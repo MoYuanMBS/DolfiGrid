@@ -1,0 +1,131 @@
+/*
+ * Portrait 3:4 composition for susu_tactical_ui_template.
+ * Content remains Markdown-driven; this file only controls the fixed canvas.
+ */
+:root {
+    --canvas-layout-width: 900px;
+    --canvas-fixed-height: 1200px;
+    --canvas-min-height: 1200px;
+}
+
+html, body { min-width: 900px; }
+body { background: var(--background-body-color); }
+
+.canvas-container.canvas {
+    width: 900px;
+    height: var(--canvas-height, 1200px);
+    min-height: var(--canvas-height, 1200px);
+    padding: 30px 52px 18px;
+    gap: 14px;
+    background:
+        radial-gradient(circle at 50% 4%, var(--background-glow-mint-color), transparent 28%),
+        linear-gradient(160deg, var(--background-gradient-start) 0%, var(--background-gradient-middle) 34%, var(--background-gradient-lower) 72%, var(--background-gradient-end) 100%);
+}
+
+.canvas-container::before { height: 12px; opacity: .9; }
+.background-decor { opacity: .12; }
+
+.header-banner {
+    width: 100%;
+    padding: 12px 0 8px;
+    background: transparent;
+    border: 0;
+    clip-path: none;
+    box-shadow: none;
+    text-align: center;
+}
+.header-banner .hud-tag { display: none; }
+.header-banner .brand-logo {
+    display: block;
+    width: 300px;
+    height: 92px;
+    margin: 0 auto 12px;
+    object-fit: contain;
+    object-position: center;
+}
+.header-banner .title-stack {
+    width: max-content;
+    max-width: 100%;
+    margin: 0 auto;
+    text-align: left;
+}
+.header-banner .main-title {
+    font-size: 58px;
+    line-height: 1.08;
+    letter-spacing: 5px;
+    color: var(--text-title);
+    text-shadow: 0 0 3px var(--text-title), 0 0 10px var(--color-violet), 0 0 22px var(--color-violet-glow);
+    white-space: nowrap;
+}
+.header-banner .sub-title {
+    margin-top: 10px;
+    font-size: 22px;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    text-align: left;
+}
+
+.section-block { gap: 10px; }
+.canvas-container > [data-layout-grow] { flex: none; }
+.section-header {
+    min-height: 54px;
+    padding: 8px 20px;
+    border-left-width: 10px;
+    background: linear-gradient(90deg, var(--bg-card-header), transparent);
+}
+.section-title-group { gap: 18px; }
+.section-title-cn { font-size: 34px; letter-spacing: 3px; }
+.section-title-en { font-size: 18px; letter-spacing: 2px; color: var(--text-muted); }
+.section-status-badge { font-size: 17px; padding: 4px 14px; }
+
+.pkg-grid, .grid-col-2 { gap: 18px; }
+.section-block[data-section="experience"] .pkg-grid { grid-template-columns: 1fr; gap: 10px; }
+.section-block[data-section="experience"] .card { min-height: 62px; }
+.section-block[data-section="experience"] .experience-feature-card { min-height: 62px; }
+.section-block[data-section="experience"] .pkg-grid { flex: none; }
+.section-block[data-section="experience"] .card-header { border-bottom: 0; padding-bottom: 0; }
+.section-block[data-section="experience"] .list-group { gap: 0; }
+
+.card {
+    padding: 16px 22px;
+    gap: 12px;
+    border-width: 2px;
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--bg-card) 88%, transparent);
+    box-shadow: 0 0 14px var(--card-glow-color, var(--color-primary-glow));
+}
+.card-header { padding-bottom: 8px; }
+.card-title { font-size: 26px; letter-spacing: 1px; }
+.card-badge { font-size: 16px; padding: 3px 11px; }
+.card-media-placeholder:not(.has-image) { display: none; }
+.card-media-placeholder { height: 160px; border: 0; background: transparent; }
+
+.list-group { gap: 7px; }
+.list-item {
+    gap: 10px;
+    padding: 8px 12px;
+    border-left-width: 4px;
+    border-radius: 3px;
+    font-size: 18px;
+    line-height: 1.35;
+    background: var(--bg-list-item);
+}
+.list-item .bullet { width: 9px; height: 9px; margin-top: 10px; }
+.price-row { gap: 16px; }
+
+/* Reuse price-requirements.css notice rules without inheriting its full-page canvas shell. */
+.section-block[data-section="notice"] > .price-requirements-canvas {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding: 0;
+    gap: 0;
+    display: block;
+}
+.section-block[data-section="notice"] .notice-box { transform: translateY(8px); }
+.section-block[data-section="notice"] .notice-box { padding-top: 16px; padding-bottom: 10px; }
+.section-block[data-section="notice"] .notice-label { transform: translateY(6px); }
+
+.copyright-section { margin-top: 4px; padding-right: 0; }
+.copyright-text { font-size: 16px; letter-spacing: 1px; }
+.section-block[data-section="decorative"] { display: none; }
